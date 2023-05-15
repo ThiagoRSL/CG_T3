@@ -1,0 +1,51 @@
+#ifndef POLY_H
+#define POLY_H
+
+#include <stdio.h>
+#include <vector>
+#include "Vec2.h"
+#include "RenderManager.h"
+#include "CollisionManager.h"
+#include "GeometryAux.h"
+
+class Poly : public Renderable
+{
+    public:
+        Poly();
+        Poly(float x, float y);
+        Poly(float x, float y, float RGB[3]);
+
+        void SetAnchor(float x, float y);
+        void SetOrientation(float x, float y);
+        void AddVertex(Vec2* vertex);
+        void AddVertex(float x, float y);
+        void Resize(float scalar);
+        void Rotate(float degrees);
+        void RotateRad(float radians);
+        void Transform(float matrix[2][2]);
+        void virtual Move(float speed);
+        void virtual Move(Vec2 directionVector, float speed);
+        bool HasCollision(float x, float y);
+
+
+        void Render();
+    protected:
+        float background_color[4];
+        float border_color[4];
+        float rotation;
+
+        Pnt2* Anchor;
+        Vec2* OrientationVector;
+        std::vector<Vec2*> Vertexes;
+
+        void RenderBody();
+        void RenderBorder();
+        void RenderVertexes();
+    private:
+
+    public:
+        Vec2* GetOrientation(){return this->OrientationVector;}
+
+};
+
+#endif // POLYGON_H
