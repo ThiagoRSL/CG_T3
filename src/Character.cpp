@@ -224,15 +224,15 @@ void Character::AutonomousThinking()
     float angleDifference = angleTarget - angleOrientation;
     float angleDifferenceInverse = (360.0 - abs(angleDifference));
 
+    Shoot();
     if(abs(angleDifference) > 0 && abs(angleDifference) < this->aim_accuracy)
     {
-        rotating = 0;
-        Shoot();
+        //rotating = 0;
     }
     else
     {
         //Verifica se é melhor virar em sentido horário ou anti-horário.
-        if(abs(angleDifferenceInverse) < abs(angleDifference))
+        /*if(abs(angleDifferenceInverse) < abs(angleDifference))
         {
             if(angleDifference > 0)
                 rotating = -0.25;
@@ -245,7 +245,7 @@ void Character::AutonomousThinking()
                 rotating = 0.25;
             else
                 rotating = -0.25;
-        }
+        }*/
         //Atualizar o valor de rotação para o minimo necessário no último frame.
     }
 }

@@ -414,11 +414,11 @@
 1683339950 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\rendermanager.cpp
 	"RenderManager.h"
 
-1684183152 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\vec2.cpp
+1684183785 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\vec2.cpp
 	"Vec2.h"
 	"GeometryAux.h"
 
-1684183440 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\character.cpp
+1684184004 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\character.cpp
 	"Character.h"
 
 1684180103 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\playercharacter.cpp

@@ -120,25 +120,25 @@ void keyboardUp(int key)
         break;
       //seta para a esquerda
       case 97:
-        if(PressedKeys.find(202) != PressedKeys.end())
+        if(PressedKeys.find(100) != PressedKeys.end())
             player_character->SetRotating(1);
         else
             player_character->SetRotating(0);
       break;
-      case 115:
-        if(PressedKeys.find(203) != PressedKeys.end())
-            player_character->SetMoving(-0.5);
-        else
-            player_character->SetMoving(0);
-      break;
       case 100:
-        if(PressedKeys.find(200) != PressedKeys.end())
+        if(PressedKeys.find(97) != PressedKeys.end())
             player_character->SetRotating(-1);
         else
             player_character->SetRotating(0);
       break;
+      case 115:
+        if(PressedKeys.find(119) != PressedKeys.end())
+            player_character->SetMoving(-0.5);
+        else
+            player_character->SetMoving(0);
+      break;
       case 119:
-        if(PressedKeys.find(201) != PressedKeys.end())
+        if(PressedKeys.find(115) != PressedKeys.end())
             player_character->SetMoving(1);
         else
             player_character->SetMoving(0);
