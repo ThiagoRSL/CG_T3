@@ -35,7 +35,7 @@ Character* CollisionManager::VerifyCollisionNPCs(float x, float y)
     for(i = 0; i < npcs.size(); i++)
     {
         actual = npcs.at(i);
-        if(!actual->IsDead() && !actual->IsDying() && actual->HasCollision(x, y))
+        if(!actual->IsDead() && !actual->IsDying() && actual->HasCollisionOnParts(x, y))
         {
             return actual;
         }
@@ -44,7 +44,7 @@ Character* CollisionManager::VerifyCollisionNPCs(float x, float y)
 }
 Character* CollisionManager::VerifyCollisionPlayer(float x, float y)
 {
-    if(player_character->HasCollision(x, y))
+    if(player_character->HasCollisionOnParts(x, y))
     {
         return player_character;
     }

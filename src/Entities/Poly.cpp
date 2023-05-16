@@ -43,6 +43,11 @@ void Poly::SetAnchor(float x, float y)
     this->Anchor->x = x;
     this->Anchor->y = y;
 }
+void Poly::SetAnchor(Pnt2* Anchor)
+{
+    this->Anchor = Anchor; //MEMORY
+}
+
 void Poly::SetOrientation(float x, float y)
 {
     this->OrientationVector->x = x;

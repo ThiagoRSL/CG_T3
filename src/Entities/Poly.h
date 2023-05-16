@@ -16,6 +16,7 @@ class Poly : public Renderable
         Poly(float x, float y, float RGB[3]);
 
         void SetAnchor(float x, float y);
+        void SetAnchor(Pnt2* Anchor);
         void SetOrientation(float x, float y);
         void AddVertex(Vec2* vertex);
         void AddVertex(float x, float y);

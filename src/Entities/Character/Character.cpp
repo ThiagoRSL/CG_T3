@@ -3,7 +3,7 @@
 static int death_frames = 20;
 
 Character::Character(float x, float y, float RGB[3])
-    : Poly(x, y)
+    :Entity(x, y)
 {
     this->OrientationVector->y = -1;
     this->OrientationVector->x = 0;
@@ -72,6 +72,7 @@ void Character::Shoot()
     PrimaryWeapon->Shoot();
 }
 
+
 void Character::ReceiveDamage(float damage)
 {
     this->hit_points = hit_points - damage;
@@ -109,7 +110,7 @@ void Character::Render()
     {
         this->AnimateDeath();
         if(death_frame == death_frames) this->Die();
-        Poly::Render();
+        Entity::Render();
         return;
     }
     if(autonomous)  AutonomousThinking();
@@ -117,9 +118,10 @@ void Character::Render()
     if(rotating)    Rotate(rotating*rotation_speed/FPSManager::shared_instance().GetFrames());
     this->OrientationVector->Render();
 
-    Poly::Render();
+    Entity::Render();
     RenderWeapons();
 }
+
 
 void Character::RenderWeapons()
 {
@@ -153,6 +155,17 @@ void Character::MoveDirection(Vec2 directionVector, float speed)
 {
     Vec2 moveVec = (directionVector * speed);
     this->Anchor->ApplyVec2(moveVec);
+}
+
+bool Character::HasCollisionOnParts(float x, float y)
+{
+    int i;
+    for (i = 0; i < Parts.size(); i++)
+    {
+        if(Parts.at(i)->HasCollision(x, y))
+            return true;
+    }
+    return false;
 }
 
 void Character::ResetControls()

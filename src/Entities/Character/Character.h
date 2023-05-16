@@ -2,11 +2,12 @@
 #define CHARACTER_H
 
 #include <math.h>
-#include "Entities/Poly.h"
+#include <vector>
+#include "Entities/Entity.h"
 #include "Entities/Weapon/Weapon.h"
 #include "Entities/Weapon/Projectile.h"
 
-class Character : public Poly
+class Character : public Entity
 {
     public:
         Character(float x, float y, float RGB[3]);
@@ -19,12 +20,17 @@ class Character : public Poly
         void AnimateDeath();
         void Die();
 
+        bool HasCollisionOnParts(float x, float y);
+
 
         void RefreshWeaponsCooldown();
         void ResetControls();
 
         void Render();
+        void RenderBody();
         void RenderWeapons();
+        void AppendPoly(Poly* poly);
+
         void UpdateWeaponPosition();
 
         void MoveDirection(Vec2 directionVector, float speed);
@@ -66,7 +72,6 @@ class Character : public Poly
     public:
         bool IsDying() {return this->dying;}
         bool IsDead() {return this->dead;}
-        Pnt2* GetAnchor() {return this->Anchor;}
         Vec2* GetAimVector() {return this->AimVector;}
 
         void SetAutonomous(bool autonomous){this->autonomous = autonomous;}

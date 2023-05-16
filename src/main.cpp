@@ -28,9 +28,10 @@
 #include "Managers/MouseManager.h"
 #include "Managers/RenderManager.h"
 #include "Managers/CollisionManager.h"
+#include "Managers/FPSManager.h"
 #include "Utils/Vec2.h"
 #include "Entities/Poly.h"
-#include "Managers/FPSManager.h"
+#include "Entities/Entity.h"
 #include "Entities/Character/Character.h"
 #include "Entities/Character/PlayerCharacter.h"
 
@@ -170,22 +171,34 @@ int main(void)
     float RGB2[3] = {0.75,0.0,0.75};
    //Sleep(1000);
     player_character = new PlayerCharacter(400, 400, RGB);
-    player_character->AddVertex(-20,-25);
-    player_character->AddVertex(-10,-40);
-    player_character->AddVertex(10,-40);
-    player_character->AddVertex(20,-25);
-    player_character->AddVertex(20,25);
-    player_character->AddVertex(-20,25);
 
+    Poly* body = new Poly(400, 400, RGB);
+    body->AddVertex(-20,-25);
+    body->AddVertex(-10,-40);
+    body->AddVertex(10,-40);
+    body->AddVertex(20,-25);
+    body->AddVertex(20,25);
+    body->AddVertex(-20,25);
+    player_character::Entity->AppendPoly(body);
+
+    Poly* leftWing = new Poly(350, 400, RGB);
+    leftWing->AddVertex(15, -25);
+    leftWing->AddVertex(-15, -10);
+    leftWing->AddVertex(-15, 20);
+    leftWing->AddVertex(15, 20);
+    player_character::Entity->AppendPoly(leftWing);
 
     enemy_character = new Character(800, 400, RGB2);
-    enemy_character->AddVertex(-20,-25);
-    enemy_character->AddVertex(-10,-40);
-    enemy_character->AddVertex(10,-40);
-    enemy_character->AddVertex(20,-25);
-    enemy_character->AddVertex(20,25);
-    enemy_character->AddVertex(-20,25);
+
+    Poly* bodye = new Poly(800, 400, RGB);
+    bodye->AddVertex(-20,-25);
+    bodye->AddVertex(-10,-40);
+    bodye->AddVertex(10,-40);
+    bodye->AddVertex(20,-25);
+    bodye->AddVertex(20,25);
+    bodye->AddVertex(-20,25);
     enemy_character->SetAutonomous(true);
+    enemy_character::Entity->AppendPoly(bodye);
 
     RenderManager::shared_instance().AddRenderableToList(player_character);
     RenderManager::shared_instance().AddRenderableToList(enemy_character);

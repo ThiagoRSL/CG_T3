@@ -536,7 +536,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1684200899 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1684206404 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -550,9 +550,10 @@
 	"Managers/MouseManager.h"
 	"Managers/RenderManager.h"
 	"Managers/CollisionManager.h"
+	"Managers/FPSManager.h"
 	"Utils/Vec2.h"
 	"Entities/Poly.h"
-	"Managers/FPSManager.h"
+	"Entities/Entity.h"
 	"Entities/Character/Character.h"
 	"Entities/Character/PlayerCharacter.h"
 
@@ -645,16 +646,17 @@
 	"Vec2.h"
 	"GeometryAux.h"
 
-1684199845 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
+1684205824 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 
-1684200689 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
+1684204429 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
 	<math.h>
-	"Entities/Poly.h"
+	<vector>
+	"Entities/Entity.h"
 	"Entities/Weapon/Weapon.h"
 	"Entities/Weapon/Projectile.h"
 
-1684200774 c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.h
+1684205444 c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.h
 	<stdio.h>
 	<vector>
 	"Utils/Vec2.h"
@@ -687,17 +689,31 @@
 1684200727 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\playercharacter.h
 	<Entities/Character/Character.h>
 
-1684198249 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
+1684205514 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
 	"Poly.h"
 
-1684200838 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.cpp
+1684205086 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.cpp
 	"Managers/CollisionManager.h"
 	"Entities/Character/Character.h"
 
 1684198249 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\rendermanager.cpp
 	"RenderManager.h"
 
-1684200915 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.cpp
+1684204766 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.cpp
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
+
+1684200935 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
+	"Entities/Weapon/Weapon.h"
+	"Entities/Character/Character.h"
+
+1684205331 c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.h
+	<stdio.h>
+	<vector>
+	"Utils/Pnt2.h"
+	"Utils/Vec2.h"
+	"Poly.h"
+
+1684205712 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.cpp
+	"Entity.h"
 

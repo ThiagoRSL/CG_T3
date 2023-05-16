@@ -11,7 +11,7 @@ Projectile::Projectile(float x, float y, float damage, Character* Owner)
 void Projectile::Render()
 {
     this->Move(1000/FPSManager::shared_instance().GetFrames());
-    if(this->Owner->HasCollision(this->Anchor->x, this->Anchor->y))
+    if(this->Owner->HasCollisionOnParts(this->Anchor->x, this->Anchor->y))
     {
         return;
     }
