@@ -179,7 +179,7 @@ int main(void)
     body->AddVertex(20,-25);
     body->AddVertex(20,25);
     body->AddVertex(-20,25);
-    player_character::Entity->AppendPoly(body);
+    player_character->AppendPoly(body);
 
     Poly* leftWing = new Poly(350, 400, RGB);
     leftWing->AddVertex(15, -25);

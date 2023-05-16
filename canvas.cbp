@@ -18,6 +18,7 @@
 					<Add option="-g" />
 					<Add directory="include" />
 					<Add directory="src" />
+					<Add directory="src/Entities" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -31,6 +32,7 @@
 					<Add option="-O2 -Wall" />
 					<Add directory="include" />
 					<Add directory="src" />
+					<Add directory="src/Entities" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -52,6 +54,8 @@
 		<Unit filename="src/Entities/Character/Character.h" />
 		<Unit filename="src/Entities/Character/PlayerCharacter.cpp" />
 		<Unit filename="src/Entities/Character/PlayerCharacter.h" />
+		<Unit filename="src/Entities/Entity.cpp" />
+		<Unit filename="src/Entities/Entity.h" />
 		<Unit filename="src/Entities/Poly.cpp" />
 		<Unit filename="src/Entities/Poly.h" />
 		<Unit filename="src/Entities/Weapon/Projectile.cpp" />
