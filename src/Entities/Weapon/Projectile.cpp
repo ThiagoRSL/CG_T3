@@ -1,5 +1,5 @@
-#include "Projectile.h"
-#include "Character.h"
+#include "Entities/Weapon/Projectile.h"
+#include "Entities/Character/Character.h"
 
 Projectile::Projectile(float x, float y, float damage, Character* Owner)
     :Poly(x, y)

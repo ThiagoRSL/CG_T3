@@ -18,15 +18,12 @@ Character::Character(float x, float y, float RGB[3])
     this->view_range = 600;
     this->Target = nullptr;
     this->target_last_known_location = new Pnt2();
-    this->aim_accuracy = 2;
+    aim_accuracy = 2;
 
     this->hit_points_max = 100;
     this->hit_points = hit_points_max;
     this->energy_max = 100;
     this->energy = energy_max;
-    this->base_damage = 10;
-    this->shot_cooldown_max = 10;
-    this->shot_cooldown = 0;
 
     this->dying = false;
     this->dead = false;
@@ -72,19 +69,9 @@ void Character::SetMoving(float movement)
 
 void Character::Shoot()
 {
-    if(shot_cooldown <= 0)
-    {
-        Projectile* shotPoly = new Projectile(this->Anchor->x, this->Anchor->y, this->base_damage, this);
-        shotPoly->AddVertex(this->Anchor->x - 5, this->Anchor->y - 5);
-        shotPoly->AddVertex(this->Anchor->x + 5, this->Anchor->y - 5);
-        shotPoly->AddVertex(this->Anchor->x + 5, this->Anchor->y + 5);
-        shotPoly->AddVertex(this->Anchor->x - 5, this->Anchor->y + 5);
-
-        shotPoly->SetOrientation(this->PrimaryWeapon->GetOrientation()->x, this->PrimaryWeapon->GetOrientation()->y);
-        RenderManager::shared_instance().AddRenderableToList(shotPoly);
-        shot_cooldown = shot_cooldown_max;
-    }
+    PrimaryWeapon->Shoot();
 }
+
 void Character::ReceiveDamage(float damage)
 {
     this->hit_points = hit_points - damage;
@@ -114,22 +101,10 @@ void Character::Die()
     //CollisionManager::shared_instance().RemoveNPC(this);
 }
 
-void Character::RefreshShotCooldown()
-{
-    if(shot_cooldown == 0)
-        return;
-
-    float frames = FPSManager::shared_instance().GetFrames();
-    if(last_shot_frame != frames)
-    {
-        shot_cooldown--;
-        last_shot_frame = frames;
-    }
-}
 void Character::Render()
 {
     AdjustAim();
-    RefreshShotCooldown();
+    RefreshWeaponsCooldown();
     if(dying)
     {
         this->AnimateDeath();
@@ -144,7 +119,6 @@ void Character::Render()
 
     Poly::Render();
     RenderWeapons();
-    this->AimVector->Render();
 }
 
 void Character::RenderWeapons()
@@ -155,18 +129,25 @@ void Character::RenderWeapons()
         PrimaryWeapon->Render();
     }
 }
+
 void Character::UpdateWeaponPosition()
 {
     int i;
     for(i = 0; i < 1; i++)
     {
         float angleDiff = PrimaryWeapon->GetOrientation()->GetAngleBetween(this->AimVector);
-        printf("\n AngleDiff %f", angleDiff);
         PrimaryWeapon->RotateRad(angleDiff);
-
     }
 }
 
+void Character::RefreshWeaponsCooldown()
+{
+    int i;
+    for(i = 0; i < 1; i++)
+    {
+        PrimaryWeapon->RefreshShotCooldown();
+    }
+}
 
 void Character::MoveDirection(Vec2 directionVector, float speed)
 {
@@ -227,12 +208,12 @@ void Character::AutonomousThinking()
     Shoot();
     if(abs(angleDifference) > 0 && abs(angleDifference) < this->aim_accuracy)
     {
-        //rotating = 0;
+        rotating = 0;
     }
     else
     {
         //Verifica se é melhor virar em sentido horário ou anti-horário.
-        /*if(abs(angleDifferenceInverse) < abs(angleDifference))
+        if(abs(angleDifferenceInverse) < abs(angleDifference))
         {
             if(angleDifference > 0)
                 rotating = -0.25;
@@ -245,7 +226,7 @@ void Character::AutonomousThinking()
                 rotating = 0.25;
             else
                 rotating = -0.25;
-        }*/
+        }
         //Atualizar o valor de rotação para o minimo necessário no último frame.
     }
 }

@@ -1,8 +1,8 @@
 #ifndef PROJECTILE_H
 #define PROJECTILE_H
 
-#include "FPSManager.h"
-#include "Poly.h"
+#include "Managers/FPSManager.h"
+#include "Entities/Poly.h"
 
 class Character;
 

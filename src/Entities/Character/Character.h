@@ -2,9 +2,9 @@
 #define CHARACTER_H
 
 #include <math.h>
-#include "Poly.h"
-#include "Weapon.h"
-#include "Projectile.h"
+#include "Entities/Poly.h"
+#include "Entities/Weapon/Weapon.h"
+#include "Entities/Weapon/Projectile.h"
 
 class Character : public Poly
 {
@@ -20,7 +20,7 @@ class Character : public Poly
         void Die();
 
 
-        void RefreshShotCooldown();
+        void RefreshWeaponsCooldown();
         void ResetControls();
 
         void Render();
@@ -39,13 +39,9 @@ class Character : public Poly
         //Base stats
         float movement_speed;
         float rotation_speed;
-        float base_damage;
         float speed;
-        float aim_accuracy;
         float energy_max;
         float energy;
-        float shot_cooldown_max;
-        float shot_cooldown;
 
         // Life
         float hit_points_max;
@@ -54,13 +50,11 @@ class Character : public Poly
         bool dead;
 
         //Autonomy
+        float aim_accuracy;
         Character* Target;
         Pnt2* target_last_known_location;
         bool autonomous;
         float view_range;
-
-        // Shot control
-        float last_shot_frame;
 
         // Death Animation
         int death_frame;

@@ -24,15 +24,15 @@
 #include <iterator>
 
 #include "gl_canvas2d.h"
-#include "FileManager.h"
-#include "MouseManager.h"
-#include "RenderManager.h"
-#include "CollisionManager.h"
-#include "Vec2.h"
-#include "Poly.h"
-#include "FPSManager.h"
-#include "Character.h"
-#include "PlayerCharacter.h"
+#include "Managers/FileManager.h"
+#include "Managers/MouseManager.h"
+#include "Managers/RenderManager.h"
+#include "Managers/CollisionManager.h"
+#include "Utils/Vec2.h"
+#include "Entities/Poly.h"
+#include "Managers/FPSManager.h"
+#include "Entities/Character/Character.h"
+#include "Entities/Character/PlayerCharacter.h"
 
 Character* player_character;
 Character* enemy_character;

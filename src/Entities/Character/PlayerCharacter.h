@@ -1,7 +1,7 @@
 #ifndef PLAYERCHARACTER_H
 #define PLAYERCHARACTER_H
 
-#include <Character.h>
+#include <Entities/Character/Character.h>
 
 
 class PlayerCharacter : public Character

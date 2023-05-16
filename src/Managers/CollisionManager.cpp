@@ -1,5 +1,5 @@
-#include "CollisionManager.h"
-#include "Character.h"
+#include "Managers/CollisionManager.h"
+#include "Entities/Character/Character.h"
 
 CollisionManager::CollisionManager()
 {

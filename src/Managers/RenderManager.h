@@ -5,8 +5,8 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
-#include "MouseManager.h"
-#include "Renderable.h"
+#include "Managers/MouseManager.h"
+#include "Entities/Abstract/Renderable.h"
 
 typedef void (*callback_function)(void);
 

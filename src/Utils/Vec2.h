@@ -2,9 +2,9 @@
 #define VEC2_H
 
 #include <math.h>
-#include "Renderable.h"
+#include "Entities/Abstract/Renderable.h"
 #include "gl_canvas2d.h"
-#include "Pnt2.h"
+#include "Utils/Pnt2.h"
 
 class GeometryAux;
 

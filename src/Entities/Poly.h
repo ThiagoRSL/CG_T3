@@ -3,10 +3,10 @@
 
 #include <stdio.h>
 #include <vector>
-#include "Vec2.h"
-#include "RenderManager.h"
-#include "CollisionManager.h"
-#include "GeometryAux.h"
+#include "Utils/Vec2.h"
+#include "Managers/RenderManager.h"
+#include "Managers/CollisionManager.h"
+#include "Utils/GeometryAux.h"
 
 class Poly : public Renderable
 {
