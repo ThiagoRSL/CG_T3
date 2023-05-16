@@ -29,11 +29,10 @@ class Character : public Entity
         void Render();
         void RenderBody();
         void RenderWeapons();
-        void AppendPoly(Poly* poly);
 
         void UpdateWeaponPosition();
 
-        void MoveDirection(Vec2 directionVector, float speed);
+        void MoveDirection(Vec2* directionVector, float speed);
 
     protected:
         Weapon* PrimaryWeapon;

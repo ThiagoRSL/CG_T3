@@ -151,9 +151,9 @@ void Character::RefreshWeaponsCooldown()
     }
 }
 
-void Character::MoveDirection(Vec2 directionVector, float speed)
+void Character::MoveDirection(Vec2* directionVector, float speed)
 {
-    Vec2 moveVec = (directionVector * speed);
+    Vec2 moveVec = (*directionVector * speed);
     this->Anchor->ApplyVec2(moveVec);
 }
 

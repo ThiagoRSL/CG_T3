@@ -6,6 +6,7 @@ Poly::Poly()
     this->OrientationVector = new Vec2();
     this->OrientationVector->SetAnchor(this->Anchor);
     rotation = 0;
+    Offset = Vec2(0,0);
 }
 
 Poly::Poly(float x, float y)
@@ -14,6 +15,7 @@ Poly::Poly(float x, float y)
     this->OrientationVector = new Vec2(0, 1);
     this->OrientationVector->SetAnchor(this->Anchor);
     rotation = 0;
+    Offset = Vec2(0,0);
 }
 
 Poly::Poly(float x, float y, float RGB[3])
@@ -24,7 +26,9 @@ Poly::Poly(float x, float y, float RGB[3])
     background_color[0] = RGB[0];
     background_color[1] = RGB[1];
     background_color[2] = RGB[2];
+    background_color[3] = 1;
     rotation = 0;
+    Offset = Vec2(0,0);
 }
 
 void Poly::Move(float speed)
@@ -32,9 +36,9 @@ void Poly::Move(float speed)
     Vec2 moveVec = (*OrientationVector * speed);
     this->Anchor->ApplyVec2(moveVec);
 }
-void Poly::Move(Vec2 directionVector, float speed)
+void Poly::Move(Vec2* directionVector, float speed)
 {
-    Vec2 moveVec = (directionVector * speed);
+    Vec2 moveVec = (*directionVector * speed);
     this->Anchor->ApplyVec2(moveVec);
 }
 
@@ -83,6 +87,7 @@ void Poly::RotateRad(float radians)
     {
         Vertexes.at(i)->RotateRadians(radians);
     }
+    Offset.RotateRadians(radians);
     OrientationVector->RotateRadians(radians);
 }
 
@@ -94,6 +99,7 @@ void Poly::Rotate(float degrees)
         Vertexes.at(i)->RotateDegrees(degrees);
     }
     OrientationVector->RotateDegrees(degrees);
+    Offset.RotateDegrees(degrees);
 
     rotation += degrees;
 
@@ -129,6 +135,7 @@ void Poly::RenderBody()
 {
     CV::color(background_color[0], background_color[1], background_color[2]);
     int i, a;
+    float virtualX, virtualY;
     for(i = 0; i < Vertexes.size(); i++)
     {
         if(i != Vertexes.size()-1)
@@ -136,8 +143,10 @@ void Poly::RenderBody()
         else
             a = 0;
 
-        float vx[3] = {Anchor->x, Anchor->x + Vertexes.at(i)->x, Anchor->x + Vertexes.at(a)->x};
-        float vy[3] = {Anchor->y, Anchor->y + Vertexes.at(i)->y, Anchor->y + Vertexes.at(a)->y};
+        virtualX = Anchor->x + Offset.x;
+        virtualY = Anchor->y + Offset.y;
+        float vx[3] = {virtualX, virtualX + Vertexes.at(i)->x, virtualX + Vertexes.at(a)->x};
+        float vy[3] = {virtualY, virtualY + Vertexes.at(i)->y, virtualY + Vertexes.at(a)->y};
         CV::polygonFill(vx, vy, 3);
     }
 }
@@ -167,15 +176,18 @@ bool Poly::HasCollision(float x, float y)
             a = 0;
 
         int counter = 0;
-        if(GeometryAux::Intercept(8000, 8000, x, y, this->Anchor->x, this->Anchor->y, Anchor->x + this->Vertexes.at(i)->x, Anchor->y + this->Vertexes.at(i)->y))
+        float virtualX, virtualY;
+        virtualX = this->Anchor->x + Offset.x;
+        virtualY = this->Anchor->y + Offset.y;
+        if(GeometryAux::Intercept(8000, 8000, x, y, virtualX, virtualY, virtualX + this->Vertexes.at(i)->x, virtualY + this->Vertexes.at(i)->y))
         {
             counter += 1;
         }
-        if(GeometryAux::Intercept(8000, 8000, x, y, this->Anchor->x, this->Anchor->y, Anchor->x + this->Vertexes.at(a)->x, Anchor->y + this->Vertexes.at(a)->y))
+        if(GeometryAux::Intercept(8000, 8000, x, y, virtualX, virtualY, virtualX + this->Vertexes.at(a)->x, virtualY + this->Vertexes.at(a)->y))
         {
             counter += 1;
         }
-        if(GeometryAux::Intercept(8000, 8000, x, y, Anchor->x + this->Vertexes.at(i)->x, Anchor->y + this->Vertexes.at(i)->y, Anchor->x + this->Vertexes.at(a)->x, Anchor->y + this->Vertexes.at(a)->y))
+        if(GeometryAux::Intercept(8000, 8000, x, y, virtualX + this->Vertexes.at(i)->x, virtualY + this->Vertexes.at(i)->y, virtualX + this->Vertexes.at(a)->x, virtualY + this->Vertexes.at(a)->y))
         {
             counter += 1;
         }
@@ -183,4 +195,12 @@ bool Poly::HasCollision(float x, float y)
     }
 
     return false;
+}
+
+void Poly::SetBackgroundColor(float color[3])
+{
+    background_color[0] = color[0];
+    background_color[1] = color[1];
+    background_color[2] = color[2];
+    background_color[3] = 1;
 }

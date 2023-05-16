@@ -11,11 +11,8 @@ Entity::Entity(float x, float y)
 
 void Entity::Move(float speed)
 {
-    int i;
-    for (i = 0; i < Parts.size(); i++)
-    {
-        Parts.at(i)->Move(speed);
-    }
+    Vec2 moveVec = (*OrientationVector * speed);
+    this->Anchor->ApplyVec2(moveVec);
 }
 
 void Entity::Resize(float scalar)
@@ -34,12 +31,14 @@ void Entity::Rotate(float degrees)
     {
         Parts.at(i)->Rotate(degrees);
     }
+    OrientationVector->RotateDegrees(degrees);
 }
 
 void Entity::AppendPoly(Poly* poly)
 {
     Parts.push_back(poly);
     poly->SetAnchor(this->Anchor);
+    poly->SetBackgroundColor(this->background_color);
 }
 
 void Entity::Render()

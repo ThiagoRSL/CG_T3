@@ -25,16 +25,18 @@ class Poly : public Renderable
         void RotateRad(float radians);
         void Transform(float matrix[2][2]);
         void virtual Move(float speed);
-        void virtual Move(Vec2 directionVector, float speed);
+        void virtual Move(Vec2* directionVector, float speed);
         bool HasCollision(float x, float y);
 
 
+        void SetBackgroundColor(float* color);
         void Render();
     protected:
         float background_color[4];
         float border_color[4];
         float rotation;
 
+        Vec2 Offset;
         Pnt2* Anchor;
         Vec2* OrientationVector;
         std::vector<Vec2*> Vertexes;
@@ -45,6 +47,11 @@ class Poly : public Renderable
     private:
 
     public:
+        void SetOffset(float x, float y)
+        {
+            Offset.x = x;
+            Offset.y = y;
+        }
         Vec2* GetOrientation(){return this->OrientationVector;}
 
 };

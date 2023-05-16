@@ -186,7 +186,17 @@ int main(void)
     leftWing->AddVertex(-15, -10);
     leftWing->AddVertex(-15, 20);
     leftWing->AddVertex(15, 20);
-    player_character::Entity->AppendPoly(leftWing);
+    leftWing->SetOffset(-30, 0);
+    player_character->AppendPoly(leftWing);
+
+
+    Poly* rightWing = new Poly(350, 400, RGB);
+    rightWing->AddVertex(15, -25);
+    rightWing->AddVertex(-15, -10);
+    rightWing->AddVertex(-15, 20);
+    rightWing->AddVertex(15, 20);
+    rightWing->SetOffset(30, 0);
+    player_character->AppendPoly(rightWing);
 
     enemy_character = new Character(800, 400, RGB2);
 
@@ -198,7 +208,7 @@ int main(void)
     bodye->AddVertex(20,25);
     bodye->AddVertex(-20,25);
     enemy_character->SetAutonomous(true);
-    enemy_character::Entity->AppendPoly(bodye);
+    enemy_character->AppendPoly(bodye);
 
     RenderManager::shared_instance().AddRenderableToList(player_character);
     RenderManager::shared_instance().AddRenderableToList(enemy_character);
