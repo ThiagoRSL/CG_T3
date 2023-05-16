@@ -3,9 +3,40 @@
 
 #include <math.h>
 #include <vector>
+#include "Utils/Pnt2.h"
 #include "Entities/Entity.h"
+#include "ShipPart.h"
 #include "Entities/Weapon/Weapon.h"
 #include "Entities/Weapon/Projectile.h"
+
+
+class WeaponSlot : public Renderable
+{
+    public:
+        Weapon* EquippedWeapon;
+        Pnt2 Position;
+
+    public:
+        WeaponSlot()
+        {
+            EquippedWeapon = nullptr;
+        }
+        void SetOffset(float x, float y)
+        {
+            this->Position.x = x;
+            this->Position.y = y;
+        }
+        void SetWeapon(Weapon* weapon) {this->EquippedWeapon = weapon;}
+        bool HasWeapon()
+        {
+            if(EquippedWeapon != nullptr) return true;
+            return false;
+        }
+        void Render()
+        {
+            if(HasWeapon()) EquippedWeapon->Render();
+        }
+};
 
 class Character : public Entity
 {
@@ -30,12 +61,16 @@ class Character : public Entity
         void RenderBody();
         void RenderWeapons();
 
+        void AppendPart(ShipPart* part);
+        bool EquipWeapon(Weapon* weapon);
+
+        void CreateWeaponSlot(Pnt2 offset);
         void UpdateWeaponPosition();
 
         void MoveDirection(Vec2* directionVector, float speed);
 
     protected:
-        Weapon* PrimaryWeapon;
+        std::vector<WeaponSlot*> WeaponSlots;
         Vec2* AimVector;
         //Control Variables
         float rotating;

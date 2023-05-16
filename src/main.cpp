@@ -29,6 +29,7 @@
 #include "Managers/RenderManager.h"
 #include "Managers/CollisionManager.h"
 #include "Managers/FPSManager.h"
+#include "CharacterBuilder.h"
 #include "Utils/Vec2.h"
 #include "Entities/Poly.h"
 #include "Entities/Entity.h"
@@ -170,33 +171,40 @@ int main(void)
     float RGB[3] = {0.0,0.75,0.75};
     float RGB2[3] = {0.75,0.0,0.75};
    //Sleep(1000);
-    player_character = new PlayerCharacter(400, 400, RGB);
 
-    Poly* body = new Poly(400, 400, RGB);
+    player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(400, 400, RGB, 1);
+    player_character->EquipWeapon(new Weapon(player_character));
+
+    enemy_character = CharacterBuilder::BuildShip(800, 400, RGB, 1);
+
+    enemy_character->EquipWeapon(new Weapon(enemy_character));
+    enemy_character->SetAutonomous(true);
+
+    /*
+    ShipPart* body = new ShipPart(400, 400, RGB);
     body->AddVertex(-20,-25);
     body->AddVertex(-10,-40);
     body->AddVertex(10,-40);
     body->AddVertex(20,-25);
     body->AddVertex(20,25);
     body->AddVertex(-20,25);
-    player_character->AppendPoly(body);
+    player_character->AppendPart(body);
 
-    Poly* leftWing = new Poly(350, 400, RGB);
-    leftWing->AddVertex(15, -25);
-    leftWing->AddVertex(-15, -10);
-    leftWing->AddVertex(-15, 20);
-    leftWing->AddVertex(15, 20);
+    ShipPart* leftWing = new ShipPart(350, 400, RGB);
+    leftWing->AddVertex(10, -25);
+    leftWing->AddVertex(-10, -10);
+    leftWing->AddVertex(-10, 30);
+    leftWing->AddVertex(10, 30);
     leftWing->SetOffset(-30, 0);
-    player_character->AppendPoly(leftWing);
+    player_character->AppendPart(leftWing);
 
-
-    Poly* rightWing = new Poly(350, 400, RGB);
-    rightWing->AddVertex(15, -25);
-    rightWing->AddVertex(-15, -10);
-    rightWing->AddVertex(-15, 20);
-    rightWing->AddVertex(15, 20);
+    ShipPart* rightWing = new ShipPart(350, 400, RGB);
+    rightWing->AddVertex(10, -10);
+    rightWing->AddVertex(-10, -25);
+    rightWing->AddVertex(-10, 30);
+    rightWing->AddVertex(10, 30);
     rightWing->SetOffset(30, 0);
-    player_character->AppendPoly(rightWing);
+    player_character->AppendPart(rightWing);
 
     enemy_character = new Character(800, 400, RGB2);
 
@@ -209,7 +217,7 @@ int main(void)
     bodye->AddVertex(-20,25);
     enemy_character->SetAutonomous(true);
     enemy_character->AppendPoly(bodye);
-
+*/
     RenderManager::shared_instance().AddRenderableToList(player_character);
     RenderManager::shared_instance().AddRenderableToList(enemy_character);
     CollisionManager::shared_instance().SetPlayerCharacter(player_character);

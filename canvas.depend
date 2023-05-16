@@ -537,7 +537,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1684206404 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1684259212 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -552,6 +552,7 @@
 	"Managers/RenderManager.h"
 	"Managers/CollisionManager.h"
 	"Managers/FPSManager.h"
+	"CharacterBuilder.h"
 	"Utils/Vec2.h"
 	"Entities/Poly.h"
 	"Entities/Entity.h"
@@ -647,17 +648,19 @@
 	"Vec2.h"
 	"GeometryAux.h"
 
-1684205824 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
+1684258725 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 
-1684204429 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
+1684258729 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
 	<math.h>
 	<vector>
+	"Utils/Pnt2.h"
 	"Entities/Entity.h"
+	"ShipPart.h"
 	"Entities/Weapon/Weapon.h"
 	"Entities/Weapon/Projectile.h"
 
-1684205444 c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.h
+1684254068 c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.h
 	<stdio.h>
 	<vector>
 	"Utils/Vec2.h"
@@ -690,7 +693,7 @@
 1684200727 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\playercharacter.h
 	<Entities/Character/Character.h>
 
-1684205514 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
+1684254068 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
 	"Poly.h"
 
 1684205086 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.cpp
@@ -715,7 +718,7 @@
 	"Utils/Vec2.h"
 	"Poly.h"
 
-1684205712 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.cpp
+1684254068 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.cpp
 	"Entity.h"
 
 1684245030 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\abstract\renderable.cpp
@@ -838,4 +841,17 @@
 1684245030 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\utils\vec2.cpp
 	"Vec2.h"
 	"GeometryAux.h"
+
+1684257716 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\shippart.h
+	<Poly.h>
+	<vector>
+
+1684257164 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\shippart.cpp
+	"ShipPart.h"
+
+1684258413 source:c:\users\nektus\desktop\cg\cg_t3\src\builder\characterbuilder.cpp
+	"CharacterBuilder.h"
+
+1684257911 c:\users\nektus\desktop\cg\cg_t3\src\builder\characterbuilder.h
+	"Character.h"
 

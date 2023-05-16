@@ -39,8 +39,6 @@ Character::Character(float x, float y, float RGB[3])
     this->death_rgb_save[0] = 1 - this->background_color[0];
     this->death_rgb_save[1] = (1 - this->background_color[1])/4;
     this->death_rgb_save[2] = - this->background_color[2];
-
-    this->PrimaryWeapon = new Weapon(this);
 }
 
 void Character::AdjustAim()
@@ -69,7 +67,12 @@ void Character::SetMoving(float movement)
 
 void Character::Shoot()
 {
-    PrimaryWeapon->Shoot();
+    int i;
+    for(i = 0; i < WeaponSlots.size(); i++)
+    {
+        if(WeaponSlots.at(i)->HasWeapon())
+            WeaponSlots.at(i)->EquippedWeapon->Shoot();
+    }
 }
 
 
@@ -122,32 +125,55 @@ void Character::Render()
     RenderWeapons();
 }
 
+void Character::AppendPart(ShipPart* part)
+{
+    Entity::AppendPoly((Poly*) part);
+
+}
+
+bool Character::EquipWeapon(Weapon* weapon)
+{
+    int i;
+    for(i = 0; i < WeaponSlots.size(); i++)
+    {
+        if(WeaponSlots.at(i)->EquippedWeapon == nullptr)
+        {
+            WeaponSlots.at(i)->SetWeapon(weapon);
+            return true;
+        }
+    }
+    return false;
+}
 
 void Character::RenderWeapons()
 {
     int i;
-    for(i = 0; i < 1; i++)
+    for(i = 0; i < WeaponSlots.size(); i++)
     {
-        PrimaryWeapon->Render();
+        WeaponSlots.at(i)->Render();
     }
 }
 
 void Character::UpdateWeaponPosition()
 {
     int i;
-    for(i = 0; i < 1; i++)
+    for(i = 0; i < WeaponSlots.size(); i++)
     {
-        float angleDiff = PrimaryWeapon->GetOrientation()->GetAngleBetween(this->AimVector);
-        PrimaryWeapon->RotateRad(angleDiff);
+        if(WeaponSlots.at(i)->HasWeapon())
+        {
+            float angleDiff = WeaponSlots.at(i)->EquippedWeapon->GetOrientation()->GetAngleBetween(this->AimVector);
+            WeaponSlots.at(i)->EquippedWeapon->RotateRad(angleDiff);
+        }
     }
 }
 
 void Character::RefreshWeaponsCooldown()
 {
     int i;
-    for(i = 0; i < 1; i++)
+    for(i = 0; i < WeaponSlots.size(); i++)
     {
-        PrimaryWeapon->RefreshShotCooldown();
+        if(WeaponSlots.at(i)->HasWeapon())
+            WeaponSlots.at(i)->EquippedWeapon->RefreshShotCooldown();
     }
 }
 
@@ -242,4 +268,13 @@ void Character::AutonomousThinking()
         }
         //Atualizar o valor de rotação para o minimo necessário no último frame.
     }
+}
+
+//Building Ship Methods
+void Character::CreateWeaponSlot(Pnt2 offset)
+{
+    WeaponSlot* ws = new WeaponSlot();
+    ws->EquippedWeapon = nullptr;
+    ws->SetOffset(offset.x, offset.y);
+    WeaponSlots.push_back(ws);
 }
