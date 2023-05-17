@@ -29,7 +29,8 @@
 #include "Managers/RenderManager.h"
 #include "Managers/CollisionManager.h"
 #include "Managers/FPSManager.h"
-#include "CharacterBuilder.h"
+#include "Managers/PlayerManager.h"
+#include "Builder/CharacterBuilder.h"
 #include "Utils/Vec2.h"
 #include "Entities/Poly.h"
 #include "Entities/Entity.h"
@@ -52,6 +53,7 @@ void render()
 {
     CV::clear(0,0,0);
     FPSManager::shared_instance().UpdateFrames();
+    PlayerManager::shared_instance().CheckInteraction();
     RenderManager::shared_instance().RenderAll();
 }
 
@@ -174,6 +176,8 @@ int main(void)
 
     player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(400, 400, RGB, 1);
     player_character->EquipWeapon(new Weapon(player_character));
+
+    PlayerManager::shared_instance().SetPlayerCharacter(player_character);
 
     enemy_character = CharacterBuilder::BuildShip(800, 400, RGB, 1);
 

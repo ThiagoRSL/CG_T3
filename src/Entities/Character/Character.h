@@ -26,7 +26,11 @@ class WeaponSlot : public Renderable
             this->Position.x = x;
             this->Position.y = y;
         }
-        void SetWeapon(Weapon* weapon) {this->EquippedWeapon = weapon;}
+        void SetWeapon(Weapon* weapon)
+        {
+            this->EquippedWeapon = weapon;
+            this->EquippedWeapon->SetOffset(Position.x, Position.y);
+        }
         bool HasWeapon()
         {
             if(EquippedWeapon != nullptr) return true;
@@ -43,7 +47,7 @@ class Character : public Entity
     public:
         Character(float x, float y, float RGB[3]);
 
-        void virtual AdjustAim();
+        void AimTo(float x, float y);
         void SetRotating(float degree);
         void SetMoving(float movement);
         void Shoot();
@@ -110,6 +114,9 @@ class Character : public Entity
 
         void SetAutonomous(bool autonomous){this->autonomous = autonomous;}
         bool SetTarget(Character* target) {this->Target = target;}
+    //Autonomy
+    public:
+        void AutonomyAdjustAim();
 };
 
 #endif // CHARACTER_H

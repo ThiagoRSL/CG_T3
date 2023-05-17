@@ -28,7 +28,7 @@ void Weapon::Shoot()
 {
     if(shot_cooldown_val <= 0)
     {
-        Projectile* shotPoly = new Projectile(this->Anchor->x, this->Anchor->y, this->CalcShotDamage(), this->Wielder);
+        Projectile* shotPoly = new Projectile(this->Anchor->x + this->Offset.x, this->Anchor->y + this->Offset.y, this->CalcShotDamage(), this->Wielder);
         shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
         RenderManager::shared_instance().AddRenderableToList(shotPoly);
         shot_cooldown_val = shot_cooldown_base;

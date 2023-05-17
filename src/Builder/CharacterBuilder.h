@@ -1,7 +1,7 @@
 #ifndef CHARACTERBUILDER_H
 #define CHARACTERBUILDER_H
 
-#include "Character.h"
+#include "../Entities/Character/Character.h"
 
 class CharacterBuilder
 {

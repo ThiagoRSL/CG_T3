@@ -41,17 +41,21 @@ Character::Character(float x, float y, float RGB[3])
     this->death_rgb_save[2] = - this->background_color[2];
 }
 
-void Character::AdjustAim()
+void Character::AutonomyAdjustAim()
 {
     if(Target == nullptr)
         return;
 
+    float targetX = Target->Anchor->x - this->Anchor->x;
+    float targetY = Target->Anchor->y - this->Anchor->y;
 
-    float targetX = Target->Anchor->x;
-    float targetY = Target->Anchor->y;
+    AimTo(targetX, targetY);
+}
 
-    this->AimVector->x = (float) targetX - this->Anchor->x;
-    this->AimVector->y = (float) targetY - this->Anchor->y;
+void Character::AimTo(float x, float y)
+{
+    this->AimVector->x = x;
+    this->AimVector->y = y;
     this->AimVector->Normalize();
     UpdateWeaponPosition();
 }
@@ -107,7 +111,6 @@ void Character::Die()
 
 void Character::Render()
 {
-    AdjustAim();
     RefreshWeaponsCooldown();
     if(dying)
     {
@@ -216,6 +219,7 @@ void Character::AutonomousThinking()
             return;
         }
     }
+    AutonomyAdjustAim(); // Revisar se deveria estar nesta linha
     if(GeometryAux::DistanceBetween(this->Anchor, Target->GetAnchor()) > view_range)
     {
         rotating = 0;

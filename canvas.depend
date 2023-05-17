@@ -537,7 +537,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1684259212 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1684286160 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -552,7 +552,8 @@
 	"Managers/RenderManager.h"
 	"Managers/CollisionManager.h"
 	"Managers/FPSManager.h"
-	"CharacterBuilder.h"
+	"Managers/PlayerManager.h"
+	"Builder/CharacterBuilder.h"
 	"Utils/Vec2.h"
 	"Entities/Poly.h"
 	"Entities/Entity.h"
@@ -648,10 +649,10 @@
 	"Vec2.h"
 	"GeometryAux.h"
 
-1684258725 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
+1684286324 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 
-1684258729 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
+1684286235 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
 	<math.h>
 	<vector>
 	"Utils/Pnt2.h"
@@ -687,7 +688,7 @@
 	"Managers/FPSManager.h"
 	"Entities/Poly.h"
 
-1684198249 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\playercharacter.cpp
+1684259663 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\playercharacter.cpp
 	"PlayerCharacter.h"
 
 1684200727 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\playercharacter.h
@@ -707,7 +708,7 @@
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
 
-1684200935 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
+1684285148 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
 	"Entities/Weapon/Weapon.h"
 	"Entities/Character/Character.h"
 
@@ -849,9 +850,15 @@
 1684257164 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\shippart.cpp
 	"ShipPart.h"
 
-1684258413 source:c:\users\nektus\desktop\cg\cg_t3\src\builder\characterbuilder.cpp
+1684285192 source:c:\users\nektus\desktop\cg\cg_t3\src\builder\characterbuilder.cpp
 	"CharacterBuilder.h"
 
-1684257911 c:\users\nektus\desktop\cg\cg_t3\src\builder\characterbuilder.h
-	"Character.h"
+1684284926 c:\users\nektus\desktop\cg\cg_t3\src\builder\characterbuilder.h
+	"../Entities/Character/Character.h"
+
+1684286202 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\playermanager.cpp
+	"PlayerManager.h"
+
+1684285858 c:\users\nektus\desktop\cg\cg_t3\src\managers\playermanager.h
+	"Character/Character.h"
 
