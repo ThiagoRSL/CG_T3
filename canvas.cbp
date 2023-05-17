@@ -19,6 +19,7 @@
 					<Add directory="include" />
 					<Add directory="src" />
 					<Add directory="src/Entities" />
+					<Add directory="src/Managers" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -33,6 +34,7 @@
 					<Add directory="include" />
 					<Add directory="src" />
 					<Add directory="src/Entities" />
+					<Add directory="src/Managers" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -48,12 +50,16 @@
 			<Add library="../lib/libopengl32.a" />
 			<Add library="../lib/freeglut.lib" />
 		</Linker>
+		<Unit filename="src/Builder/CharacterBuilder.cpp" />
+		<Unit filename="src/Builder/CharacterBuilder.h" />
 		<Unit filename="src/Entities/Abstract/Renderable.cpp" />
 		<Unit filename="src/Entities/Abstract/Renderable.h" />
 		<Unit filename="src/Entities/Character/Character.cpp" />
 		<Unit filename="src/Entities/Character/Character.h" />
 		<Unit filename="src/Entities/Character/PlayerCharacter.cpp" />
 		<Unit filename="src/Entities/Character/PlayerCharacter.h" />
+		<Unit filename="src/Entities/Character/ShipPart.cpp" />
+		<Unit filename="src/Entities/Character/ShipPart.h" />
 		<Unit filename="src/Entities/Entity.cpp" />
 		<Unit filename="src/Entities/Entity.h" />
 		<Unit filename="src/Entities/Poly.cpp" />
@@ -71,6 +77,8 @@
 		<Unit filename="src/Managers/Frames.h" />
 		<Unit filename="src/Managers/MouseManager.cpp" />
 		<Unit filename="src/Managers/MouseManager.h" />
+		<Unit filename="src/Managers/PlayerManager.cpp" />
+		<Unit filename="src/Managers/PlayerManager.h" />
 		<Unit filename="src/Managers/RenderManager.cpp" />
 		<Unit filename="src/Managers/RenderManager.h" />
 		<Unit filename="src/Utils/GeometryAux.cpp" />
