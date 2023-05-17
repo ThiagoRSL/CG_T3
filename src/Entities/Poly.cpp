@@ -143,8 +143,8 @@ void Poly::RenderBody()
         else
             a = 0;
 
-        virtualX = Anchor->x + Offset.x;
-        virtualY = Anchor->y + Offset.y;
+        virtualX = Anchor->x + Offset.x - CameraOffsetRef->x;
+        virtualY = Anchor->y + Offset.y - CameraOffsetRef->y;
         float vx[3] = {virtualX, virtualX + Vertexes.at(i)->x, virtualX + Vertexes.at(a)->x};
         float vy[3] = {virtualY, virtualY + Vertexes.at(i)->y, virtualY + Vertexes.at(a)->y};
         CV::polygonFill(vx, vy, 3);
@@ -177,8 +177,8 @@ bool Poly::HasCollision(float x, float y)
 
         int counter = 0;
         float virtualX, virtualY;
-        virtualX = this->Anchor->x + Offset.x;
-        virtualY = this->Anchor->y + Offset.y;
+        virtualX = this->Anchor->x + Offset.x - CameraOffsetRef->x;
+        virtualY = this->Anchor->y + Offset.y - CameraOffsetRef->y;
         if(GeometryAux::Intercept(8000, 8000, x, y, virtualX, virtualY, virtualX + this->Vertexes.at(i)->x, virtualY + this->Vertexes.at(i)->y))
         {
             counter += 1;

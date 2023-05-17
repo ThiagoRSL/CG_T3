@@ -6,6 +6,7 @@
 #include "Utils/Vec2.h"
 #include "Managers/RenderManager.h"
 #include "Managers/CollisionManager.h"
+#include "Managers/CameraManager.h"
 #include "Utils/GeometryAux.h"
 
 class Poly : public Renderable
@@ -44,7 +45,6 @@ class Poly : public Renderable
         void RenderBody();
         void RenderBorder();
         void RenderVertexes();
-    private:
 
     public:
         void SetOffset(float x, float y)

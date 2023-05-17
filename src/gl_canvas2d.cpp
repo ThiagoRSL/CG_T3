@@ -275,22 +275,26 @@ void display (void)
 ////////////////////////////////////////////////////////////////////////////////////////
 //  inicializa o OpenGL
 ////////////////////////////////////////////////////////////////////////////////////////
-void CV::init(int *w, int *h, const char *title)
+void CV::init(const char *title)
 {
    int argc = 0;
    glutInit(&argc, NULL);
 
-   scrHeight = h;
-   scrWidth = w;
+   int height = glutGet(GLUT_SCREEN_WIDTH);
+   int width = glutGet(GLUT_SCREEN_HEIGHT);
+
+   scrHeight = &height;
+   scrWidth = &width;
 
    //habilita MSAA
    glutSetOption(GLUT_MULTISAMPLE, 8);
    glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);// GLUT_MULTISAMPLE
    //glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
 
-   glutInitWindowSize (*w, *h);
-   glutInitWindowPosition (50, 50);
+   glutInitWindowSize (height, width);
+   glutInitWindowPosition (0, 0);
    glutCreateWindow (title);
+   glutFullScreen();
 
    inicializa();
 

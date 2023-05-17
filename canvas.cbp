@@ -68,6 +68,8 @@
 		<Unit filename="src/Entities/Weapon/Projectile.h" />
 		<Unit filename="src/Entities/Weapon/Weapon.cpp" />
 		<Unit filename="src/Entities/Weapon/Weapon.h" />
+		<Unit filename="src/Managers/CameraManager.cpp" />
+		<Unit filename="src/Managers/CameraManager.h" />
 		<Unit filename="src/Managers/CollisionManager.cpp" />
 		<Unit filename="src/Managers/CollisionManager.h" />
 		<Unit filename="src/Managers/FPSManager.cpp" />

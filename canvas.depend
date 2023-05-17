@@ -464,7 +464,7 @@
 
 1684198249 c:\users\nektus\desktop\cg\cg_t3\src\renderable.h
 
-1684198249 c:\users\nektus\desktop\cg\cg_t3\src\gl_canvas2d.h
+1684355435 c:\users\nektus\desktop\cg\cg_t3\src\gl_canvas2d.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -533,11 +533,11 @@
 1684198249 source:c:\users\nektus\desktop\cg\cg_t3\src\geometryaux.cpp
 	"GeometryAux.h"
 
-1684198249 source:c:\users\nektus\desktop\cg\cg_t3\src\gl_canvas2d.cpp
+1684355578 source:c:\users\nektus\desktop\cg\cg_t3\src\gl_canvas2d.cpp
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1684286160 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1684355695 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -599,10 +599,12 @@
 
 1684198249 c:\users\nektus\desktop\cg\cg_t3\include\playercharacter.h
 
-1684198249 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.cpp
+1684354998 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.cpp
 	"Renderable.h"
 
-1684198249 c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.h
+1684355002 c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.h
+	"Utils/Pnt2.h"
+	"Managers/CameraManager.h"
 
 1684198249 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\filemanager.cpp
 	"FileManager.h"
@@ -661,12 +663,13 @@
 	"Entities/Weapon/Weapon.h"
 	"Entities/Weapon/Projectile.h"
 
-1684254068 c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.h
+1684351575 c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.h
 	<stdio.h>
 	<vector>
 	"Utils/Vec2.h"
 	"Managers/RenderManager.h"
 	"Managers/CollisionManager.h"
+	"Managers/CameraManager.h"
 	"Utils/GeometryAux.h"
 
 1684200850 c:\users\nektus\desktop\cg\cg_t3\src\managers\rendermanager.h
@@ -694,7 +697,7 @@
 1684200727 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\playercharacter.h
 	<Entities/Character/Character.h>
 
-1684254068 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
+1684355008 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
 	"Poly.h"
 
 1684205086 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.cpp
@@ -704,11 +707,11 @@
 1684198249 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\rendermanager.cpp
 	"RenderManager.h"
 
-1684204766 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.cpp
+1684355024 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.cpp
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
 
-1684285148 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
+1684354964 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
 	"Entities/Weapon/Weapon.h"
 	"Entities/Character/Character.h"
 
@@ -856,9 +859,16 @@
 1684284926 c:\users\nektus\desktop\cg\cg_t3\src\builder\characterbuilder.h
 	"../Entities/Character/Character.h"
 
-1684286379 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\playermanager.cpp
+1684355059 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\playermanager.cpp
 	"PlayerManager.h"
 
 1684285858 c:\users\nektus\desktop\cg\cg_t3\src\managers\playermanager.h
 	"Character/Character.h"
+
+1684355108 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\cameramanager.cpp
+	"CameraManager.h"
+
+1684355103 c:\users\nektus\desktop\cg\cg_t3\src\managers\cameramanager.h
+	"Managers/CameraManager.h"
+	"Utils/Pnt2.h"
 

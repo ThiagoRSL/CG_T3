@@ -52,6 +52,7 @@ bool control_moving;
 void render()
 {
     CV::clear(0,0,0);
+    CameraManager::shared_instance().UpdateCameraOffset();
     FPSManager::shared_instance().UpdateFrames();
     PlayerManager::shared_instance().CheckInteraction();
     RenderManager::shared_instance().RenderAll();
@@ -60,7 +61,7 @@ void render()
 
 void keyboard(int key)
 {
-    printf("\nTecla: %d" , key);
+    //printf("\nTecla: %d" , key);
 
     if(PressedKeys.find(key) != PressedKeys.end())
     {
@@ -101,7 +102,7 @@ void keyboard(int key)
 //funcao chamada toda vez que uma tecla for liberada
 void keyboardUp(int key)
 {
-    printf("\nLiberou: %d" , key);
+    //printf("\nLiberou: %d" , key);
     if(PressedKeys.find(key) != PressedKeys.end())
         PressedKeys.erase(PressedKeys.find(key));
     switch(key)
@@ -156,7 +157,7 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
     MouseManager::shared_instance().PosX = x; //guarda as coordenadas do mouse para exibir dentro da render()
     MouseManager::shared_instance().PosY = y;
 
-    printf("\nmouse %d %d %d %d %d %d", button, state, wheel, direction,  x, y);
+    //printf("\nmouse %d %d %d %d %d %d", button, state, wheel, direction,  x, y);
 
     if(button == 0 && state == 0)
     {
@@ -228,9 +229,15 @@ int main(void)
     CollisionManager::shared_instance().AddNPC(player_character);
     CollisionManager::shared_instance().AddNPC(enemy_character);
 
-    int screenWidth = 1600;
-    int screenHeight = 800;
-    CV::init(&screenWidth, &screenHeight, "Space Extinction");
+
+    CV::init("Space Extinction");
+
+    int screenWidth = glutGet(GLUT_SCREEN_WIDTH);
+    int screenHeight = glutGet(GLUT_SCREEN_HEIGHT);
+
+    CameraManager::shared_instance().SetCameraOffset(Pnt2((float) -screenWidth/2, (float) -screenHeight/2));
+    CameraManager::shared_instance().SetCameraAnchor(player_character->GetAnchor());
+
     glutSetCursor(GLUT_CURSOR_CROSSHAIR);
     CV::run();
 }

@@ -2,5 +2,5 @@
 
 Renderable::Renderable()
 {
-    //ctor
+    CameraOffsetRef = CameraManager::shared_instance().GetCameraOffsetRef();
 }
