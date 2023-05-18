@@ -229,7 +229,6 @@ int main(void)
     CollisionManager::shared_instance().AddNPC(player_character);
     CollisionManager::shared_instance().AddNPC(enemy_character);
 
-
     CV::init("Space Extinction");
 
     int screenWidth = glutGet(GLUT_SCREEN_WIDTH);

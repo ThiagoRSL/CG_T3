@@ -537,7 +537,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1684355695 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1684366839 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
