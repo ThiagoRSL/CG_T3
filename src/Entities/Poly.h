@@ -22,7 +22,7 @@ class Poly : public Renderable
         void AddVertex(Vec2* vertex);
         void AddVertex(float x, float y);
         void Resize(float scalar);
-        void Rotate(float degrees);
+        void virtual Rotate(float degrees);
         void RotateRad(float radians);
         void Transform(float matrix[2][2]);
         void virtual Move(float speed);
@@ -37,7 +37,6 @@ class Poly : public Renderable
         float border_color[4];
         float rotation;
 
-        Vec2 Offset;
         Pnt2* Anchor;
         Vec2* OrientationVector;
         std::vector<Vec2*> Vertexes;
@@ -47,6 +46,7 @@ class Poly : public Renderable
         void RenderVertexes();
 
     public:
+        Vec2 Offset;
         void SetOffset(float x, float y)
         {
             Offset.x = x;

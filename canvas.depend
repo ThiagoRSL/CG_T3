@@ -276,11 +276,11 @@
 1683047694 source:c:\users\thiago\desktop\grad\cg\cg_gametest\src\geometryaux.cpp
 	"GeometryAux.h"
 
-1683338857 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\gl_canvas2d.cpp
+1684416283 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\gl_canvas2d.cpp
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1683029880 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\gl_canvas2d.h
+1684416283 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\gl_canvas2d.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -305,7 +305,7 @@
 1683029880 c:\users\thiago\desktop\grad\cg\trabalhos\t3\include\gl\freeglut_ext.h
 	<stdarg.h>
 
-1684247047 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\main.cpp
+1684519229 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -320,6 +320,8 @@
 	"Managers/RenderManager.h"
 	"Managers/CollisionManager.h"
 	"Managers/FPSManager.h"
+	"Managers/PlayerManager.h"
+	"Builder/CharacterBuilder.h"
 	"Utils/Vec2.h"
 	"Entities/Poly.h"
 	"Entities/Entity.h"
@@ -725,22 +727,27 @@
 1684254068 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.cpp
 	"Entity.h"
 
-1684245030 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\abstract\renderable.cpp
+1684416283 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\abstract\renderable.cpp
 	"Renderable.h"
 
-1684245030 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\abstract\renderable.h
+1684416283 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\abstract\renderable.h
+	"Utils/Pnt2.h"
+	"Managers/CameraManager.h"
 
-1684245396 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\character.cpp
+1684520418 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\character.cpp
 	"Character.h"
 
-1684245376 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\character.h
+1684520304 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\character.h
 	<math.h>
 	<vector>
+	"Utils/Pnt2.h"
 	"Entities/Entity.h"
+	"ShipPart.h"
+	"Slot.h"
 	"Entities/Weapon/Weapon.h"
 	"Entities/Weapon/Projectile.h"
 
-1684245030 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\entity.h
+1684520279 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\entity.h
 	<stdio.h>
 	<vector>
 	"Utils/Pnt2.h"
@@ -749,18 +756,19 @@
 
 1684245030 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\utils\pnt2.h
 
-1684245030 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\utils\vec2.h
+1684520697 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\utils\vec2.h
 	<math.h>
 	"Entities/Abstract/Renderable.h"
 	"gl_canvas2d.h"
 	"Utils/Pnt2.h"
 
-1684246600 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\poly.h
+1684519854 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\poly.h
 	<stdio.h>
 	<vector>
 	"Utils/Vec2.h"
 	"Managers/RenderManager.h"
 	"Managers/CollisionManager.h"
+	"Managers/CameraManager.h"
 	"Utils/GeometryAux.h"
 
 1684245030 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\managers\rendermanager.h
@@ -780,7 +788,7 @@
 	<math.h>
 	"Pnt2.h"
 
-1684245030 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\weapon\weapon.h
+1684519485 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\weapon\weapon.h
 	<Entities/Poly.h>
 	<Entities/Weapon/Projectile.h>
 
@@ -792,7 +800,7 @@
 	<stdio.h>
 	<time.h>
 
-1684245030 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\playercharacter.cpp
+1684416283 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\playercharacter.cpp
 	"PlayerCharacter.h"
 
 1684245030 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\playercharacter.h
@@ -801,16 +809,17 @@
 1684245717 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\entity.cpp
 	"Entity.h"
 
-1684247177 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\poly.cpp
+1684416283 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\poly.cpp
 	"Poly.h"
 
-1684245030 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\weapon\projectile.cpp
+1684416283 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\weapon\projectile.cpp
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
 
-1684245030 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\weapon\weapon.cpp
+1684520059 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\weapon\weapon.cpp
 	"Entities/Weapon/Weapon.h"
 	"Entities/Character/Character.h"
+	"Slot.h"
 
 1684245030 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\managers\collisionmanager.cpp
 	"Managers/CollisionManager.h"
@@ -842,7 +851,7 @@
 	"Pnt2.h"
 	"Vec2.h"
 
-1684245030 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\utils\vec2.cpp
+1684520776 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\utils\vec2.cpp
 	"Vec2.h"
 	"GeometryAux.h"
 
@@ -871,4 +880,54 @@
 1684355103 c:\users\nektus\desktop\cg\cg_t3\src\managers\cameramanager.h
 	"Managers/CameraManager.h"
 	"Utils/Pnt2.h"
+
+1684416283 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\managers\cameramanager.h
+	"Managers/CameraManager.h"
+	"Utils/Pnt2.h"
+
+1684518903 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\shippart.h
+	<Poly.h>
+	<vector>
+	"Slot.h"
+
+1684520554 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\builder\characterbuilder.cpp
+	"CharacterBuilder.h"
+
+1684517418 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\builder\characterbuilder.h
+	"../Entities/Character/Character.h"
+
+1684518938 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\shippart.cpp
+	"ShipPart.h"
+	"Character.h"
+
+1684416283 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\managers\playermanager.h
+	"Character/Character.h"
+
+1684416283 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\managers\cameramanager.cpp
+	"CameraManager.h"
+
+1684416283 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\managers\playermanager.cpp
+	"PlayerManager.h"
+
+1684416283 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\controller\playercontroller.cpp
+	"PlayerController.h"
+
+1684416283 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\controller\playercontroller.h
+
+1684514986 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\modifiers.cpp
+	"Modifiers.h"
+
+1684515078 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\modifiers.h
+
+1684519937 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\slot.h
+	"Weapon/Weapon.h"
+
+1684518930 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\slot.cpp
+	"Slot.h"
+	"ShipPart.h"
+
+1684515325 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\modifier.cpp
+	"Modifier.h"
+
+1684515567 c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\character\modifier.h
 

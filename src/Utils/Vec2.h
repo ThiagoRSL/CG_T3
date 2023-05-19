@@ -43,6 +43,7 @@ class Vec2 : public Renderable
         // Operações no próprio vetor
         void Mult(float scalar);
         void Sum(float scalar);
+        void Sum(Vec2& v2);
         void Sum(Vec2* v2);
         void Sub(Vec2* v2);
 

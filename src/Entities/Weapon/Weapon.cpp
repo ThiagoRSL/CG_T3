@@ -1,18 +1,14 @@
 #include "Entities/Weapon/Weapon.h"
 #include "Entities/Character/Character.h"
+#include "Slot.h"
 
-Weapon::Weapon(Character* Wielder)
+Weapon::Weapon()
     :Poly()
 {
-    this->Wielder = Wielder;
-    this->Anchor = Wielder->GetAnchor();
-    Vec2* wielderAim = Wielder->GetAimVector();
-    this->OrientationVector = new Vec2(wielderAim->x, wielderAim->y);
     Poly::AddVertex(- 5, - 25);
     Poly::AddVertex(+ 5, - 25);
     Poly::AddVertex(+ 5, + 5);
     Poly::AddVertex(- 5, + 5);
-    Poly::Render();
 
     shot_cooldown_base = 15;
     damage_base = 10;
@@ -22,6 +18,15 @@ Weapon::Weapon(Character* Wielder)
 
     shot_cooldown_val = 0;
     ammo_temp = max_ammo_base;
+}
+
+void Weapon::EquipOn(WeaponSlot* slot)
+{
+    this->Wielder = slot->SlotOf()->PartOf();
+    this->SlottedOn = slot;
+    this->Anchor = slot->SlotOf()->PartOf()->GetAnchor();
+    Vec2* wielderAim = Wielder->GetAimVector();
+    this->OrientationVector = new Vec2(wielderAim->x, wielderAim->y);
 }
 
 void Weapon::Shoot()

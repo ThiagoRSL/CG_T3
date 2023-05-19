@@ -69,6 +69,13 @@ void Vec2::Sum(Vec2* v2)
     this->x = this->x + v2->x;
     this->y = this->y + v2->y;
 }
+
+void Vec2::Sum(Vec2& v2)
+{
+    this->x = this->x + (v2.x);
+    this->y = this->y + (v2.y);
+}
+
 void Vec2::Sub(Vec2* v2)
 {
     this->x = this->x - v2->x;

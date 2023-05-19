@@ -16,7 +16,7 @@ class Entity : public Renderable
 
         void Move(float speed);
         void Resize(float scalar);
-        void Rotate(float degrees);
+        virtual void Rotate(float degrees);
 
     protected:
         Pnt2* Anchor;

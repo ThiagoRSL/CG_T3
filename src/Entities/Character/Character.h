@@ -6,41 +6,9 @@
 #include "Utils/Pnt2.h"
 #include "Entities/Entity.h"
 #include "ShipPart.h"
+#include "Slot.h"
 #include "Entities/Weapon/Weapon.h"
 #include "Entities/Weapon/Projectile.h"
-
-
-class WeaponSlot : public Renderable
-{
-    public:
-        Weapon* EquippedWeapon;
-        Pnt2 Position;
-
-    public:
-        WeaponSlot()
-        {
-            EquippedWeapon = nullptr;
-        }
-        void SetOffset(float x, float y)
-        {
-            this->Position.x = x;
-            this->Position.y = y;
-        }
-        void SetWeapon(Weapon* weapon)
-        {
-            this->EquippedWeapon = weapon;
-            this->EquippedWeapon->SetOffset(Position.x, Position.y);
-        }
-        bool HasWeapon()
-        {
-            if(EquippedWeapon != nullptr) return true;
-            return false;
-        }
-        void Render()
-        {
-            if(HasWeapon()) EquippedWeapon->Render();
-        }
-};
 
 class Character : public Entity
 {
@@ -64,9 +32,12 @@ class Character : public Entity
         void Render();
         void RenderBody();
         void RenderWeapons();
+        void RenderShipParts();
 
         void AppendPart(ShipPart* part);
+        void Rotate(float degrees);
         bool EquipWeapon(Weapon* weapon);
+        void UpdateParts();
 
         void CreateWeaponSlot(Pnt2 offset);
         void UpdateWeaponPosition();
@@ -74,6 +45,7 @@ class Character : public Entity
         void MoveDirection(Vec2* directionVector, float speed);
 
     protected:
+        std::vector<ShipPart*> ShipParts;
         std::vector<WeaponSlot*> WeaponSlots;
         Vec2* AimVector;
         //Control Variables
@@ -92,6 +64,7 @@ class Character : public Entity
         float hit_points;
         bool dying;
         bool dead;
+        bool deactivated;
 
         //Autonomy
         float aim_accuracy;
