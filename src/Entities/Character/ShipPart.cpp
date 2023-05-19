@@ -9,3 +9,7 @@ void ShipPart::AddModifier(int modifier_id)
 {
     this->modifiers.push_back(modifier_id);
 }
+void ShipPart::AddWeaponSlot(int modifier_id)
+{
+    this->modifiers.push_back(modifier_id);
+}

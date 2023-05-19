@@ -131,8 +131,23 @@ void Character::Render()
 void Character::AppendPart(ShipPart* part)
 {
     Entity::AppendPoly((Poly*) part);
-
+    ShipParts.push_back(part);
+    UpdateParts();
 }
+
+void Character::UpdatePartModifiers()
+{
+    int i, j;
+    for (i = 0; i < ShipParts.size(); i++)
+    {
+        for (j = 0; j <ShipParts.at(i)->Modifiers; j++)
+        {
+
+        }
+    }
+}
+
+void Character::ClearPartModifiers()
 
 bool Character::EquipWeapon(Weapon* weapon)
 {
@@ -274,11 +289,3 @@ void Character::AutonomousThinking()
     }
 }
 
-//Building Ship Methods
-void Character::CreateWeaponSlot(Pnt2 offset)
-{
-    WeaponSlot* ws = new WeaponSlot();
-    ws->EquippedWeapon = nullptr;
-    ws->SetOffset(offset.x, offset.y);
-    WeaponSlots.push_back(ws);
-}

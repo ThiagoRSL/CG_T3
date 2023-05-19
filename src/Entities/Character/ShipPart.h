@@ -11,10 +11,11 @@ class ShipPart : public Poly
         ShipPart(float x, float y, float* RGB);
         void AddModifier(int modifier_id);
 
+        void AddWeaponSlot(Pnt2 offset);
+        std::vector<int> modifiers;
     protected:
 
     private:
-        std::vector<int> modifiers;
 };
 
 #endif // SHIPPART_H

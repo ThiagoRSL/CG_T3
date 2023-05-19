@@ -180,7 +180,7 @@ int main(void)
 
     PlayerManager::shared_instance().SetPlayerCharacter(player_character);
 
-    enemy_character = CharacterBuilder::BuildShip(800, 400, RGB, 1);
+    enemy_character = CharacterBuilder::BuildShip(800, 400, RGB, 2);
 
     enemy_character->EquipWeapon(new Weapon(enemy_character));
     enemy_character->SetAutonomous(true);
