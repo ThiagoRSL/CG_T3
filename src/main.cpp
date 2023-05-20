@@ -102,7 +102,7 @@ void keyboard(int key)
 //funcao chamada toda vez que uma tecla for liberada
 void keyboardUp(int key)
 {
-    //printf("\nLiberou: %d" , key);
+    printf("\nLiberou: %d" , key);
     if(PressedKeys.find(key) != PressedKeys.end())
         PressedKeys.erase(PressedKeys.find(key));
     switch(key)
@@ -124,6 +124,15 @@ void keyboardUp(int key)
         //FileManager::shared_instance().SaveData(SavedFilePath, FigureManager::shared_instance().GetFiguresAsString(), FigureManager::shared_instance().CountFigures());
         break;
       //seta para a esquerda
+      case 98:
+        printf("\nB pressionado, loja abertas.");
+        break;
+      case 99:
+        printf("\nC pressionado, estatísticas do personagem abertas.");
+        break;
+      case 99:
+        printf("\nI pressionado, inventário abertas.");
+        break;
       case 97:
         if(PressedKeys.find(100) != PressedKeys.end())
             player_character->SetRotating(1);
