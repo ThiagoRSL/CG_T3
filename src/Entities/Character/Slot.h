@@ -1,19 +1,24 @@
 #ifndef SLOT_H
 #define SLOT_H
 
+#include "Weapon/Weapon.h"
 
-class Slot
+class ShipPart;
+
+class Slot : public Renderable
 {
     public:
         Slot();
+        void SlotOf(ShipPart* part);
+        ShipPart* SlotOf();
 
     protected:
 
     private:
+        ShipPart* AttachedTo;
 };
 
-
-class WeaponSlot : public Renderable
+class WeaponSlot : public Slot
 {
     public:
         Weapon* EquippedWeapon;
@@ -32,6 +37,7 @@ class WeaponSlot : public Renderable
         void SetWeapon(Weapon* weapon)
         {
             this->EquippedWeapon = weapon;
+            weapon->EquipOn(this);
             this->EquippedWeapon->SetOffset(Position.x, Position.y);
         }
         bool HasWeapon()
@@ -41,7 +47,11 @@ class WeaponSlot : public Renderable
         }
         void Render()
         {
-            if(HasWeapon()) EquippedWeapon->Render();
+            if(HasWeapon())
+            {
+                EquippedWeapon->Render();
+            }
         }
 };
-#endif // SLOTS_H
+
+#endif // SLOT_H

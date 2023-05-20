@@ -79,6 +79,16 @@ void Character::Shoot()
     }
 }
 
+void Character::Rotate(float degrees)
+{
+    int i;
+    for (i = 0; i < WeaponSlots.size(); i++)
+    {
+        if(WeaponSlots.at(i)->HasWeapon())
+            WeaponSlots.at(i)->EquippedWeapon->Rotate(degrees);
+    }
+    Entity::Rotate(degrees);
+}
 
 void Character::ReceiveDamage(float damage)
 {
@@ -122,41 +132,41 @@ void Character::Render()
     if(autonomous)  AutonomousThinking();
     if(moving)      Move(moving*movement_speed/FPSManager::shared_instance().GetFrames());
     if(rotating)    Rotate(rotating*rotation_speed/FPSManager::shared_instance().GetFrames());
-    this->OrientationVector->Render();
 
     Entity::Render();
+
+    ////RenderShipParts();
     RenderWeapons();
 }
+/*
+void Character::RenderShipParts()
+{
+    CV::color(0.5, 0.5, 0.5);
+    int i;
+    for (i = 0; i < ShipParts.size(); i++)
+    {
+        ShipParts.at(i)->Render();
+    }
+}
+*/
 
 void Character::AppendPart(ShipPart* part)
 {
     Entity::AppendPoly((Poly*) part);
     ShipParts.push_back(part);
+    part->AppendToCharacter(this);
     UpdateParts();
 }
-
-void Character::UpdatePartModifiers()
-{
-    int i, j;
-    for (i = 0; i < ShipParts.size(); i++)
-    {
-        for (j = 0; j <ShipParts.at(i)->Modifiers; j++)
-        {
-
-        }
-    }
-}
-
-void Character::ClearPartModifiers()
 
 bool Character::EquipWeapon(Weapon* weapon)
 {
     int i;
     for(i = 0; i < WeaponSlots.size(); i++)
     {
-        if(WeaponSlots.at(i)->EquippedWeapon == nullptr)
+        WeaponSlot* slot = WeaponSlots.at(i);
+        if(slot->EquippedWeapon == nullptr)
         {
-            WeaponSlots.at(i)->SetWeapon(weapon);
+            slot->SetWeapon(weapon);
             return true;
         }
     }
@@ -177,10 +187,17 @@ void Character::UpdateWeaponPosition()
     int i;
     for(i = 0; i < WeaponSlots.size(); i++)
     {
-        if(WeaponSlots.at(i)->HasWeapon())
+        WeaponSlot* slot = WeaponSlots.at(i);
+        if(slot->HasWeapon())
         {
-            float angleDiff = WeaponSlots.at(i)->EquippedWeapon->GetOrientation()->GetAngleBetween(this->AimVector);
-            WeaponSlots.at(i)->EquippedWeapon->RotateRad(angleDiff);
+            Vec2* orientation = slot->EquippedWeapon->GetOrientation();
+            float angleDiff = orientation->GetAngleBetween(this->AimVector);
+
+            Vec2 saveOffSet = slot->EquippedWeapon->Offset;
+            slot->EquippedWeapon->Offset = Vec2(0,0);
+            slot->EquippedWeapon->RotateRad(angleDiff);
+
+            slot->EquippedWeapon->Offset = saveOffSet;
         }
     }
 }
@@ -194,6 +211,24 @@ void Character::RefreshWeaponsCooldown()
             WeaponSlots.at(i)->EquippedWeapon->RefreshShotCooldown();
     }
 }
+
+void Character::UpdateParts()
+{
+    WeaponSlots.clear();
+    int i, j;
+    for(i = 0; i < ShipParts.size(); i++)
+    {
+        std::vector<WeaponSlot*> wps = ShipParts.at(i)->GetWeaponSlots();
+        for(j = 0; j < wps.size(); j++)
+        {
+            WeaponSlots.push_back(wps.at(j));
+        }
+    }
+    //UpdatePartsModifiers();
+}
+
+//void Character::ClearPartModifiers();
+//void Character::UpdatePartsModifiers();
 
 void Character::MoveDirection(Vec2* directionVector, float speed)
 {
@@ -288,4 +323,3 @@ void Character::AutonomousThinking()
         //Atualizar o valor de rotação para o minimo necessário no último frame.
     }
 }
-

@@ -5,13 +5,15 @@
 #include <Entities/Weapon/Projectile.h>
 
 class Character;
+class WeaponSlot;
 
 class Weapon : public Poly
 {
     public:
-        Weapon(Character* Wielder);
+        Weapon();
         void AdjustWeapon();
 
+        void EquipOn(WeaponSlot* slot);
         void Shoot();
         float CalcShotDamage();
 
@@ -20,6 +22,8 @@ class Weapon : public Poly
 
     private:
         Character* Wielder;
+        WeaponSlot* SlottedOn;
+
         float shot_cooldown_base;
         float damage_base;
         float energy_cost_base;

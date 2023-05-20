@@ -6,9 +6,9 @@
 #include "Utils/Pnt2.h"
 #include "Entities/Entity.h"
 #include "ShipPart.h"
+#include "Slot.h"
 #include "Entities/Weapon/Weapon.h"
 #include "Entities/Weapon/Projectile.h"
-
 
 class Character : public Entity
 {
@@ -32,11 +32,15 @@ class Character : public Entity
         void Render();
         void RenderBody();
         void RenderWeapons();
+        void RenderShipParts();
 
         void AppendPart(ShipPart* part);
         void RemovePart(ShipPart* part);
         void UpdateParts();
+        void UpdatePartsModifiers();
+        void RemovePartsModifiers();
 
+        void Rotate(float degrees);
         bool EquipWeapon(Weapon* weapon);
 
         void UpdateWeaponPosition();
@@ -44,7 +48,7 @@ class Character : public Entity
         void MoveDirection(Vec2* directionVector, float speed);
 
     protected:
-        std::vector<ShipParts*> ShipParts;
+        std::vector<ShipPart*> ShipParts;
         std::vector<WeaponSlot*> WeaponSlots;
         Vec2* AimVector;
         //Control Variables
@@ -63,6 +67,7 @@ class Character : public Entity
         float hit_points;
         bool dying;
         bool dead;
+        bool deactivated;
 
         //Autonomy
         float aim_accuracy;

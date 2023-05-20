@@ -16,7 +16,7 @@ class Entity : public Renderable
 
         void Move(float speed);
         void Resize(float scalar);
-        void Rotate(float degrees);
+        virtual void Rotate(float degrees);
 
     protected:
         Pnt2* Anchor;
@@ -26,7 +26,7 @@ class Entity : public Renderable
         float background_color[3];
 
     public:
-        Pnt2* GetAnchor() {return this->Anchor;}
+        Pnt2* GetAnchor();
 };
 
 #endif // ENTITY_H

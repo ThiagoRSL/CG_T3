@@ -33,7 +33,8 @@ void Vec2::SetAnchor(Pnt2* point)
 float Vec2::GetAngleBetween(Vec2* v)
 {
     float det = Determinant(v);
-    if(v == 0)
+    float arc_tan = atan2(det, DotProduct(v));
+    if(isnan(arc_tan))
         return 0;
     else
         return atan2(det, DotProduct(v));
@@ -69,6 +70,13 @@ void Vec2::Sum(Vec2* v2)
     this->x = this->x + v2->x;
     this->y = this->y + v2->y;
 }
+
+void Vec2::Sum(Vec2& v2)
+{
+    this->x = this->x + (v2.x);
+    this->y = this->y + (v2.y);
+}
+
 void Vec2::Sub(Vec2* v2)
 {
     this->x = this->x - v2->x;

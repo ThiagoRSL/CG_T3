@@ -175,54 +175,19 @@ int main(void)
     float RGB2[3] = {0.75,0.0,0.75};
    //Sleep(1000);
 
-    player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(400, 400, RGB, 1);
-    player_character->EquipWeapon(new Weapon(player_character));
+    player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(400, 400, RGB, 2);
+    player_character->EquipWeapon(new Weapon());
+    player_character->EquipWeapon(new Weapon());
+    player_character->EquipWeapon(new Weapon());
 
     PlayerManager::shared_instance().SetPlayerCharacter(player_character);
 
     enemy_character = CharacterBuilder::BuildShip(800, 400, RGB, 2);
+    enemy_character->EquipWeapon(new Weapon());
+    enemy_character->EquipWeapon(new Weapon());
 
-    enemy_character->EquipWeapon(new Weapon(enemy_character));
     enemy_character->SetAutonomous(true);
 
-    /*
-    ShipPart* body = new ShipPart(400, 400, RGB);
-    body->AddVertex(-20,-25);
-    body->AddVertex(-10,-40);
-    body->AddVertex(10,-40);
-    body->AddVertex(20,-25);
-    body->AddVertex(20,25);
-    body->AddVertex(-20,25);
-    player_character->AppendPart(body);
-
-    ShipPart* leftWing = new ShipPart(350, 400, RGB);
-    leftWing->AddVertex(10, -25);
-    leftWing->AddVertex(-10, -10);
-    leftWing->AddVertex(-10, 30);
-    leftWing->AddVertex(10, 30);
-    leftWing->SetOffset(-30, 0);
-    player_character->AppendPart(leftWing);
-
-    ShipPart* rightWing = new ShipPart(350, 400, RGB);
-    rightWing->AddVertex(10, -10);
-    rightWing->AddVertex(-10, -25);
-    rightWing->AddVertex(-10, 30);
-    rightWing->AddVertex(10, 30);
-    rightWing->SetOffset(30, 0);
-    player_character->AppendPart(rightWing);
-
-    enemy_character = new Character(800, 400, RGB2);
-
-    Poly* bodye = new Poly(800, 400, RGB);
-    bodye->AddVertex(-20,-25);
-    bodye->AddVertex(-10,-40);
-    bodye->AddVertex(10,-40);
-    bodye->AddVertex(20,-25);
-    bodye->AddVertex(20,25);
-    bodye->AddVertex(-20,25);
-    enemy_character->SetAutonomous(true);
-    enemy_character->AppendPoly(bodye);
-*/
     RenderManager::shared_instance().AddRenderableToList(player_character);
     RenderManager::shared_instance().AddRenderableToList(enemy_character);
     CollisionManager::shared_instance().SetPlayerCharacter(player_character);

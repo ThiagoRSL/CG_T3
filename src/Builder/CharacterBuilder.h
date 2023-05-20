@@ -15,6 +15,7 @@ class CharacterBuilder
     private:
         static Character* CreateSmallShip(float x, float y, float* RGB);
         static Character* CreateMediumShip(float x, float y, float* RGB);
+
         static ShipPart* CreateChassis(float x, float y, float* RGB);
         static ShipPart* CreateRightWing(float x, float y, float* RGB);
         static ShipPart* CreateLeftWing(float x, float y, float* RGB);
