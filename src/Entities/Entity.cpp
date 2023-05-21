@@ -41,6 +41,28 @@ void Entity::AppendPoly(Poly* poly)
     poly->SetBackgroundColor(this->background_color);
 }
 
+std::vector<Poly*>* Entity::GetPartsCopy()
+{
+    std::vector<Poly*>* coppies = new std::vector<Poly*>();
+    int i;
+    for(i = 0; i < Parts.size(); i++)
+    {
+        coppies->push_back(Parts.at(i)->GetCopy());
+    }
+    return coppies;
+}
+
+Entity* Entity::GetCopy()
+{
+    Entity* entityCopy = new Entity(this->Anchor->x, this->Anchor->y);
+    int i;
+    for(i = 0; i < Parts.size(); i++)
+    {
+        entityCopy->AppendPoly(Parts.at(i)->GetCopy());
+    }
+    return entityCopy;
+}
+
 void Entity::Render()
 {
     CV::color(0.5, 0.5, 0.5);

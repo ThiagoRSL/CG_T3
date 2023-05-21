@@ -20,6 +20,7 @@ class Vec2 : public Renderable
         Vec2();
         Vec2(float v[2]);
         Vec2(float x, float y);
+        Vec2(float x, float y, Pnt2* anchor);
 
         // Setters
         void SetAnchor(Pnt2* point);
@@ -56,9 +57,12 @@ class Vec2 : public Renderable
 
         void Render();
 
-    protected:
+    public:
+        Vec2* GetCopy()
+        {
+            return new Vec2(this->x, this->y, this->anchor);
+        }
 
-    private:
 };
 
 #endif // VEC2_H

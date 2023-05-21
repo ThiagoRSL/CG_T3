@@ -18,6 +18,10 @@ void Pnt2::ApplyVec2(Vec2 vec)
     this->y = this->y + vec.y;
 }
 
+Vec2 Pnt2::AsVec()
+{
+    return Vec2(this->x, this->y);
+}
 /*
 Pnt2 Pnt2::operator+ (const Vec2& vec)
 {

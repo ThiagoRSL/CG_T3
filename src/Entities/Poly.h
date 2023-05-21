@@ -53,6 +53,19 @@ class Poly : public Renderable
             Offset.y = y;
         }
         Vec2* GetOrientation(){return this->OrientationVector;}
+        Poly* GetCopy()
+        {
+            float RGBCopy[3] = {background_color[0], background_color[1], background_color[2]};
+            Poly* polyCopy = new Poly(this->Anchor->x, this->Anchor->y);
+            polyCopy->SetBackgroundColor(RGBCopy);
+            polyCopy->SetOffset(Offset.x, Offset.y);
+            int i = 0;
+            for(i = 0; i < Vertexes.size(); i++)
+            {
+                polyCopy->AddVertex(Vertexes.at(i)->GetCopy());
+            }
+            return polyCopy;
+        }
 
 };
 

@@ -18,6 +18,7 @@ class Character : public Entity
         void AimTo(float x, float y);
         void SetRotating(float degree);
         void SetMoving(float movement);
+        void ActivateSpecial();
         void Shoot();
         void ReceiveDamage(float damage);
         void AnimateDeath();
@@ -50,6 +51,7 @@ class Character : public Entity
     protected:
         std::vector<ShipPart*> ShipParts;
         std::vector<WeaponSlot*> WeaponSlots;
+        //SpecialPower* Special;
         Vec2* AimVector;
         //Control Variables
         float rotating;

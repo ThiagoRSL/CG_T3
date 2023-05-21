@@ -78,6 +78,7 @@ void Poly::Resize(float scalar)
     {
         Vertexes.at(i)->Mult(scalar);
     }
+    Offset.Mult(scalar);
 }
 
 void Poly::RotateRad(float radians)

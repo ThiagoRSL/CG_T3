@@ -79,6 +79,12 @@ void Character::Shoot()
     }
 }
 
+void Character::ActivateSpecial()
+{
+    printf("\nCharacter used special.");
+    //this->Special->Activate();
+}
+
 void Character::Rotate(float degrees)
 {
     int i;
@@ -134,7 +140,6 @@ void Character::Render()
     if(rotating)    Rotate(rotating*rotation_speed/FPSManager::shared_instance().GetFrames());
 
     Entity::Render();
-
     ////RenderShipParts();
     RenderWeapons();
 }
@@ -224,11 +229,14 @@ void Character::UpdateParts()
             WeaponSlots.push_back(wps.at(j));
         }
     }
-    //UpdatePartsModifiers();
+    UpdatePartsModifiers();
 }
 
 //void Character::ClearPartModifiers();
-//void Character::UpdatePartsModifiers();
+void Character::UpdatePartsModifiers()
+{
+    printf("\nUpdating modifiers...");
+}
 
 void Character::MoveDirection(Vec2* directionVector, float speed)
 {

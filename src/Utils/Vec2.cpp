@@ -23,6 +23,13 @@ Vec2::Vec2(float x, float y)
     this->anchor = nullptr;
 }
 
+Vec2::Vec2(float x, float y, Pnt2* anchor)
+{
+    this->x = x;
+    this->y = y;
+    this->anchor = new Pnt2(anchor->x, anchor->y);
+}
+
 // Setters
 void Vec2::SetAnchor(Pnt2* point)
 {

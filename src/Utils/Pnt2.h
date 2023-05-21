@@ -13,6 +13,7 @@ class Pnt2
         float y;
 
         void ApplyVec2(Vec2 vec);
+        Vec2 AsVec();
         //Pnt2 operator+ (const Vec2& vec);
         //Pnt2 operator+= (const Vec2& vec);
     protected:

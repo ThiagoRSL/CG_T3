@@ -9,13 +9,14 @@ class PlayerManager
         PlayerManager();
         static PlayerManager &shared_instance() {static PlayerManager playerManager; return playerManager;}
 
-        void SetPlayerCharacter(Character* character);
         void CheckInteraction();
-
-    protected:
 
     private:
         Character* PlayerCharacter;
+
+    public:
+        void SetPlayerCharacter(Character* character);
+        Character* GetPlayerCharacter() {return PlayerCharacter;}
 };
 
 #endif // PLAYERMANAGER_H

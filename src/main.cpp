@@ -30,6 +30,7 @@
 #include "Managers/CollisionManager.h"
 #include "Managers/FPSManager.h"
 #include "Managers/PlayerManager.h"
+#include "Managers/UIManager.h"
 #include "Builder/CharacterBuilder.h"
 #include "Utils/Vec2.h"
 #include "Entities/Poly.h"
@@ -51,7 +52,7 @@ bool control_moving;
 
 void render()
 {
-    CV::clear(0,0,0);
+    CV::clear(0.4,0.3,0);
     CameraManager::shared_instance().UpdateCameraOffset();
     FPSManager::shared_instance().UpdateFrames();
     PlayerManager::shared_instance().CheckInteraction();
@@ -74,7 +75,7 @@ void keyboard(int key)
       //seta para a esquerda
       case 99:
         //tecla C
-        player_character->ReceiveDamage(200);
+        //player_character->ReceiveDamage(200);
       break;
       case 120:
         //tecla X
@@ -82,7 +83,7 @@ void keyboard(int key)
       break;
       case 122:
         //tecla Z
-        player_character->Shoot();
+        player_character->ActivateSpecial();
       break;
       case 97:
         player_character->SetRotating(-1);
@@ -102,7 +103,7 @@ void keyboard(int key)
 //funcao chamada toda vez que uma tecla for liberada
 void keyboardUp(int key)
 {
-    printf("\nLiberou: %d" , key);
+    //printf("\nLiberou: %d" , key);
     if(PressedKeys.find(key) != PressedKeys.end())
         PressedKeys.erase(PressedKeys.find(key));
     switch(key)
@@ -110,10 +111,7 @@ void keyboardUp(int key)
       case 27:
          //exit(0);
       break;
-      //tecla "I"
-      case 105:
-        // debugMode = !debugMode;
-        break;
+        //InventoryManager::shared_instance().OpenMenu();
       case 107:
         //ClearAllFigures();
         break;
@@ -128,10 +126,10 @@ void keyboardUp(int key)
         printf("\nB pressionado, loja abertas.");
         break;
       case 99:
-        printf("\nC pressionado, estatísticas do personagem abertas.");
+        UIManager::shared_instance().OpenCharacterStats();
         break;
-      case 99:
-        printf("\nI pressionado, inventário abertas.");
+      case 105:
+        UIManager::shared_instance().OpenInventory();
         break;
       case 97:
         if(PressedKeys.find(100) != PressedKeys.end())

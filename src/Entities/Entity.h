@@ -27,6 +27,8 @@ class Entity : public Renderable
 
     public:
         Pnt2* GetAnchor();
+        Entity* GetCopy();
+        std::vector<Poly*>* GetPartsCopy();
 };
 
 #endif // ENTITY_H
