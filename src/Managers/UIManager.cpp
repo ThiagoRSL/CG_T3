@@ -11,13 +11,15 @@ void UIManager::OpenInventory()
     {
         CharacterProjection = PlayerManager::shared_instance().GetPlayerCharacter()->GetCopy();
         CharacterProjection->Resize(2);
-        RenderManager::shared_instance().AddRenderableToList(CharacterProjection);
+        CharacterProjection->SetStatic(true);
+        CharacterProjection->SetStaticOffset(300,300);
+        UIManager::shared_instance().AddRenderableToList(CharacterProjection);
         printf("\nOpening inventory...");
         show_inventory = true;
     }
     else
     {
-        RenderManager::shared_instance().RemoveRenderableFromList(CharacterProjection);
+        UIManager::shared_instance().RemoveRenderableFromList(CharacterProjection);
         delete CharacterProjection;
         printf("\nClosing inventory...");
         show_inventory = false;

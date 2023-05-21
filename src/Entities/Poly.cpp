@@ -144,8 +144,17 @@ void Poly::RenderBody()
         else
             a = 0;
 
-        virtualX = Anchor->x + Offset.x - CameraOffsetRef->x;
-        virtualY = Anchor->y + Offset.y - CameraOffsetRef->y;
+        if(!this->isStatic)
+        {
+            virtualX = Anchor->x + Offset.x - CameraOffsetRef->x;
+            virtualY = Anchor->y + Offset.y - CameraOffsetRef->y;
+        }
+        else
+        {
+            virtualX = StaticOffset.x + Offset.x;
+            virtualY = StaticOffset.y + Offset.y;
+        }
+
         float vx[3] = {virtualX, virtualX + Vertexes.at(i)->x, virtualX + Vertexes.at(a)->x};
         float vy[3] = {virtualY, virtualY + Vertexes.at(i)->y, virtualY + Vertexes.at(a)->y};
         CV::polygonFill(vx, vy, 3);

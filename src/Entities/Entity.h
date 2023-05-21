@@ -28,6 +28,8 @@ class Entity : public Renderable
     public:
         Pnt2* GetAnchor();
         Entity* GetCopy();
+        void SetStatic(bool isStatic);
+        void SetStaticOffset(float x, float y);
         std::vector<Poly*>* GetPartsCopy();
 };
 

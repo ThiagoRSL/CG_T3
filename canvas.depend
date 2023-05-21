@@ -539,7 +539,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1684634041 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1684639574 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -602,10 +602,10 @@
 
 1684198249 c:\users\nektus\desktop\cg\cg_t3\include\playercharacter.h
 
-1684550669 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.cpp
+1684640669 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.cpp
 	"Renderable.h"
 
-1684550669 c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.h
+1684640310 c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.h
 	"Utils/Pnt2.h"
 	"Managers/CameraManager.h"
 
@@ -640,7 +640,7 @@
 
 1684636131 c:\users\nektus\desktop\cg\cg_t3\src\utils\pnt2.h
 
-1684550669 source:c:\users\nektus\desktop\cg\cg_t3\src\utils\pnt2.cpp
+1684636162 source:c:\users\nektus\desktop\cg\cg_t3\src\utils\pnt2.cpp
 	"Pnt2.h"
 	"Vec2.h"
 
@@ -667,7 +667,7 @@
 	"Entities/Weapon/Weapon.h"
 	"Entities/Weapon/Projectile.h"
 
-1684635992 c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.h
+1684645652 c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.h
 	<stdio.h>
 	<vector>
 	"Utils/Vec2.h"
@@ -701,7 +701,7 @@
 1684550669 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\playercharacter.h
 	<Entities/Character/Character.h>
 
-1684550669 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
+1684645626 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
 	"Poly.h"
 
 1684550669 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.cpp
@@ -715,19 +715,19 @@
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
 
-1684556705 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
+1684645926 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
 	"Entities/Weapon/Weapon.h"
 	"Entities/Character/Character.h"
 	"Slot.h"
 
-1684633131 c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.h
+1684645594 c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.h
 	<stdio.h>
 	<vector>
 	"Utils/Pnt2.h"
 	"Utils/Vec2.h"
 	"Poly.h"
 
-1684635639 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.cpp
+1684645746 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.cpp
 	"Entity.h"
 
 1684416283 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\abstract\renderable.cpp
@@ -953,13 +953,13 @@
 	"Slot.h"
 	"ShipPart.h"
 
-1684634813 c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.h
+1684639548 c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.h
 	<stdio.h>
 	<vector>
 	"Entity.h"
 	"PlayerManager.h"
 	"RenderManager.h"
 
-1684636032 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.cpp
+1684645659 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.cpp
 	"UIManager.h"
 

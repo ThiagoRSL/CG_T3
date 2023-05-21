@@ -3,4 +3,5 @@
 Renderable::Renderable()
 {
     CameraOffsetRef = CameraManager::shared_instance().GetCameraOffsetRef();
+    Static(false);
 }

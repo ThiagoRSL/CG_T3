@@ -57,6 +57,7 @@ void render()
     FPSManager::shared_instance().UpdateFrames();
     PlayerManager::shared_instance().CheckInteraction();
     RenderManager::shared_instance().RenderAll();
+    UIManager::shared_instance().RenderAll();
 }
 
 
@@ -180,18 +181,29 @@ int main(void)
 
     float RGB[3] = {0.0,0.75,0.75};
     float RGB2[3] = {0.75,0.0,0.75};
+    float RGB3[3] = {0.75, 0.75, 0.0};
+    float RGB4[3] = {0.75, 0.35, 0.35};
    //Sleep(1000);
 
     player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(400, 400, RGB, 2);
-    player_character->EquipWeapon(new Weapon());
-    player_character->EquipWeapon(new Weapon());
-    player_character->EquipWeapon(new Weapon());
-
+    Weapon* w1 = new Weapon();
+    w1->SetBackgroundColor(RGB3);
+    Weapon* w2 = new Weapon();
+    w2->SetBackgroundColor(RGB2);
+    Weapon* w3 = new Weapon();
+    w3->SetBackgroundColor(RGB2);
+    player_character->EquipWeapon(w1);
+    player_character->EquipWeapon(w2);
+    player_character->EquipWeapon(w3);
     PlayerManager::shared_instance().SetPlayerCharacter(player_character);
 
-    enemy_character = CharacterBuilder::BuildShip(800, 400, RGB, 2);
-    enemy_character->EquipWeapon(new Weapon());
-    enemy_character->EquipWeapon(new Weapon());
+    enemy_character = CharacterBuilder::BuildShip(800, 400, RGB2, 2);
+    w1 = new Weapon();
+    w1->SetBackgroundColor(RGB4);
+    w2 = new Weapon();
+    w2->SetBackgroundColor(RGB4);
+    enemy_character->EquipWeapon(w1);
+    enemy_character->EquipWeapon(w2);
 
     enemy_character->SetAutonomous(true);
 

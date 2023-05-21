@@ -8,7 +8,7 @@
 #include "PlayerManager.h"
 #include "RenderManager.h"
 
-class UIManager
+class UIManager : public RenderManager
 {
     public:
         UIManager();

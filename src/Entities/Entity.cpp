@@ -63,9 +63,29 @@ Entity* Entity::GetCopy()
     return entityCopy;
 }
 
+void Entity::SetStatic(bool isStatic)
+{
+    int i;
+    for(i = 0; i < Parts.size(); i++)
+    {
+        Parts.at(i)->Static(isStatic);
+    }
+    this->Static(isStatic);
+}
+
+void Entity::SetStaticOffset(float x, float y)
+{
+    int i;
+    for(i = 0; i < Parts.size(); i++)
+    {
+        Poly* part = Parts.at(i);
+        part->SetStaticOffset(x, y);
+    }
+}
+
+
 void Entity::Render()
 {
-    CV::color(0.5, 0.5, 0.5);
     int i;
     for (i = 0; i < Parts.size(); i++)
     {

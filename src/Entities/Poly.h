@@ -47,10 +47,16 @@ class Poly : public Renderable
 
     public:
         Vec2 Offset;
+        Vec2 StaticOffset;
         void SetOffset(float x, float y)
         {
             Offset.x = x;
             Offset.y = y;
+        }
+        void SetStaticOffset(float x, float y)
+        {
+            StaticOffset.x = x;
+            StaticOffset.y = y;
         }
         Vec2* GetOrientation(){return this->OrientationVector;}
         Poly* GetCopy()
