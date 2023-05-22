@@ -16,6 +16,7 @@ class Weapon : public Poly
         void EquipOn(WeaponSlot* slot);
         void Shoot();
         float CalcShotDamage();
+        float CalcShotSpeed();
 
         void RefreshShotCooldown();
     protected:
@@ -24,14 +25,17 @@ class Weapon : public Poly
         Character* Wielder;
         WeaponSlot* SlottedOn;
 
-        float shot_cooldown_base;
-        float damage_base;
         float energy_cost_base;
         float accuracy_base;
-        float max_ammo_base;
 
+        float shot_cooldown_base;
         float shot_cooldown_val;
-        float ammo_temp;
+
+        float damage_base;
+        float shot_speed;
+
+        float ammo_max;
+        float ammo_val;
 
         float last_shot_frame;
 };

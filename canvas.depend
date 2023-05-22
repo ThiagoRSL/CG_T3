@@ -539,7 +539,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1684639574 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1684791873 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -687,11 +687,11 @@
 1684550669 c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.h
 	<vector>
 
-1684556705 c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.h
+1684791772 c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.h
 	<Entities/Poly.h>
 	<Entities/Weapon/Projectile.h>
 
-1684550669 c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.h
+1684791841 c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.h
 	"Managers/FPSManager.h"
 	"Entities/Poly.h"
 
@@ -711,11 +711,11 @@
 1684550669 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\rendermanager.cpp
 	"RenderManager.h"
 
-1684550669 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.cpp
+1684791854 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.cpp
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
 
-1684645926 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
+1684791755 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
 	"Entities/Weapon/Weapon.h"
 	"Entities/Character/Character.h"
 	"Slot.h"

@@ -14,10 +14,11 @@ Weapon::Weapon()
     damage_base = 10;
     energy_cost_base = 10;
     accuracy_base = 2;
-    max_ammo_base = 5;
+    ammo_max = 5;
+    shot_speed = 1500;
 
     shot_cooldown_val = 0;
-    ammo_temp = max_ammo_base;
+    ammo_val = ammo_max;
 
     this->SetAnchor(nullptr);
 }
@@ -35,7 +36,7 @@ void Weapon::Shoot()
 {
     if(shot_cooldown_val <= 0)
     {
-        Projectile* shotPoly = new Projectile(this->Anchor->x + this->Offset.x, this->Anchor->y + this->Offset.y, this->CalcShotDamage(), this->Wielder);
+        Projectile* shotPoly = new Projectile(this->Anchor->x + this->Offset.x, this->Anchor->y + this->Offset.y, this->CalcShotDamage(), this->CalcShotSpeed(), this->Wielder);
         shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
         RenderManager::shared_instance().AddRenderableToList(shotPoly);
         shot_cooldown_val = shot_cooldown_base;
@@ -58,4 +59,9 @@ void Weapon::RefreshShotCooldown()
 float Weapon::CalcShotDamage()
 {
     return this->damage_base;
+}
+
+float Weapon::CalcShotSpeed()
+{
+    return this->shot_speed;
 }
