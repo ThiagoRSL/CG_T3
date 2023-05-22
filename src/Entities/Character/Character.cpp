@@ -5,6 +5,7 @@ static int death_frames = 20;
 Character::Character(float x, float y, float RGB[3])
     :Entity(x, y)
 {
+    Entity::SetBackgroundColor(RGB);
     this->OrientationVector->y = -1;
     this->OrientationVector->x = 0;
     this->AimVector = new Vec2(0, -1);
@@ -30,10 +31,6 @@ Character::Character(float x, float y, float RGB[3])
     //Controls
     this->rotating = 0;
     this->moving = 0;
-
-    this->background_color[0] = RGB[0];
-    this->background_color[1] = RGB[1];
-    this->background_color[2] = RGB[2];
 
     //Ir pro laranja quando morre
     this->death_rgb_save[0] = 1 - this->background_color[0];
@@ -143,23 +140,27 @@ void Character::Render()
     ////RenderShipParts();
     RenderWeapons();
 }
-/*
-void Character::RenderShipParts()
-{
-    CV::color(0.5, 0.5, 0.5);
-    int i;
-    for (i = 0; i < ShipParts.size(); i++)
-    {
-        ShipParts.at(i)->Render();
-    }
-}
-*/
 
-void Character::AppendPart(ShipPart* part)
+void Character::CreatePartSlot(int type_part_id)
 {
-    Entity::AppendPoly((Poly*) part);
-    ShipParts.push_back(part);
-    part->AppendToCharacter(this);
+    ShipParts[type_part_id] = nullptr;
+}
+
+void Character::AppendPart(ShipPart* shipPart)
+{
+    for (auto part : ShipParts)
+    {
+        if(part.first == shipPart->GetPartTypeId())
+        {
+            if(part.second == nullptr)
+            {
+                ShipParts[part.first] = shipPart;
+                Entity::AppendPoly((Poly*) shipPart);
+            }
+        }
+    }
+    shipPart->AppendToCharacter(this);
+    //UpdatePartsModifiers();
     UpdateParts();
 }
 
@@ -221,12 +222,16 @@ void Character::UpdateParts()
 {
     WeaponSlots.clear();
     int i, j;
-    for(i = 0; i < ShipParts.size(); i++)
+
+    for (auto part :ShipParts)
     {
-        std::vector<WeaponSlot*> wps = ShipParts.at(i)->GetWeaponSlots();
-        for(j = 0; j < wps.size(); j++)
+        if(part.second != nullptr)
         {
-            WeaponSlots.push_back(wps.at(j));
+            std::vector<WeaponSlot*> wps = part.second->GetWeaponSlots();
+            for(j = 0; j < wps.size(); j++)
+            {
+                WeaponSlots.push_back(wps.at(j));
+            }
         }
     }
     UpdatePartsModifiers();

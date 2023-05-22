@@ -4,7 +4,7 @@
 ShipPart::ShipPart(float x, float y, float* RGB)
     :Poly(x, y, RGB)
 {
-    //ctor
+    this->part_type_id = part_type_id;
 }
 
 

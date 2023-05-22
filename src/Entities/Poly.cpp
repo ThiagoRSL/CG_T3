@@ -7,6 +7,7 @@ Poly::Poly()
     this->OrientationVector->SetAnchor(this->Anchor);
     rotation = 0;
     Offset = Vec2(0,0);
+    this->show_border = false;
 }
 
 Poly::Poly(float x, float y)
@@ -16,6 +17,7 @@ Poly::Poly(float x, float y)
     this->OrientationVector->SetAnchor(this->Anchor);
     rotation = 0;
     Offset = Vec2(0,0);
+    this->show_border = false;
 }
 
 Poly::Poly(float x, float y, float RGB[3])
@@ -29,6 +31,7 @@ Poly::Poly(float x, float y, float RGB[3])
     background_color[3] = 1;
     rotation = 0;
     Offset = Vec2(0,0);
+    this->show_border = false;
 }
 
 void Poly::Move(float speed)
@@ -129,7 +132,7 @@ void Poly::Render()
 {
     //this->RenderVertex();
     this->RenderBody();
-    //this->RenderBorder();
+    if(show_border) this->RenderBorder();
 }
 
 void Poly::RenderBody()
@@ -163,7 +166,29 @@ void Poly::RenderBody()
 
 void Poly::RenderBorder()
 {
+    CV::color(border_color[0],border_color[1],border_color[2]);
+    int i, j;
+    float virtualX, virtualY;
+    for(i = 0; i < Vertexes.size(); i++)
+    {
+        if(i == Vertexes.size()-1) j = 0;
+        else j = i + 1;
+        Vec2* pi = Vertexes.at(i);
+        Vec2* pj = Vertexes.at(j);
 
+        if(!this->isStatic)
+        {
+            virtualX = Anchor->x + Offset.x - CameraOffsetRef->x;
+            virtualY = Anchor->y + Offset.y - CameraOffsetRef->y;
+        }
+        else
+        {
+            virtualX = StaticOffset.x + Offset.x;
+            virtualY = StaticOffset.y + Offset.y;
+        }
+
+        CV::line(virtualX + pi->x, virtualY + pi->y, virtualX + pj->x, virtualY + pj->y);
+    }
 }
 
 void Poly::RenderVertexes()
@@ -187,8 +212,17 @@ bool Poly::HasCollision(float x, float y)
 
         int counter = 0;
         float virtualX, virtualY;
-        virtualX = this->Anchor->x + Offset.x - CameraOffsetRef->x;
-        virtualY = this->Anchor->y + Offset.y - CameraOffsetRef->y;
+        if(!isStatic)
+        {
+            virtualX = this->Anchor->x + Offset.x - CameraOffsetRef->x;
+            virtualY = this->Anchor->y + Offset.y - CameraOffsetRef->y;
+        }
+        else
+        {
+            virtualX = StaticOffset.x + Offset.x;
+            virtualY = StaticOffset.y + Offset.y;
+        }
+
         if(GeometryAux::Intercept(8000, 8000, x, y, virtualX, virtualY, virtualX + this->Vertexes.at(i)->x, virtualY + this->Vertexes.at(i)->y))
         {
             counter += 1;
@@ -213,4 +247,12 @@ void Poly::SetBackgroundColor(float color[3])
     background_color[1] = color[1];
     background_color[2] = color[2];
     background_color[3] = 1;
+}
+
+void Poly::SetBorderColor(float color[3])
+{
+    border_color[0] = color[0];
+    border_color[1] = color[1];
+    border_color[2] = color[2];
+    border_color[3] = 1;
 }

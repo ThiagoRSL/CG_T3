@@ -14,10 +14,6 @@ void Projectile::Render()
     Pnt2 position = Pnt2(this->Anchor->x - CameraOffsetRef->x, this->Anchor->y - CameraOffsetRef->y);
 
     this->Move(speed/FPSManager::shared_instance().GetFrames());
-    if(this->Owner->HasCollisionOnParts(position.x, position.y))
-    {
-        return;
-    }
 
     CV::color(1,1,1);
     CV::circleFill(position.x, position.y, 5, 30);
