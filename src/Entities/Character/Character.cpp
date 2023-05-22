@@ -5,6 +5,7 @@ static int death_frames = 20;
 Character::Character(float x, float y, float RGB[3])
     :Entity(x, y)
 {
+    Entity::SetBackgroundColor(RGB);
     this->OrientationVector->y = -1;
     this->OrientationVector->x = 0;
     this->AimVector = new Vec2(0, -1);
@@ -30,10 +31,6 @@ Character::Character(float x, float y, float RGB[3])
     //Controls
     this->rotating = 0;
     this->moving = 0;
-
-    this->background_color[0] = RGB[0];
-    this->background_color[1] = RGB[1];
-    this->background_color[2] = RGB[2];
 
     //Ir pro laranja quando morre
     this->death_rgb_save[0] = 1 - this->background_color[0];

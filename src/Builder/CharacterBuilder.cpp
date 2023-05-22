@@ -41,13 +41,13 @@ Character* CharacterBuilder::CreateMediumShip(float x, float y, float* RGB)
     body->AddWeaponSlot(Pnt2(0,0));
     character->AppendPart(body);
 
-    ShipPart* leftWing = CreateLeftWing(x, y, RGB);
-    leftWing->AddWeaponSlot(Pnt2(-30,5));
-    character->AppendPart(leftWing);
 
     ShipPart* rightWing = CreateRightWing(x, y, RGB);
     rightWing->AddWeaponSlot(Pnt2(30,5));
     character->AppendPart(rightWing);
+    ShipPart* leftWing = CreateLeftWing(x, y, RGB);
+    leftWing->AddWeaponSlot(Pnt2(-30,5));
+    character->AppendPart(leftWing);
 
 
     return character;

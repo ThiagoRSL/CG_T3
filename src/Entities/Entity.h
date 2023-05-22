@@ -11,12 +11,15 @@ class Entity : public Renderable
 {
     public:
         Entity(float x, float y);
+        Entity(float x, float y, float* RGB);
         void AppendPoly(Poly* poly);
         void Render();
 
         void Move(float speed);
         void Resize(float scalar);
         virtual void Rotate(float degrees);
+        Poly* CollideAt(float x, float y);
+        void SetFirstPosition(Poly* part);
 
     protected:
         Pnt2* Anchor;
@@ -28,9 +31,16 @@ class Entity : public Renderable
     public:
         Pnt2* GetAnchor();
         Entity* GetCopy();
+        std::vector<Poly*>* GetPartsCopy();
         void SetStatic(bool isStatic);
         void SetStaticOffset(float x, float y);
-        std::vector<Poly*>* GetPartsCopy();
+        void SetBackgroundColor(float* RGB)
+        {
+            this->background_color[0] = RGB[0];
+            this->background_color[1] = RGB[1];
+            this->background_color[2] = RGB[2];
+        }
+
 };
 
 #endif // ENTITY_H

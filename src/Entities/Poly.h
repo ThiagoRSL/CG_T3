@@ -29,13 +29,14 @@ class Poly : public Renderable
         void virtual Move(Vec2* directionVector, float speed);
         bool HasCollision(float x, float y);
 
-
         void SetBackgroundColor(float* color);
+        void SetBorderColor(float* color);
         void Render();
     protected:
         float background_color[4];
         float border_color[4];
         float rotation;
+        bool show_border;
 
         Pnt2* Anchor;
         Vec2* OrientationVector;
@@ -58,6 +59,7 @@ class Poly : public Renderable
             StaticOffset.x = x;
             StaticOffset.y = y;
         }
+;
         Vec2* GetOrientation(){return this->OrientationVector;}
         Poly* GetCopy()
         {
@@ -72,6 +74,7 @@ class Poly : public Renderable
             }
             return polyCopy;
         }
+        void SetShowBorder(bool showBorder){this->show_border = showBorder;}
 
 };
 

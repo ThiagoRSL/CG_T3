@@ -52,7 +52,7 @@ bool control_moving;
 
 void render()
 {
-    CV::clear(0.4,0.3,0);
+    CV::clear(0,0,0);
     CameraManager::shared_instance().UpdateCameraOffset();
     FPSManager::shared_instance().UpdateFrames();
     PlayerManager::shared_instance().CheckInteraction();
@@ -167,10 +167,15 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 
     //printf("\nmouse %d %d %d %d %d %d", button, state, wheel, direction,  x, y);
 
+    if(UIManager::shared_instance().CheckInteraction(x, y))
+    {
+        return;
+    }
     if(button == 0 && state == 0)
     {
         player_character->Shoot();
     }
+
 }
 
 int main(void)
@@ -197,7 +202,7 @@ int main(void)
     player_character->EquipWeapon(w3);
     PlayerManager::shared_instance().SetPlayerCharacter(player_character);
 
-    enemy_character = CharacterBuilder::BuildShip(800, 400, RGB2, 2);
+    enemy_character = CharacterBuilder::BuildShip(800, 400, RGB2, 1);
     w1 = new Weapon();
     w1->SetBackgroundColor(RGB4);
     w2 = new Weapon();

@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Entity.h"
+#include "Poly.h"
 #include "PlayerManager.h"
 #include "RenderManager.h"
 
@@ -16,11 +17,16 @@ class UIManager : public RenderManager
 
         void OpenInventory();
         void OpenCharacterStats();
+        bool CheckInteraction(float x, float y);
+        void Select(Poly* selectedPoly);
 
     private:
         bool show_inventory;
         bool show_character_stats;
-        //std::vector<ShipPart*>
+        Poly* SelectedPoly;
+
+        //Open Inventory
+        Entity* InventoryBackground;
         Entity* CharacterProjection;
 
 };
