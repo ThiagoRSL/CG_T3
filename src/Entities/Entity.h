@@ -40,6 +40,8 @@ class Entity : public Renderable
             this->background_color[1] = RGB[1];
             this->background_color[2] = RGB[2];
         }
+        void SetOrientationVector(Vec2* orientationVector){this->OrientationVector = orientationVector;}
+        Vec2* GetOrientationVector(){ return OrientationVector;}
 
 };
 

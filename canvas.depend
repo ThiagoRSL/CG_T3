@@ -963,15 +963,16 @@
 1684645659 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.cpp
 	"UIManager.h"
 
-1684772334 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.cpp
+1684778655 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.cpp
 	"CharacterBuilder.h"
 
-1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.h
+1684778534 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.h
 	"../Entities/Character/Character.h"
 
-1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.h
+1684778054 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.h
 	<math.h>
 	<vector>
+	<map>
 	"Utils/Pnt2.h"
 	"Entities/Entity.h"
 	"ShipPart.h"
@@ -981,7 +982,7 @@
 
 1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\pnt2.h
 
-1684772626 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\entity.h
+1684776248 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\entity.h
 	<stdio.h>
 	<vector>
 	"Utils/Pnt2.h"
@@ -1053,7 +1054,7 @@
 	<math.h>
 	"Pnt2.h"
 
-1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\shippart.h
+1684778564 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\shippart.h
 	<Poly.h>
 	<vector>
 	"Slot.h"
@@ -1081,7 +1082,7 @@
 1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\abstract\renderable.cpp
 	"Renderable.h"
 
-1684765280 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.cpp
+1684778711 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 
 1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\modifier.cpp
@@ -1095,7 +1096,7 @@
 1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\playercharacter.h
 	<Entities/Character/Character.h>
 
-1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\shippart.cpp
+1684778662 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\shippart.cpp
 	"ShipPart.h"
 	"Character.h"
 
@@ -1122,7 +1123,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1684774218 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\main.cpp
+1684776114 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -1197,7 +1198,7 @@
 	"Vec2.h"
 	"GeometryAux.h"
 
-1684774332 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\uimanager.cpp
+1684776978 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\uimanager.cpp
 	"UIManager.h"
 
 1684770550 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\uientity.cpp

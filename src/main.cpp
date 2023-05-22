@@ -190,6 +190,11 @@ int main(void)
     float RGB4[3] = {0.75, 0.35, 0.35};
    //Sleep(1000);
 
+    Poly* base = new Poly(0,0,RGB4);
+    base->AddVertex(300,0);
+    base->AddVertex(150,300);
+    RenderManager::shared_instance().AddRenderableToList(base);
+
     player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(400, 400, RGB, 2);
     Weapon* w1 = new Weapon();
     w1->SetBackgroundColor(RGB3);

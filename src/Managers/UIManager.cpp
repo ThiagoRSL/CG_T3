@@ -29,7 +29,6 @@ void UIManager::OpenInventory()
         UIManager::shared_instance().AddRenderableToList(CharacterProjection);
 
 
-
         printf("\nOpening inventory...");
         show_inventory = true;
     }
