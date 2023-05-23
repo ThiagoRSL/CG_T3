@@ -969,7 +969,7 @@
 1684778534 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.h
 	"../Entities/Character/Character.h"
 
-1684778054 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.h
+1684854854 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.h
 	<math.h>
 	<vector>
 	<map>
@@ -1062,11 +1062,11 @@
 1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\slot.h
 	"Weapon/Weapon.h"
 
-1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.h
+1684854862 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.h
 	<Entities/Poly.h>
 	<Entities/Weapon/Projectile.h>
 
-1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\projectile.h
+1684854862 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\projectile.h
 	"Managers/FPSManager.h"
 	"Entities/Poly.h"
 
@@ -1082,7 +1082,7 @@
 1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\abstract\renderable.cpp
 	"Renderable.h"
 
-1684778711 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.cpp
+1684854854 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 
 1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\modifier.cpp
@@ -1107,14 +1107,14 @@
 1684772761 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\entity.cpp
 	"Entity.h"
 
-1684772835 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\poly.cpp
+1684780542 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\poly.cpp
 	"Poly.h"
 
-1684764474 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\projectile.cpp
+1684854862 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\projectile.cpp
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
 
-1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.cpp
+1684854862 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.cpp
 	"Entities/Weapon/Weapon.h"
 	"Entities/Character/Character.h"
 	"Slot.h"
