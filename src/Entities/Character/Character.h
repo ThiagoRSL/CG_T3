@@ -91,6 +91,10 @@ class Character : public Entity
         bool IsDying() {return this->dying;}
         bool IsDead() {return this->dead;}
         Pnt2* GetAimPoint() {return this->AimPoint;}
+        float* GetHitPointsMaxRef() {return &this->hit_points_max;}
+        float* GetHitPointsRef() {return &this->hit_points;}
+        float* GetEnergyMaxRef() {return &this->energy_max;}
+        float* GetEnergyRef() {return &this->energy;}
 
         void SetAutonomous(bool autonomous){this->autonomous = autonomous;}
         bool SetTarget(Character* target) {this->Target = target;}

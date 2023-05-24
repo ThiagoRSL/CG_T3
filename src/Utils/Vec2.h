@@ -55,6 +55,8 @@ class Vec2 : public Renderable
         void RotateDegrees(float degrees);
         void RotateRadians(float radians);
 
+        Pnt2 AsPnt();
+
         void Render();
 
     public:

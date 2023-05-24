@@ -4,10 +4,12 @@
 #include <stdio.h>
 #include <vector>
 
-#include "Entity.h"
 #include "Poly.h"
+#include "Entity.h"
+#include "Character.h"
 #include "PlayerManager.h"
 #include "RenderManager.h"
+#include "CharacterStatsFrameUI.h"
 
 class UIManager : public RenderManager
 {
@@ -20,7 +22,13 @@ class UIManager : public RenderManager
         bool CheckInteraction(float x, float y);
         void Select(Poly* selectedPoly);
 
+        void AddCharacterStatsToRenderer(Character* character);
+        void RemoveCharacterStatsToRenderer(Character* character);
+
+        void RenderAll();
     private:
+        std::vector<CharacterStatsFrameUI*> CharacterStatsFrames;
+
         bool show_inventory;
         bool show_character_stats;
         Poly* SelectedPoly;

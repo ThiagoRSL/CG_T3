@@ -79,6 +79,26 @@ void UIManager::Select(Poly* selectedPoly)
         CharacterProjection->SetFirstPosition(SelectedPoly);
         SelectedPoly->SetShowBorder(true);
     }
-
 }
 
+
+
+void UIManager::AddCharacterStatsToRenderer(Character* character)
+{
+    CharacterStatsFrameUI* charStatsFrame = new CharacterStatsFrameUI(character);
+    CharacterStatsFrames.push_back(charStatsFrame);
+}
+void UIManager::RemoveCharacterStatsToRenderer(Character* character)
+{
+    return;
+}
+
+void UIManager::RenderAll()
+{
+    RenderManager::RenderAll();
+    int i;
+    for(i = 0; i < CharacterStatsFrames.size();i++)
+    {
+        CharacterStatsFrames.at(i)->Render();
+    }
+}

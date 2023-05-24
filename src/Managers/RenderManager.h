@@ -15,11 +15,11 @@ class RenderManager
     public:
         static RenderManager &shared_instance() {static RenderManager renderManager; return renderManager;}
         RenderManager();
-        void RenderAll();
         void AddRenderableToList(Renderable* element);
         void RemoveRenderableFromList(Renderable* element);
         void SetFirstPosition(Renderable* element);
         //AddToRenderQueue(Renderizable element, int priority_level);
+        virtual void RenderAll();
 
     protected:
 
