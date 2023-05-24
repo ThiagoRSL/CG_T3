@@ -30,6 +30,7 @@ class ShipPart : public Poly
         std::vector<WeaponSlot*> GetWeaponSlots() {return this->WeaponSlots;}
         void SetPartTypeId(int id) {this->part_type_id = id;}
         int GetPartTypeId() {return part_type_id;}
+        void SetOffset(float x, float y);
 
     public:
         static const int SHIP_BODY_PART_TYPE_ID = 1;

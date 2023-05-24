@@ -37,20 +37,20 @@ Character* CharacterBuilder::CreateMediumShip(float x, float y, float* RGB)
 {
     Character* character = new Character(x, y, RGB);
     character->CreatePartSlot(ShipPart::SHIP_BODY_PART_TYPE_ID, Pnt2(0, 0));
-    character->CreatePartSlot(ShipPart::LEFT_WING_PART_TYPE_ID, Pnt2(-130, 0));
+    character->CreatePartSlot(ShipPart::LEFT_WING_PART_TYPE_ID, Pnt2(-30, 0));
     character->CreatePartSlot(ShipPart::RIGHT_WING_PART_TYPE_ID, Pnt2(30, 0));
     //character->CreateWeaponSlot(Pnt2(0,0));
 
     ShipPart* body = CreateChassis(x, y, RGB);
-    body->AddWeaponSlot(Pnt2(0,0));
     character->AppendPart(body);
+    body->AddWeaponSlot(Pnt2(0,0));
 
     ShipPart* rightWing = CreateRightWing(x, y, RGB);
-    rightWing->AddWeaponSlot(Pnt2(30,5));
+    rightWing->AddWeaponSlot(Pnt2(0,5));
     character->AppendPart(rightWing);
 
     ShipPart* leftWing = CreateLeftWing(x, y, RGB);
-    leftWing->AddWeaponSlot(Pnt2(-30,5));
+    leftWing->AddWeaponSlot(Pnt2(0,5));
     character->AppendPart(leftWing);
 
 

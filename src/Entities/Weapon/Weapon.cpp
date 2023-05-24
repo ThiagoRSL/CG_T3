@@ -28,8 +28,8 @@ void Weapon::EquipOn(WeaponSlot* slot)
     this->Wielder = slot->SlotOf()->PartOf();
     this->SlottedOn = slot;
     this->SetAnchor(Wielder->GetAnchor());
-    Vec2* wielderAim = Wielder->GetAimVector();
-    this->OrientationVector = new Vec2(wielderAim->x, wielderAim->y);
+    Pnt2* wielderAimPoint = Wielder->GetAimPoint();
+    this->OrientationVector = new Vec2(wielderAimPoint->x, wielderAimPoint->y);
 }
 
 void Weapon::Shoot()

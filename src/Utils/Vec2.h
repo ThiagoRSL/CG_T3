@@ -60,7 +60,10 @@ class Vec2 : public Renderable
     public:
         Vec2* GetCopy()
         {
-            return new Vec2(this->x, this->y, this->anchor);
+            Vec2* vecCopy = new Vec2(this->x, this->y);
+            Pnt2* anchorCopy = new Pnt2(this->anchor->x, this->anchor->y);
+            vecCopy->SetAnchor(anchorCopy);
+            return vecCopy;
         }
 
 };

@@ -8,9 +8,8 @@ PlayerCharacter::PlayerCharacter(float x, float y, float RGB[3])
 
 void PlayerCharacter::AdjustAim()
 {
-    this->AimVector->x = (float) MouseManager::shared_instance().PosX - this->Anchor->x;
-    this->AimVector->y = (float) MouseManager::shared_instance().PosY - this->Anchor->y;
-    this->AimVector->Normalize();
+    this->AimPoint->x = (float) MouseManager::shared_instance().PosX;
+    this->AimPoint->y = (float) MouseManager::shared_instance().PosY;
 
-    this->UpdateWeaponPosition();
+    this->UpdateWeaponAim();
 }

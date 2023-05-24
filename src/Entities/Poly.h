@@ -49,7 +49,7 @@ class Poly : public Renderable
     public:
         Vec2 Offset;
         Vec2 StaticOffset;
-        void SetOffset(float x, float y)
+        virtual void SetOffset(float x, float y)
         {
             Offset.x = x;
             Offset.y = y;
@@ -60,7 +60,8 @@ class Poly : public Renderable
             StaticOffset.y = y;
         }
 ;
-        Vec2* GetOrientation(){return this->OrientationVector;}
+        Vec2 GetOrientation(){return Vec2(this->OrientationVector->x, this->OrientationVector->y);}
+        Vec2* GetOrientationRef(){return this->OrientationVector;}
         Poly* GetCopy()
         {
             float RGBCopy[3] = {background_color[0], background_color[1], background_color[2]};

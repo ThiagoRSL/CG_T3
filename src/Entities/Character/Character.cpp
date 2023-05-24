@@ -8,8 +8,7 @@ Character::Character(float x, float y, float RGB[3])
     Entity::SetBackgroundColor(RGB);
     this->OrientationVector->y = -1;
     this->OrientationVector->x = 0;
-    this->AimVector = new Vec2(0, -1);
-    this->AimVector->SetAnchor(this->Anchor);
+    this->AimPoint = new Pnt2(0, -1);
 
     this->movement_speed = 500;
     this->rotation_speed = 200;
@@ -51,10 +50,9 @@ void Character::AutonomyAdjustAim()
 
 void Character::AimTo(float x, float y)
 {
-    this->AimVector->x = x;
-    this->AimVector->y = y;
-    this->AimVector->Normalize();
-    UpdateWeaponPosition();
+    this->AimPoint->x = x;
+    this->AimPoint->y = y;
+    UpdateWeaponAim();
 }
 
 void Character::SetRotating(float degree)
@@ -192,7 +190,7 @@ void Character::RenderWeapons()
     }
 }
 
-void Character::UpdateWeaponPosition()
+void Character::UpdateWeaponAim()
 {
     int i;
     for(i = 0; i < WeaponSlots.size(); i++)
@@ -200,13 +198,13 @@ void Character::UpdateWeaponPosition()
         WeaponSlot* slot = WeaponSlots.at(i);
         if(slot->HasWeapon())
         {
-            Vec2* orientation = slot->EquippedWeapon->GetOrientation();
-            float angleDiff = orientation->GetAngleBetween(this->AimVector);
+            Vec2 orientation = slot->EquippedWeapon->GetOrientation();
+            Vec2 newAim = Vec2(AimPoint->x - slot->EquippedWeapon->Offset.x, AimPoint->y - slot->EquippedWeapon->Offset.y);
+            float angleDiff = orientation.GetAngleBetween(&newAim);
 
             Vec2 saveOffSet = slot->EquippedWeapon->Offset;
             slot->EquippedWeapon->Offset = Vec2(0,0);
             slot->EquippedWeapon->RotateRad(angleDiff);
-
             slot->EquippedWeapon->Offset = saveOffSet;
         }
     }

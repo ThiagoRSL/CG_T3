@@ -46,7 +46,7 @@ class Character : public Entity
         void Rotate(float degrees);
         bool EquipWeapon(Weapon* weapon);
 
-        void UpdateWeaponPosition();
+        void UpdateWeaponAim();
 
         void MoveDirection(Vec2* directionVector, float speed);
 
@@ -54,7 +54,7 @@ class Character : public Entity
         std::map<int, std::pair<Pnt2*, ShipPart*>> ShipParts;
         std::vector<WeaponSlot*> WeaponSlots;
         //SpecialPower* Special;
-        Vec2* AimVector;
+        Pnt2* AimPoint;
         //Control Variables
         float rotating;
         float moving;
@@ -90,7 +90,7 @@ class Character : public Entity
     public:
         bool IsDying() {return this->dying;}
         bool IsDead() {return this->dead;}
-        Vec2* GetAimVector() {return this->AimVector;}
+        Pnt2* GetAimPoint() {return this->AimPoint;}
 
         void SetAutonomous(bool autonomous){this->autonomous = autonomous;}
         bool SetTarget(Character* target) {this->Target = target;}

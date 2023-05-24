@@ -963,13 +963,13 @@
 1684645659 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.cpp
 	"UIManager.h"
 
-1684941515 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.cpp
+1684942118 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.cpp
 	"CharacterBuilder.h"
 
 1684778534 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.h
 	"../Entities/Character/Character.h"
 
-1684941241 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.h
+1684947337 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.h
 	<math.h>
 	<vector>
 	<map>
@@ -989,7 +989,7 @@
 	"Utils/Vec2.h"
 	"Poly.h"
 
-1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\vec2.h
+1684944499 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\vec2.h
 	<math.h>
 	"Entities/Abstract/Renderable.h"
 	"gl_canvas2d.h"
@@ -1028,7 +1028,7 @@
 1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\include\gl\freeglut_ext.h
 	<stdarg.h>
 
-1684770401 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\poly.h
+1684944771 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\poly.h
 	<stdio.h>
 	<vector>
 	"Utils/Vec2.h"
@@ -1054,12 +1054,12 @@
 	<math.h>
 	"Pnt2.h"
 
-1684778564 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\shippart.h
+1684942516 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\shippart.h
 	<Poly.h>
 	<vector>
 	"Slot.h"
 
-1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\slot.h
+1684943665 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\slot.h
 	"Weapon/Weapon.h"
 
 1684854862 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.h
@@ -1082,7 +1082,7 @@
 1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\abstract\renderable.cpp
 	"Renderable.h"
 
-1684941720 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.cpp
+1684947350 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 
 1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\modifier.cpp
@@ -1090,13 +1090,13 @@
 
 1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\modifier.h
 
-1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\playercharacter.cpp
+1684947309 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\playercharacter.cpp
 	"PlayerCharacter.h"
 
 1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\playercharacter.h
 	<Entities/Character/Character.h>
 
-1684778662 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\shippart.cpp
+1684942526 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\shippart.cpp
 	"ShipPart.h"
 	"Character.h"
 
@@ -1114,7 +1114,7 @@
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
 
-1684854862 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.cpp
+1684947404 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.cpp
 	"Entities/Weapon/Weapon.h"
 	"Entities/Character/Character.h"
 	"Slot.h"
