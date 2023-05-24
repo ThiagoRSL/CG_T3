@@ -21,6 +21,7 @@
 					<Add directory="src/Entities" />
 					<Add directory="src/Managers" />
 					<Add directory="src/Entities/Character" />
+					<Add directory="src/UI" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -37,6 +38,7 @@
 					<Add directory="src/Entities" />
 					<Add directory="src/Managers" />
 					<Add directory="src/Entities/Character" />
+					<Add directory="src/UI" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -54,6 +56,7 @@
 		</Linker>
 		<Unit filename="src/Builder/CharacterBuilder.cpp" />
 		<Unit filename="src/Builder/CharacterBuilder.h" />
+		<Unit filename="src/CharacterHUD.cpp" />
 		<Unit filename="src/Controller/PlayerController.cpp" />
 		<Unit filename="src/Controller/PlayerController.h" />
 		<Unit filename="src/Entities/Abstract/Renderable.cpp" />
@@ -94,7 +97,8 @@
 		<Unit filename="src/Managers/UIManager.cpp" />
 		<Unit filename="src/Managers/UIManager.h" />
 		<Unit filename="src/UIEntity.cpp" />
-		<Unit filename="src/UI/UIEntity.h" />
+		<Unit filename="src/UI/CharacterStatsFrameUI.cpp" />
+		<Unit filename="src/UI/CharacterStatsFrameUI.h" />
 		<Unit filename="src/Utils/GeometryAux.cpp" />
 		<Unit filename="src/Utils/GeometryAux.h" />
 		<Unit filename="src/Utils/Pnt2.cpp" />

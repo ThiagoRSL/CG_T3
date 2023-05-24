@@ -207,7 +207,7 @@ int main(void)
     player_character->EquipWeapon(w3);
     PlayerManager::shared_instance().SetPlayerCharacter(player_character);
 
-    enemy_character = CharacterBuilder::BuildShip(1000, 400, RGB2, 1);
+    enemy_character = CharacterBuilder::BuildShip(10    00, 400, RGB2, 1);
     w1 = new Weapon();
     w1->SetBackgroundColor(RGB4);
     w2 = new Weapon();

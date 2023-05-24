@@ -1123,7 +1123,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1684960963 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\main.cpp
+1684963352 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
