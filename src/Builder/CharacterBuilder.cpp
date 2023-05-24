@@ -25,7 +25,7 @@ Character* CharacterBuilder::BuildShip(float x, float y, float* RGB, int ship_ty
 Character* CharacterBuilder::CreateSmallShip(float x, float y, float* RGB)
 {
     Character* character = new Character(x, y, RGB);
-    character->CreatePartSlot(ShipPart::SHIP_BODY_PART_TYPE_ID);
+    character->CreatePartSlot(ShipPart::SHIP_BODY_PART_TYPE_ID, Pnt2(0,0));
     ShipPart* body = CreateChassis(x, y, RGB);
     body->AddWeaponSlot(Pnt2(0,0));
     character->AppendPart(body);
@@ -36,9 +36,9 @@ Character* CharacterBuilder::CreateSmallShip(float x, float y, float* RGB)
 Character* CharacterBuilder::CreateMediumShip(float x, float y, float* RGB)
 {
     Character* character = new Character(x, y, RGB);
-    character->CreatePartSlot(ShipPart::SHIP_BODY_PART_TYPE_ID);
-    character->CreatePartSlot(ShipPart::LEFT_WING_PART_TYPE_ID);
-    character->CreatePartSlot(ShipPart::RIGHT_WING_PART_TYPE_ID);
+    character->CreatePartSlot(ShipPart::SHIP_BODY_PART_TYPE_ID, Pnt2(0, 0));
+    character->CreatePartSlot(ShipPart::LEFT_WING_PART_TYPE_ID, Pnt2(-130, 0));
+    character->CreatePartSlot(ShipPart::RIGHT_WING_PART_TYPE_ID, Pnt2(30, 0));
     //character->CreateWeaponSlot(Pnt2(0,0));
 
     ShipPart* body = CreateChassis(x, y, RGB);
@@ -78,7 +78,6 @@ ShipPart* CharacterBuilder::CreateLeftWing(float x, float y, float* RGB)
     leftWing->AddVertex(-10, -10);
     leftWing->AddVertex(-10, 30);
     leftWing->AddVertex(10, 30);
-    leftWing->SetOffset(-30, 0);
     return leftWing;
 }
 
@@ -90,6 +89,5 @@ ShipPart* CharacterBuilder::CreateRightWing(float x, float y,float* RGB)
     rightWing->AddVertex(-10, -25);
     rightWing->AddVertex(-10, 30);
     rightWing->AddVertex(10, 30);
-    rightWing->SetOffset(30, 0);
     return rightWing;
 }

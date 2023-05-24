@@ -42,7 +42,7 @@ class Character : public Entity
         void UpdatePartsModifiers();
         void RemovePartsModifiers();
 
-        void CreatePartSlot(int type_part_id);
+        void CreatePartSlot(int type_part_id, Pnt2 offset);
         void Rotate(float degrees);
         bool EquipWeapon(Weapon* weapon);
 
@@ -51,7 +51,7 @@ class Character : public Entity
         void MoveDirection(Vec2* directionVector, float speed);
 
     protected:
-        std::map<int, ShipPart*> ShipParts;
+        std::map<int, std::pair<Pnt2*, ShipPart*>> ShipParts;
         std::vector<WeaponSlot*> WeaponSlots;
         //SpecialPower* Special;
         Vec2* AimVector;

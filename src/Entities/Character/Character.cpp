@@ -141,9 +141,10 @@ void Character::Render()
     RenderWeapons();
 }
 
-void Character::CreatePartSlot(int type_part_id)
+void Character::CreatePartSlot(int type_part_id, Pnt2 offset)
 {
-    ShipParts[type_part_id] = nullptr;
+    Pnt2* offset_new = new Pnt2(offset.x, offset.y);
+    ShipParts[type_part_id] = std::make_pair(offset_new, nullptr);
 }
 
 void Character::AppendPart(ShipPart* shipPart)
@@ -152,10 +153,13 @@ void Character::AppendPart(ShipPart* shipPart)
     {
         if(part.first == shipPart->GetPartTypeId())
         {
-            if(part.second == nullptr)
+            ShipPart* partTemp = part.second.second;
+            if(partTemp == nullptr)
             {
-                ShipParts[part.first] = shipPart;
-                Entity::AppendPoly((Poly*) shipPart);
+                ShipParts[part.first].second = shipPart;
+                Pnt2* offset = ShipParts[part.first].first;
+                ShipParts[part.first].second->SetOffset(offset->x, offset->y);
+                Entity::AppendPoly((Poly*) ShipParts[part.first].second);
             }
         }
     }
@@ -225,9 +229,10 @@ void Character::UpdateParts()
 
     for (auto part :ShipParts)
     {
-        if(part.second != nullptr)
+        ShipPart* partActual = part.second.second;
+        if(partActual != nullptr)
         {
-            std::vector<WeaponSlot*> wps = part.second->GetWeaponSlots();
+            std::vector<WeaponSlot*> wps = partActual->GetWeaponSlots();
             for(j = 0; j < wps.size(); j++)
             {
                 WeaponSlots.push_back(wps.at(j));

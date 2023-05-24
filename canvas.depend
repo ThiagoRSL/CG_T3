@@ -963,13 +963,13 @@
 1684645659 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.cpp
 	"UIManager.h"
 
-1684778655 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.cpp
+1684941515 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.cpp
 	"CharacterBuilder.h"
 
 1684778534 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.h
 	"../Entities/Character/Character.h"
 
-1684854854 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.h
+1684941241 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.h
 	<math.h>
 	<vector>
 	<map>
@@ -1082,7 +1082,7 @@
 1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\abstract\renderable.cpp
 	"Renderable.h"
 
-1684854854 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.cpp
+1684941720 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 
 1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\modifier.cpp
