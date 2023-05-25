@@ -55,6 +55,7 @@ class Character : public Entity
         std::vector<WeaponSlot*> WeaponSlots;
         //SpecialPower* Special;
         Pnt2* AimPoint;
+        Vec2* AimVector;
         //Control Variables
         float rotating;
         float moving;

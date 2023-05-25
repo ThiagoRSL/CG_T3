@@ -9,6 +9,7 @@ Character::Character(float x, float y, float RGB[3])
     this->OrientationVector->y = -1;
     this->OrientationVector->x = 0;
     this->AimPoint = new Pnt2(0, -1);
+    this->AimVector = new Vec2(0, -1);
 
     this->movement_speed = 500;
     this->rotation_speed = 200;
@@ -52,6 +53,11 @@ void Character::AimTo(float x, float y)
 {
     this->AimPoint->x = x;
     this->AimPoint->y = y;
+
+    this->AimVector->x = x;
+    this->AimVector->y = y;
+    this->AimVector->Normalize();
+
     UpdateWeaponAim();
 }
 
@@ -198,9 +204,18 @@ void Character::UpdateWeaponAim()
         WeaponSlot* slot = WeaponSlots.at(i);
         if(slot->HasWeapon())
         {
+            /* Todos miram no ponto do mouse.
             Vec2 orientation = slot->EquippedWeapon->GetOrientation();
             Vec2 newAim = Vec2(AimPoint->x - slot->EquippedWeapon->Offset.x, AimPoint->y - slot->EquippedWeapon->Offset.y);
             float angleDiff = orientation.GetAngleBetween(&newAim);
+            */
+
+            // O canhão central mira em direção do mouse (os demais canhões miram em paralelo)
+            Vec2 orientation = slot->EquippedWeapon->GetOrientation();
+            Pnt2 aimTo = slot->EquippedWeapon->GetOrientation().AsPnt();
+            aimTo.ApplyVec2(*this->AimVector);
+            Vec2 aimVec = aimTo.AsVec();
+            float angleDiff = orientation.GetAngleBetween(&aimVec);
 
             Vec2 saveOffSet = slot->EquippedWeapon->Offset;
             slot->EquippedWeapon->Offset = Vec2(0,0);
