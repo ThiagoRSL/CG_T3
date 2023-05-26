@@ -97,8 +97,10 @@
 		<Unit filename="src/Managers/UIManager.cpp" />
 		<Unit filename="src/Managers/UIManager.h" />
 		<Unit filename="src/UIEntity.cpp" />
+		<Unit filename="src/UI/CharacterHUD.h" />
 		<Unit filename="src/UI/CharacterStatsFrameUI.cpp" />
 		<Unit filename="src/UI/CharacterStatsFrameUI.h" />
+		<Unit filename="src/UI/UIEntity.h" />
 		<Unit filename="src/Utils/GeometryAux.cpp" />
 		<Unit filename="src/Utils/GeometryAux.h" />
 		<Unit filename="src/Utils/Pnt2.cpp" />

@@ -1,6 +1,8 @@
 #ifndef RENDERABLE_H
 #define RENDERABLE_H
 
+#include <GL/glut.h>
+#include <GL/freeglut_ext.h>
 #include "Utils/Pnt2.h"
 #include "Managers/CameraManager.h"
 

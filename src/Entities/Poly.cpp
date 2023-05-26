@@ -256,3 +256,17 @@ void Poly::SetBorderColor(float color[3])
     border_color[2] = color[2];
     border_color[3] = 1;
 }
+
+Poly* Poly::GetCopy()
+{
+    float RGBCopy[3] = {background_color[0], background_color[1], background_color[2]};
+    Poly* polyCopy = new Poly(this->Anchor->x, this->Anchor->y);
+    polyCopy->SetBackgroundColor(RGBCopy);
+    polyCopy->SetOffset(Offset.x, Offset.y);
+    int i = 0;
+    for(i = 0; i < Vertexes.size(); i++)
+    {
+        polyCopy->AddVertex(Vertexes.at(i)->GetCopy());
+    }
+    return polyCopy;
+}

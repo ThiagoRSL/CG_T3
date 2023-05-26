@@ -22,7 +22,9 @@ class Character : public Entity
         void ActivateSpecial();
         void Shoot();
         void ReceiveDamage(float damage);
+
         void AnimateDeath();
+        void BurstAnimation();
         void Die();
 
         bool HasCollisionOnParts(float x, float y);

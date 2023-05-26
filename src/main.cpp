@@ -178,6 +178,7 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 
 }
 
+
 int main(void)
 {
     control_rotating_right = false;
@@ -193,7 +194,7 @@ int main(void)
     Poly* base = new Poly(0,0,RGB4);
     base->AddVertex(300,0);
     base->AddVertex(150,300);
-    //sRenderManager::shared_instance().AddRenderableToList(base);
+    RenderManager::shared_instance().AddRenderableToList(base);
 
     player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(200, 400, RGB, 2);
     Weapon* w1 = new Weapon();
@@ -207,7 +208,7 @@ int main(void)
     player_character->EquipWeapon(w3);
     PlayerManager::shared_instance().SetPlayerCharacter(player_character);
 
-    enemy_character = CharacterBuilder::BuildShip(1000, 400, RGB2, 1);
+    enemy_character = CharacterBuilder::BuildShip(800, 400, RGB2, 1);
     w1 = new Weapon();
     w1->SetBackgroundColor(RGB4);
     w2 = new Weapon();
@@ -224,6 +225,7 @@ int main(void)
     CollisionManager::shared_instance().AddNPC(enemy_character);
 
     UIManager::shared_instance().AddCharacterStatsToRenderer(player_character);
+
 
     CV::init("Space Extinction");
 

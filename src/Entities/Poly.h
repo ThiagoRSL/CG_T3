@@ -30,6 +30,7 @@ class Poly : public Renderable
         bool HasCollision(float x, float y);
 
         void SetBackgroundColor(float* color);
+        float* GetBackgroundColorRef(){return this->background_color;}
         void SetBorderColor(float* color);
         void Render();
     protected:
@@ -62,19 +63,8 @@ class Poly : public Renderable
 ;
         Vec2 GetOrientation(){return Vec2(this->OrientationVector->x, this->OrientationVector->y);}
         Vec2* GetOrientationRef(){return this->OrientationVector;}
-        Poly* GetCopy()
-        {
-            float RGBCopy[3] = {background_color[0], background_color[1], background_color[2]};
-            Poly* polyCopy = new Poly(this->Anchor->x, this->Anchor->y);
-            polyCopy->SetBackgroundColor(RGBCopy);
-            polyCopy->SetOffset(Offset.x, Offset.y);
-            int i = 0;
-            for(i = 0; i < Vertexes.size(); i++)
-            {
-                polyCopy->AddVertex(Vertexes.at(i)->GetCopy());
-            }
-            return polyCopy;
-        }
+        Poly* GetCopy();
+        Poly* GetPolyParts();
         void SetShowBorder(bool showBorder){this->show_border = showBorder;}
 
 };

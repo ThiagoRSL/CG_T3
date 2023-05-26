@@ -113,15 +113,30 @@ void Character::AnimateDeath()
     {
         death_frame++;
         last_death_frame = frames;
-        this->background_color[0] += death_rgb_save[0]/death_frames;
-        this->background_color[1] += death_rgb_save[1]/death_frames;
-        this->background_color[2] += death_rgb_save[2]/death_frames;
+        int i;
+        for(i = 0; i < Entity::Parts.size(); i++)
+        {
+            Poly* part = Entity::Parts.at(i);
+            float* rgb = part->GetBackgroundColorRef();
+            rgb[0] += death_rgb_save[0]/death_frames;
+            rgb[1] += death_rgb_save[1]/death_frames;
+            rgb[2] += death_rgb_save[2]/death_frames;
+        }
     }
 }
+
+void Character::BurstAnimation()
+{
+    return;
+}
+
 void Character::Die()
 {
     dying = false;
     dead = true;
+
+    //BurstAnimation();
+
     RenderManager::shared_instance().RemoveRenderableFromList(this);
     //CollisionManager::shared_instance().RemoveNPC(this);
 }

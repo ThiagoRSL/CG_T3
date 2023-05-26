@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <time.h>
-
 #define UPDATE_RATE 30   //milisegundos
 class FPSManager
 {
