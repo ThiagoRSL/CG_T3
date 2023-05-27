@@ -539,7 +539,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1685157252 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1685216836 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -548,6 +548,8 @@
 	<string>
 	<set>
 	<iterator>
+	<cstdlib>
+	<iostream>
 	"gl_canvas2d.h"
 	"Managers/FileManager.h"
 	"Managers/MouseManager.h"
@@ -658,10 +660,11 @@
 	"Vec2.h"
 	"GeometryAux.h"
 
-1685158342 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
+1685212495 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
 	"Character.h"
+	"PlayerManager.h"
 
-1685062084 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
+1685216881 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
 	<math.h>
 	<vector>
 	<map>
@@ -689,7 +692,7 @@
 	"Managers/MouseManager.h"
 	"Entities/Abstract/Renderable.h"
 
-1685158359 c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.h
+1685215165 c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.h
 	<vector>
 	"Curves.h"
 
@@ -710,7 +713,7 @@
 1685148486 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
 	"Poly.h"
 
-1685158490 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.cpp
+1685215170 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.cpp
 	"Managers/CollisionManager.h"
 	"Entities/Character/Character.h"
 
@@ -879,7 +882,7 @@
 1684791957 c:\users\nektus\desktop\cg\cg_t3\src\builder\characterbuilder.h
 	"../Entities/Character/Character.h"
 
-1684550669 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\playermanager.cpp
+1685211447 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\playermanager.cpp
 	"PlayerManager.h"
 
 1684632897 c:\users\nektus\desktop\cg\cg_t3\src\managers\playermanager.h
@@ -1257,10 +1260,10 @@
 	"Utils/Vec2.h"
 	"Abstract/Renderable.h"
 
-1685157459 source:c:\users\nektus\desktop\cg\cg_t3\src\utils\curves.cpp
+1685216495 source:c:\users\nektus\desktop\cg\cg_t3\src\utils\curves.cpp
 	"Curves.h"
 
-1685157609 c:\users\nektus\desktop\cg\cg_t3\src\utils\curves.h
+1685216697 c:\users\nektus\desktop\cg\cg_t3\src\utils\curves.h
 	"gl_canvas2d.h"
 	<vector>
 	"Entities/Abstract/Renderable.h"

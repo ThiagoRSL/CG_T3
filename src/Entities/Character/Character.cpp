@@ -1,4 +1,5 @@
 #include "Character.h"
+#include "PlayerManager.h"
 
 static int death_frames = 20;
 
@@ -104,6 +105,7 @@ void Character::ReceiveDamage(float damage)
     {
         dying = true;
         death_frame = 0;
+        hit_points = 0;
     }
 }
 void Character::AnimateDeath()
@@ -138,11 +140,19 @@ void Character::Die()
     //BurstAnimation();
 
     RenderManager::shared_instance().RemoveRenderableFromList(this);
+    if(PlayerManager::shared_instance().GetPlayerCharacter() == this)
+    {
+        PlayerManager::shared_instance().SetPlayerCharacter(nullptr);
+        CollisionManager::shared_instance().SetPlayerCharacter(nullptr);
+    }
     //CollisionManager::shared_instance().RemoveNPC(this);
 }
 
 void Character::Render()
 {
+    if(dead)
+        return;
+
     RefreshWeaponsCooldown();
     if(dying)
     {
@@ -154,7 +164,7 @@ void Character::Render()
     if(autonomous)  AutonomousThinking();
     if(moving)      Move(moving*movement_speed/FPSManager::shared_instance().GetFrames());
     if(rotating)    Rotate(rotating*rotation_speed/FPSManager::shared_instance().GetFrames());
-    if(CollisionManager::shared_instance().VerifyCollisionWalls(this, 30)) ReceiveDamage(1000);
+    if(CollisionManager::shared_instance().VerifyCollisionWalls(this, 35)) ReceiveDamage(1000);
 
     Entity::Render();
     ////RenderShipParts();

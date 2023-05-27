@@ -11,6 +11,8 @@
 #include "Entities/Weapon/Weapon.h"
 #include "Entities/Weapon/Projectile.h"
 
+class PlayerManager;
+
 class Character : public Entity
 {
     public:
@@ -51,6 +53,7 @@ class Character : public Entity
         void UpdateWeaponAim();
 
         void MoveDirection(Vec2* directionVector, float speed);
+        void TeleportTo(float x, float y) {Anchor->x = x; Anchor->y = y;}
 
     protected:
         std::map<int, std::pair<Pnt2*, ShipPart*>> ShipParts;

@@ -22,6 +22,7 @@
 					<Add directory="src/Managers" />
 					<Add directory="src/Entities/Character" />
 					<Add directory="src/UI" />
+					<Add directory="src/Utils" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -39,6 +40,7 @@
 					<Add directory="src/Managers" />
 					<Add directory="src/Entities/Character" />
 					<Add directory="src/UI" />
+					<Add directory="src/Utils" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -101,6 +103,8 @@
 		<Unit filename="src/UI/CharacterStatsFrameUI.cpp" />
 		<Unit filename="src/UI/CharacterStatsFrameUI.h" />
 		<Unit filename="src/UI/UIEntity.h" />
+		<Unit filename="src/Utils/Curves.cpp" />
+		<Unit filename="src/Utils/Curves.h" />
 		<Unit filename="src/Utils/GeometryAux.cpp" />
 		<Unit filename="src/Utils/GeometryAux.h" />
 		<Unit filename="src/Utils/Pnt2.cpp" />

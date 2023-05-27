@@ -1,6 +1,6 @@
 #include "Curves.h"
 
-BSpline::BSpline()
+Curve2d::Curve2d()
 {
     show_control_graph = false;
     curve_resolution = 1;
@@ -8,36 +8,26 @@ BSpline::BSpline()
     this->Anchor = new Pnt2(0,0);
 }
 
-void BSpline::AddControlPoint(Pnt2* point)
+BSpline::BSpline()
+    :Curve2d()
+{
+
+}
+
+Bezier::Bezier()
+    :Curve2d()
+{
+
+}
+
+
+void Curve2d::AddControlPoint(Pnt2* point)
 {
     ControlPoints.push_back(point);
 }
 
-void BSpline::GenerateCurvePoints()
+void Curve2d::Render()
 {
-    int i, j;
-    float t, div = ControlPoints.size()*curve_resolution;
-
-    for(i = 0; i < ControlPoints.size()-3; i++)
-    {
-        for(t = 0.0; t < 1; t += 1/div)
-        {
-            Pnt2* p0 = ControlPoints.at(i);
-            Pnt2* p1 = ControlPoints.at(i+1);
-            Pnt2* p2 = ControlPoints.at(i+2);
-            Pnt2* p3 = ControlPoints.at(i+3);
-
-            float px = ((1 - t)*(1 - t)*(1 - t)/6)*p0->x + (((3*t*t*t) - 6*t*t + 4)/6)*p1->x + (((-3*t*t*t) + (3*t*t) + (3*t) + 1)/6)*p2->x + ((t*t*t)/6)*p3->x;
-            float py = ((1 - t)*(1 - t)*(1 - t)/6)*p0->y + (((3*t*t*t) - 6*t*t + 4)/6)*p1->y + (((-3*t*t*t) + (3*t*t) + (3*t) + 1)/6)*p2->y + ((t*t*t)/6)*p3->y;
-            Pnt2* newPoint = new Pnt2(px, py);
-            CurvePoints.push_back(newPoint);
-        }
-    }
-}
-
-void BSpline::Render()
-{
-    if(ControlPoints.size()<4) return;
     float virtualX, virtualY;
     if(!this->isStatic)
     {
@@ -73,7 +63,7 @@ void BSpline::Render()
     }
 }
 
-void BSpline::RenderWithLines()
+void Curve2d::RenderWithLines()
 {
     float virtualX, virtualY;
     if(!this->isStatic)
@@ -103,7 +93,7 @@ void BSpline::RenderWithLines()
     glEnd();
 }
 
-void BSpline::RenderWithPoints()
+void Curve2d::RenderWithPoints()
 {
     float virtualX, virtualY;
     if(!this->isStatic)
@@ -130,7 +120,7 @@ void BSpline::RenderWithPoints()
     glEnd();
 }
 
-Pnt2* BSpline::NearPoint(Pnt2 point, float distanceMin)
+Pnt2* Curve2d::NearPoint(Pnt2 point, float distanceMin)
 {
     float virtualX, virtualY;
     if(!this->isStatic)
@@ -156,4 +146,44 @@ Pnt2* BSpline::NearPoint(Pnt2 point, float distanceMin)
         }
     }
     return nullptr;
+}
+
+void BSpline::GenerateCurvePoints()
+{
+    int i, j;
+    float t, div = ControlPoints.size()*curve_resolution;
+
+    for(i = 0; i < ControlPoints.size()-3; i++)
+    {
+        for(t = 0.0; t < 1; t += 1/div)
+        {
+            Pnt2* p0 = ControlPoints.at(i);
+            Pnt2* p1 = ControlPoints.at(i+1);
+            Pnt2* p2 = ControlPoints.at(i+2);
+            Pnt2* p3 = ControlPoints.at(i+3);
+
+            float px = ((1 - t)*(1 - t)*(1 - t)/6)*p0->x + (((3*t*t*t) - 6*t*t + 4)/6)*p1->x + (((-3*t*t*t) + (3*t*t) + (3*t) + 1)/6)*p2->x + ((t*t*t)/6)*p3->x;
+            float py = ((1 - t)*(1 - t)*(1 - t)/6)*p0->y + (((3*t*t*t) - 6*t*t + 4)/6)*p1->y + (((-3*t*t*t) + (3*t*t) + (3*t) + 1)/6)*p2->y + ((t*t*t)/6)*p3->y;
+            Pnt2* newPoint = new Pnt2(px, py);
+            CurvePoints.push_back(newPoint);
+        }
+    }
+}
+
+void Bezier::GenerateCurvePoints()
+{
+    int i, j;
+    float t, div = ControlPoints.size()*curve_resolution;
+
+    Pnt2* p0 = ControlPoints.at(0);
+    Pnt2* p1 = ControlPoints.at(1);
+    Pnt2* p2 = ControlPoints.at(2);
+
+    for(t = 0.0; t < 1; t += 1/div)
+    {
+        float px = p0->x*(1 - t)*(1 - t) + p1->x*(2*t*(1-t)) + p2->x*(t*t);
+        float py = p0->y*(1 - t)*(1 - t) + p1->y*(2*t*(1-t)) + p2->y*(t*t);
+        Pnt2* newPoint = new Pnt2(px, py);
+        CurvePoints.push_back(newPoint);
+    }
 }

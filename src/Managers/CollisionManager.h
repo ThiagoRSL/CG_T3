@@ -15,7 +15,7 @@ class CollisionManager
         void SetPlayerCharacter(Character* player_character);
         void AddNPC(Character* character);
         void RemoveNPC(Character* character);
-        void addWall(BSpline* wall);
+        void addWall(Curve2d* wall);
         Character* VerifyCollisionNPCs(float x, float y);
         Character* VerifyCollisionPlayer(float x, float y);
         bool VerifyCollisionWalls(Character* character, int distance);
@@ -25,7 +25,7 @@ class CollisionManager
     private:
         Character* player_character;
         std::vector<Character*> npcs;
-        std::vector<BSpline*> Walls;
+        std::vector<Curve2d*> Walls;
 };
 
 #endif // COLLISIONMANAGER_H

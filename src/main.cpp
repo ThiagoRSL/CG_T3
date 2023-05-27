@@ -22,6 +22,8 @@
 #include <string>
 #include <set>
 #include <iterator>
+#include <cstdlib>
+#include <iostream>
 
 #include "gl_canvas2d.h"
 #include "Managers/FileManager.h"
@@ -191,30 +193,57 @@ int main(void)
     float RGB4[3] = {0.75, 0.35, 0.35};
    //Sleep(1000);
 
-    Pnt2* p1 = new Pnt2(100,100);
-    Pnt2* p2 = new Pnt2(200,150);
-    Pnt2* p3 = new Pnt2(400,100);
-    Pnt2* p4 = new Pnt2(550,200);
-    Pnt2* p5 = new Pnt2(700,300);
-    Pnt2* p6 = new Pnt2(800,100);
-    Pnt2* p7 = new Pnt2(900,200);
-    Pnt2* p8 = new Pnt2(1000,100);
-    BSpline* curv = new BSpline();
-    curv->SetColor(RGB3);
-    curv->SetShowWithLines(true);
-    curv->SetShowControlGraph(true);
-    //curv->SetCurveResolution(1);
-    curv->AddControlPoint(p1);
-    curv->AddControlPoint(p2);
-    curv->AddControlPoint(p3);
-    curv->AddControlPoint(p4);
-    curv->AddControlPoint(p5);
-    curv->AddControlPoint(p6);
-    curv->AddControlPoint(p7);
-    curv->AddControlPoint(p8);
-    curv->GenerateCurvePoints();
-    CollisionManager::shared_instance().addWall(curv);
-    RenderManager::shared_instance().AddRenderableToList(curv);
+
+    //Wall Close
+    Bezier* closeBottom = new Bezier();
+    closeBottom->SetColor(RGB3);
+    closeBottom->SetShowWithLines(true);
+    closeBottom->SetCurveResolution(100);
+
+    //LeftWall
+    BSpline* left = new BSpline();
+    left->SetColor(RGB3);
+    left->SetShowWithLines(true);
+    //left->SetShowControlGraph(true);
+    //left->SetCurveResolution(1);
+
+    //RightWall
+    BSpline* right = new BSpline();
+    right->SetColor(RGB3);
+    right->SetShowWithLines(true);
+    //right->SetShowControlGraph(true);
+    //right->SetCurveResolution(1);x
+
+    Pnt2* p = new Pnt2(100,100);
+    Pnt2* pn;
+    Pnt2* pnx;
+    int controlPoints = 150;
+    int i;
+    for (i = 0; i < controlPoints; i++)
+    {
+        pn = new Pnt2((std::rand() % 100), p->y - (std::rand() % 125) - 175);
+        left->AddControlPoint(pn);
+        pnx = new Pnt2(pn->x + 1000 + (std::rand() % 200), pn->y - (std::rand() % 50));
+        right->AddControlPoint(pnx);
+        p = pn;
+    }
+
+    left->GenerateCurvePoints();
+    right->GenerateCurvePoints();
+
+    Pnt2* firstRightPoint = right->GetFirstCurvePoint();
+    Pnt2* firstLeftPoint = left->GetFirstCurvePoint();
+    closeBottom->AddControlPoint(firstRightPoint);
+    closeBottom->AddControlPoint(new Pnt2((firstRightPoint->x + firstLeftPoint->x)/2, firstLeftPoint->y + 500));
+
+    closeBottom->AddControlPoint(firstLeftPoint);
+    closeBottom->GenerateCurvePoints();
+    CollisionManager::shared_instance().addWall(left);
+    RenderManager::shared_instance().AddRenderableToList(left);
+    CollisionManager::shared_instance().addWall(right);
+    RenderManager::shared_instance().AddRenderableToList(right);
+    CollisionManager::shared_instance().addWall(closeBottom);
+    RenderManager::shared_instance().AddRenderableToList(closeBottom);
 
     Poly* base = new Poly(0,0,RGB4);
     base->AddVertex(300,0);
@@ -236,8 +265,10 @@ int main(void)
     CollisionManager::shared_instance().SetPlayerCharacter(player_character);
     CollisionManager::shared_instance().AddNPC(player_character);
     UIManager::shared_instance().AddCharacterStatsToRenderer(player_character);
+    player_character->TeleportTo((firstRightPoint->x + firstLeftPoint->x)/2, firstLeftPoint->y);
 
     enemy_character = CharacterBuilder::BuildShip(800, 400, RGB2, 1);
+    enemy_character->Rotate(180);
     w1 = new Weapon();
     w1->SetBackgroundColor(RGB4);
     w2 = new Weapon();
@@ -247,6 +278,7 @@ int main(void)
     enemy_character->SetAutonomous(true);
     RenderManager::shared_instance().AddRenderableToList(enemy_character);
     CollisionManager::shared_instance().AddNPC(enemy_character);
+    enemy_character->TeleportTo((firstRightPoint->x + firstLeftPoint->x)/2, firstLeftPoint->y-1000);
 
 
     CV::init("Space Extinction");

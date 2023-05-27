@@ -7,24 +7,27 @@
 #include "Pnt2.h"
 #include "GeometryAux.h"
 
-class BSpline : public Renderable
+class Curve2d : public Renderable
 {
-    public:
-        BSpline();
 
-        void AddControlPoint(Pnt2* point);
-        void Render();
+    public:
+        Curve2d();
+
         void SetColor(float* color) {Color[0] = color[0];Color[1] = color[1];Color[2] = color[2];}
+        void AddControlPoint(Pnt2* point);
         void SetShowControlGraph(bool show) {show_control_graph = show;}
         void SetShowWithLines(bool show) {show_with_lines = show;}
-        void SetCurveResolution(bool resolution) {curve_resolution = resolution;}
-        void GenerateCurvePoints();
+        void SetCurveResolution(float resolution) {curve_resolution = resolution;}
+        virtual void GenerateCurvePoints() = 0;
         Pnt2* NearPoint(Pnt2 point, float distanceMin);
+        Pnt2* GetFirstCurvePoint() { return CurvePoints.at(0);}
 
-    private:
+        void Render();
+
+    protected:
         bool show_control_graph;
         bool show_with_lines;
-        int curve_resolution;
+        float curve_resolution;
         float Color[3];
         std::vector<Pnt2*> ControlPoints;
         std::vector<Pnt2*> CurvePoints;
@@ -32,4 +35,20 @@ class BSpline : public Renderable
         void RenderWithPoints();
 };
 
+class BSpline : public Curve2d
+{
+    public:
+        BSpline();
+
+        void GenerateCurvePoints();
+};
+
+class Bezier : public Curve2d
+{
+    public:
+        Bezier();
+
+        void GenerateCurvePoints();
+
+};
 #endif // CURVES_H
