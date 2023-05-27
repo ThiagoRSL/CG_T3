@@ -5,6 +5,7 @@
 #include <vector>
 #include "Entities/Abstract/Renderable.h"
 #include "Pnt2.h"
+#include "GeometryAux.h"
 
 class BSpline : public Renderable
 {
@@ -18,6 +19,7 @@ class BSpline : public Renderable
         void SetShowWithLines(bool show) {show_with_lines = show;}
         void SetCurveResolution(bool resolution) {curve_resolution = resolution;}
         void GenerateCurvePoints();
+        Pnt2* NearPoint(Pnt2 point, float distanceMin);
 
     private:
         bool show_control_graph;

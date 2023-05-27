@@ -54,8 +54,8 @@ bool control_moving;
 void render()
 {
     CV::clear(0,0,0);
-    CameraManager::shared_instance().UpdateCameraOffset();
     FPSManager::shared_instance().UpdateFrames();
+    CameraManager::shared_instance().UpdateCameraOffset();
     PlayerManager::shared_instance().CheckInteraction();
     RenderManager::shared_instance().RenderAll();
     UIManager::shared_instance().RenderAll();
@@ -193,16 +193,16 @@ int main(void)
 
     Pnt2* p1 = new Pnt2(100,100);
     Pnt2* p2 = new Pnt2(200,150);
-    Pnt2* p3 = new Pnt2(320,400);
-    Pnt2* p4 = new Pnt2(600,200);
-    Pnt2* p5 = new Pnt2(700,400);
-    Pnt2* p6 = new Pnt2(800,500);
-    Pnt2* p7 = new Pnt2(700,800);
-    Pnt2* p8 = new Pnt2(1000,300);
+    Pnt2* p3 = new Pnt2(400,100);
+    Pnt2* p4 = new Pnt2(550,200);
+    Pnt2* p5 = new Pnt2(700,300);
+    Pnt2* p6 = new Pnt2(800,100);
+    Pnt2* p7 = new Pnt2(900,200);
+    Pnt2* p8 = new Pnt2(1000,100);
     BSpline* curv = new BSpline();
     curv->SetColor(RGB3);
     curv->SetShowWithLines(true);
-    //curv->SetShowControlGraph(true);
+    curv->SetShowControlGraph(true);
     //curv->SetCurveResolution(1);
     curv->AddControlPoint(p1);
     curv->AddControlPoint(p2);
@@ -213,6 +213,7 @@ int main(void)
     curv->AddControlPoint(p7);
     curv->AddControlPoint(p8);
     curv->GenerateCurvePoints();
+    CollisionManager::shared_instance().addWall(curv);
     RenderManager::shared_instance().AddRenderableToList(curv);
 
     Poly* base = new Poly(0,0,RGB4);
@@ -220,7 +221,7 @@ int main(void)
     base->AddVertex(150,300);
     RenderManager::shared_instance().AddRenderableToList(base);
 
-    player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(200, 400, RGB, 2);
+    player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(200, 700, RGB, 2);
     Weapon* w1 = new Weapon();
     w1->SetBackgroundColor(RGB3);
     Weapon* w2 = new Weapon();

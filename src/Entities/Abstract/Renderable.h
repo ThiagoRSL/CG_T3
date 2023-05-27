@@ -35,6 +35,21 @@ class Renderable
             StaticOffset.x = x;
             StaticOffset.y = y;
         }
+        Pnt2 GetPosition()
+        {
+            float virtualX, virtualY;
+            if(!this->isStatic)
+            {
+                virtualX = Anchor->x + Offset.x - CameraOffsetRef->x;
+                virtualY = Anchor->y + Offset.y - CameraOffsetRef->y;
+            }
+            else
+            {
+                virtualX = StaticOffset.x + Offset.x;
+                virtualY = StaticOffset.y + Offset.y;
+            }
+            return Pnt2(virtualX, virtualY);
+        }
 
         void Static(bool isStatic){this->isStatic = isStatic;}
         bool Static(){return this->isStatic;}

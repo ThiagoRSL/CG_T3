@@ -154,6 +154,7 @@ void Character::Render()
     if(autonomous)  AutonomousThinking();
     if(moving)      Move(moving*movement_speed/FPSManager::shared_instance().GetFrames());
     if(rotating)    Rotate(rotating*rotation_speed/FPSManager::shared_instance().GetFrames());
+    if(CollisionManager::shared_instance().VerifyCollisionWalls(this, 30)) ReceiveDamage(1000);
 
     Entity::Render();
     ////RenderShipParts();

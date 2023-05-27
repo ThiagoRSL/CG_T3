@@ -28,6 +28,10 @@ void CollisionManager::RemoveNPC(Character* character)
         }
     }
 }
+void CollisionManager::addWall(BSpline* wall)
+{
+    Walls.push_back(wall);
+}
 Character* CollisionManager::VerifyCollisionNPCs(float x, float y)
 {
     int i;
@@ -48,4 +52,28 @@ Character* CollisionManager::VerifyCollisionPlayer(float x, float y)
     {
         return player_character;
     }
+}
+
+
+bool CollisionManager::VerifyCollisionWalls(Character* character, int distance)
+{
+    Pnt2* nearest = Walls.at(0)->NearPoint(character->GetPosition(), distance);
+
+    if(nearest == nullptr)
+        return false;
+
+    if(character->HasCollisionOnParts(nearest->x, nearest->y))
+    {
+        character->ReceiveDamage(1000);
+    }
+    /*
+    int i;
+    for(i = 0; i < nearest_points.size(); i++)
+    {
+        Pnt2* p = nearest_points.at(i);
+        if(character->HasCollisionOnParts(p->x, p->y))
+        {
+            return p;
+        }
+    }*/
 }

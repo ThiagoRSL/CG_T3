@@ -18,7 +18,7 @@ void BSpline::GenerateCurvePoints()
     int i, j;
     float t, div = ControlPoints.size()*curve_resolution;
 
-    for(i = 0; i < ControlPoints.size()-4; i++)
+    for(i = 0; i < ControlPoints.size()-3; i++)
     {
         for(t = 0.0; t < 1; t += 1/div)
         {
@@ -38,6 +38,19 @@ void BSpline::GenerateCurvePoints()
 void BSpline::Render()
 {
     if(ControlPoints.size()<4) return;
+    float virtualX, virtualY;
+    if(!this->isStatic)
+    {
+        virtualX = Anchor->x;
+        virtualX += Offset.x;
+        virtualX -= CameraOffsetRef->x;
+        virtualY = Anchor->y + Offset.y - CameraOffsetRef->y;
+    }
+    else
+    {
+        virtualX = StaticOffset.x + Offset.x;
+        virtualY = StaticOffset.y + Offset.y;
+    }
 
     int i;
     if(show_control_graph)
@@ -47,7 +60,7 @@ void BSpline::Render()
         {
             Pnt2* c0 = ControlPoints.at(i);
             Pnt2* c1 = ControlPoints.at(i+1);
-            CV::line(c0->x, c0->y, c1->x, c1->y);
+            CV::line(c0->x + virtualX, c0->y + virtualY, c1->x + virtualX, c1->y + virtualY);
         }
     }
     if(show_with_lines)
@@ -115,4 +128,32 @@ void BSpline::RenderWithPoints()
         glVertex2d(point->x + virtualX, point->y + virtualY);
     }
     glEnd();
+}
+
+Pnt2* BSpline::NearPoint(Pnt2 point, float distanceMin)
+{
+    float virtualX, virtualY;
+    if(!this->isStatic)
+    {
+        virtualX = Anchor->x + Offset.x - CameraOffsetRef->x;
+        virtualY = Anchor->y + Offset.y - CameraOffsetRef->y;
+    }
+    else
+    {
+        virtualX = StaticOffset.x + Offset.x;
+        virtualY = StaticOffset.y + Offset.y;
+    }
+    int i;
+    for(i = 0; i < CurvePoints.size(); i++)
+    {
+        CV::color(3);
+        Pnt2 p = Pnt2(CurvePoints.at(i)->x + virtualX, CurvePoints.at(i)->y + virtualY);
+        //CV::point(p.x, p.y);
+        //CV::point(point.x, point.y);
+        if(GeometryAux::DistanceBetween(&p, &point) < distanceMin)
+        {
+            return new Pnt2(CurvePoints.at(i)->x + virtualX, CurvePoints.at(i)->y + virtualY);
+        }
+    }
+    return nullptr;
 }
