@@ -8,22 +8,18 @@
 
 class GeometryAux;
 
-
 class Vec2 : public Renderable
 {
     public:
-        Pnt2* anchor;
         float x, y;
-        float RelativeX(){return this->anchor->x + x;}
-        float RelativeY(){return this->anchor->y + y;}
+        float RelativeX();
+        float RelativeY();
 
         Vec2();
         Vec2(float v[2]);
         Vec2(float x, float y);
         Vec2(float x, float y, Pnt2* anchor);
 
-        // Setters
-        void SetAnchor(Pnt2* point);
         // Getters
         float GetNorm();
         float DotProduct(Vec2* v);
@@ -60,13 +56,7 @@ class Vec2 : public Renderable
         void Render();
 
     public:
-        Vec2* GetCopy()
-        {
-            Vec2* vecCopy = new Vec2(this->x, this->y);
-            Pnt2* anchorCopy = new Pnt2(this->anchor->x, this->anchor->y);
-            vecCopy->SetAnchor(anchorCopy);
-            return vecCopy;
-        }
+        Vec2* GetCopy();
 
 };
 

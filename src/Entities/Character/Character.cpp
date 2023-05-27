@@ -232,8 +232,8 @@ void Character::UpdateWeaponAim()
             Vec2 aimVec = aimTo.AsVec();
             float angleDiff = orientation.GetAngleBetween(&aimVec);
 
-            Vec2 saveOffSet = slot->EquippedWeapon->Offset;
-            slot->EquippedWeapon->Offset = Vec2(0,0);
+            Pnt2 saveOffSet = slot->EquippedWeapon->Offset;
+            slot->EquippedWeapon->Offset = Pnt2(0,0);
             slot->EquippedWeapon->RotateRad(angleDiff);
             slot->EquippedWeapon->Offset = saveOffSet;
         }

@@ -6,35 +6,30 @@ Vec2::Vec2()
 {
     this->x = 0;
     this->y = 0;
-    this->anchor = nullptr;
+    this->Anchor = nullptr;
 }
 
 Vec2::Vec2(float v[2])
 {
     this->x = v[0];
     this->y = v[1];
-    this->anchor = nullptr;
+    this->Anchor = nullptr;
 }
 
 Vec2::Vec2(float x, float y)
 {
     this->x = x;
     this->y = y;
-    this->anchor = nullptr;
+    this->Anchor = nullptr;
 }
 
 Vec2::Vec2(float x, float y, Pnt2* anchor)
 {
     this->x = x;
     this->y = y;
-    this->anchor = new Pnt2(anchor->x, anchor->y);
+    this->Anchor = new Pnt2(anchor->x, anchor->y);
 }
 
-// Setters
-void Vec2::SetAnchor(Pnt2* point)
-{
-    this->anchor = point;
-}
 
 // Getters
 float Vec2::GetAngleBetween(Vec2* v)
@@ -115,9 +110,26 @@ Pnt2 Vec2::AsPnt()
     return Pnt2(this->x, this->y);
 }
 
+float Vec2::RelativeX()
+{
+    return Anchor->y + y;
+}
+
+float Vec2::RelativeY()
+{
+    return Anchor->y + y;
+}
+
+Vec2* Vec2::GetCopy()
+{
+    Vec2* n = new Vec2(x, y);
+    n->SetAnchor(Anchor->x, Anchor->y);
+    return n;
+}
+
 void Vec2::Render()
 {
     CV::color(2);
-    CV::line(this->anchor->x, this->anchor->y, this->RelativeX(), this->RelativeY());
+    CV::line(this->Anchor->x, this->Anchor->y, this->RelativeX(), this->RelativeY());
 }
 

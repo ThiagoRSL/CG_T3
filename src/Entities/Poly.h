@@ -16,8 +16,6 @@ class Poly : public Renderable
         Poly(float x, float y);
         Poly(float x, float y, float RGB[3]);
 
-        void SetAnchor(float x, float y);
-        void SetAnchor(Pnt2* Anchor);
         void SetOrientation(float x, float y);
         void AddVertex(Vec2* vertex);
         void AddVertex(float x, float y);
@@ -39,7 +37,6 @@ class Poly : public Renderable
         float rotation;
         bool show_border;
 
-        Pnt2* Anchor;
         Vec2* OrientationVector;
         std::vector<Vec2*> Vertexes;
 
@@ -48,19 +45,7 @@ class Poly : public Renderable
         void RenderVertexes();
 
     public:
-        Vec2 Offset;
-        Vec2 StaticOffset;
-        virtual void SetOffset(float x, float y)
-        {
-            Offset.x = x;
-            Offset.y = y;
-        }
-        void SetStaticOffset(float x, float y)
-        {
-            StaticOffset.x = x;
-            StaticOffset.y = y;
-        }
-;
+
         Vec2 GetOrientation(){return Vec2(this->OrientationVector->x, this->OrientationVector->y);}
         Vec2* GetOrientationRef(){return this->OrientationVector;}
         Poly* GetCopy();

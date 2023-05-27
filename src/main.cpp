@@ -37,6 +37,7 @@
 #include "Entities/Entity.h"
 #include "Entities/Character/Character.h"
 #include "Entities/Character/PlayerCharacter.h"
+#include "Utils/Curves.h"
 
 Character* player_character;
 Character* enemy_character;
@@ -178,7 +179,6 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 
 }
 
-
 int main(void)
 {
     control_rotating_right = false;
@@ -190,6 +190,30 @@ int main(void)
     float RGB3[3] = {0.75, 0.75, 0.0};
     float RGB4[3] = {0.75, 0.35, 0.35};
    //Sleep(1000);
+
+    Pnt2* p1 = new Pnt2(100,100);
+    Pnt2* p2 = new Pnt2(200,150);
+    Pnt2* p3 = new Pnt2(320,400);
+    Pnt2* p4 = new Pnt2(600,200);
+    Pnt2* p5 = new Pnt2(700,400);
+    Pnt2* p6 = new Pnt2(800,500);
+    Pnt2* p7 = new Pnt2(700,800);
+    Pnt2* p8 = new Pnt2(1000,300);
+    BSpline* curv = new BSpline();
+    curv->SetColor(RGB3);
+    curv->SetShowWithLines(true);
+    //curv->SetShowControlGraph(true);
+    //curv->SetCurveResolution(1);
+    curv->AddControlPoint(p1);
+    curv->AddControlPoint(p2);
+    curv->AddControlPoint(p3);
+    curv->AddControlPoint(p4);
+    curv->AddControlPoint(p5);
+    curv->AddControlPoint(p6);
+    curv->AddControlPoint(p7);
+    curv->AddControlPoint(p8);
+    curv->GenerateCurvePoints();
+    RenderManager::shared_instance().AddRenderableToList(curv);
 
     Poly* base = new Poly(0,0,RGB4);
     base->AddVertex(300,0);
@@ -207,6 +231,10 @@ int main(void)
     player_character->EquipWeapon(w2);
     player_character->EquipWeapon(w3);
     PlayerManager::shared_instance().SetPlayerCharacter(player_character);
+    RenderManager::shared_instance().AddRenderableToList(player_character);
+    CollisionManager::shared_instance().SetPlayerCharacter(player_character);
+    CollisionManager::shared_instance().AddNPC(player_character);
+    UIManager::shared_instance().AddCharacterStatsToRenderer(player_character);
 
     enemy_character = CharacterBuilder::BuildShip(800, 400, RGB2, 1);
     w1 = new Weapon();
@@ -215,16 +243,9 @@ int main(void)
     w2->SetBackgroundColor(RGB4);
     enemy_character->EquipWeapon(w1);
     enemy_character->EquipWeapon(w2);
-
     enemy_character->SetAutonomous(true);
-
-    RenderManager::shared_instance().AddRenderableToList(player_character);
     RenderManager::shared_instance().AddRenderableToList(enemy_character);
-    CollisionManager::shared_instance().SetPlayerCharacter(player_character);
-    CollisionManager::shared_instance().AddNPC(player_character);
     CollisionManager::shared_instance().AddNPC(enemy_character);
-
-    UIManager::shared_instance().AddCharacterStatsToRenderer(player_character);
 
 
     CV::init("Space Extinction");

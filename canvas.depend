@@ -539,7 +539,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1685067337 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1685150229 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -558,11 +558,11 @@
 	"Managers/UIManager.h"
 	"Builder/CharacterBuilder.h"
 	"Utils/Vec2.h"
-	"Entities/PointSet.h"
 	"Entities/Poly.h"
 	"Entities/Entity.h"
 	"Entities/Character/Character.h"
 	"Entities/Character/PlayerCharacter.h"
+	"Utils/Curves.h"
 
 1684198249 c:\users\nektus\desktop\cg\cg_t3\src\playercharacter.h
 	<Character.h>
@@ -603,10 +603,11 @@
 
 1684198249 c:\users\nektus\desktop\cg\cg_t3\include\playercharacter.h
 
-1684640669 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.cpp
+1685149226 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.cpp
 	"Renderable.h"
+	"Utils/Vec2.h"
 
-1685062565 c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.h
+1685148753 c:\users\nektus\desktop\cg\cg_t3\src\entities\abstract\renderable.h
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	"Utils/Pnt2.h"
@@ -647,17 +648,17 @@
 	"Pnt2.h"
 	"Vec2.h"
 
-1684973358 c:\users\nektus\desktop\cg\cg_t3\src\utils\vec2.h
+1685148094 c:\users\nektus\desktop\cg\cg_t3\src\utils\vec2.h
 	<math.h>
 	"Entities/Abstract/Renderable.h"
 	"gl_canvas2d.h"
 	"Utils/Pnt2.h"
 
-1684973358 source:c:\users\nektus\desktop\cg\cg_t3\src\utils\vec2.cpp
+1685149129 source:c:\users\nektus\desktop\cg\cg_t3\src\utils\vec2.cpp
 	"Vec2.h"
 	"GeometryAux.h"
 
-1685062137 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
+1685148348 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 
 1685062084 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
@@ -671,7 +672,7 @@
 	"Entities/Weapon/Weapon.h"
 	"Entities/Weapon/Projectile.h"
 
-1685061954 c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.h
+1685147655 c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.h
 	<stdio.h>
 	<vector>
 	"Utils/Vec2.h"
@@ -705,7 +706,7 @@
 1684550669 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\playercharacter.h
 	<Entities/Character/Character.h>
 
-1685062058 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
+1685148486 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
 	"Poly.h"
 
 1684550669 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.cpp
@@ -719,19 +720,19 @@
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
 
-1684973358 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
+1685148622 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
 	"Entities/Weapon/Weapon.h"
 	"Entities/Character/Character.h"
 	"Slot.h"
 
-1684791957 c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.h
+1685148564 c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.h
 	<stdio.h>
 	<vector>
 	"Utils/Pnt2.h"
 	"Utils/Vec2.h"
 	"Poly.h"
 
-1684791957 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.cpp
+1685148568 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\entity.cpp
 	"Entity.h"
 
 1684416283 source:c:\users\thiago\desktop\grad\cg\trabalhos\t3\src\entities\abstract\renderable.cpp
@@ -867,7 +868,7 @@
 	<vector>
 	"Slot.h"
 
-1684973358 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\shippart.cpp
+1685148681 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\shippart.cpp
 	"ShipPart.h"
 	"Character.h"
 
@@ -883,7 +884,7 @@
 1684632897 c:\users\nektus\desktop\cg\cg_t3\src\managers\playermanager.h
 	"Character/Character.h"
 
-1684550669 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\cameramanager.cpp
+1685149346 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\cameramanager.cpp
 	"CameraManager.h"
 
 1684629888 c:\users\nektus\desktop\cg\cg_t3\src\managers\cameramanager.h
@@ -1254,4 +1255,13 @@
 	"Utils/Pnt2.h"
 	"Utils/Vec2.h"
 	"Abstract/Renderable.h"
+
+1685150308 source:c:\users\nektus\desktop\cg\cg_t3\src\utils\curves.cpp
+	"Curves.h"
+
+1685150247 c:\users\nektus\desktop\cg\cg_t3\src\utils\curves.h
+	"gl_canvas2d.h"
+	<vector>
+	"Entities/Abstract/Renderable.h"
+	"Pnt2.h"
 

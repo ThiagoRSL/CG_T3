@@ -127,8 +127,3 @@ void Entity::Render()
         Parts.at(i)->Render();
     }
 }
-
-Pnt2* Entity::GetAnchor()
-{
-    return Anchor;
-}

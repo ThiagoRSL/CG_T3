@@ -6,7 +6,7 @@ Poly::Poly()
     this->OrientationVector = new Vec2();
     this->OrientationVector->SetAnchor(this->Anchor);
     rotation = 0;
-    Offset = Vec2(0,0);
+    Offset = Pnt2(0,0);
     this->show_border = false;
 }
 
@@ -16,7 +16,7 @@ Poly::Poly(float x, float y)
     this->OrientationVector = new Vec2(0, 1);
     this->OrientationVector->SetAnchor(this->Anchor);
     rotation = 0;
-    Offset = Vec2(0,0);
+    Offset = Pnt2(0,0);
     this->show_border = false;
 }
 
@@ -30,7 +30,7 @@ Poly::Poly(float x, float y, float RGB[3])
     background_color[2] = RGB[2];
     background_color[3] = 1;
     rotation = 0;
-    Offset = Vec2(0,0);
+    Offset = Pnt2(0,0);
     this->show_border = false;
 }
 
@@ -45,15 +45,6 @@ void Poly::Move(Vec2* directionVector, float speed)
     this->Anchor->ApplyVec2(moveVec);
 }
 
-void Poly::SetAnchor(float x, float y)
-{
-    this->Anchor->x = x;
-    this->Anchor->y = y;
-}
-void Poly::SetAnchor(Pnt2* Anchor)
-{
-    this->Anchor = Anchor; //MEMORY
-}
 
 void Poly::SetOrientation(float x, float y)
 {
@@ -81,7 +72,9 @@ void Poly::Resize(float scalar)
     {
         Vertexes.at(i)->Mult(scalar);
     }
-    Offset.Mult(scalar);
+    Vec2 offsetVec = Offset.AsVec();
+    offsetVec.Mult(scalar);
+    Offset = offsetVec.AsPnt();
 }
 
 void Poly::RotateRad(float radians)
@@ -91,7 +84,11 @@ void Poly::RotateRad(float radians)
     {
         Vertexes.at(i)->RotateRadians(radians);
     }
-    Offset.RotateRadians(radians);
+
+    Vec2 offsetVec = Offset.AsVec();
+    offsetVec.RotateRadians(radians);
+    Offset = offsetVec.AsPnt();
+
     OrientationVector->RotateRadians(radians);
 }
 
@@ -103,7 +100,10 @@ void Poly::Rotate(float degrees)
         Vertexes.at(i)->RotateDegrees(degrees);
     }
     OrientationVector->RotateDegrees(degrees);
-    Offset.RotateDegrees(degrees);
+
+    Vec2 offsetVec = Offset.AsVec();
+    offsetVec.RotateDegrees(degrees);
+    Offset = offsetVec.AsPnt();
 
     rotation += degrees;
 

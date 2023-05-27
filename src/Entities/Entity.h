@@ -22,14 +22,12 @@ class Entity : public Renderable
         void SetFirstPosition(Poly* part);
 
     protected:
-        Pnt2* Anchor;
         Vec2* OrientationVector;
         std::vector<Poly*> Parts;
 
         float background_color[3];
 
     public:
-        Pnt2* GetAnchor();
         Entity* GetCopy();
         std::vector<Poly*>* GetPartsCopy();
         void SetStatic(bool isStatic);

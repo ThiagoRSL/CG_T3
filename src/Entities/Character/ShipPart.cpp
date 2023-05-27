@@ -34,7 +34,7 @@ void ShipPart::AddMotorSlot(Pnt2 offset)
 void ShipPart::AppendToCharacter(Character* character)
 {
     this->AttachedTo = character;
-    this->Anchor = character->GetAnchor();
+    SetAnchor(character->GetAnchor());
 }
 
 void ShipPart::SetOffset(float x, float y)

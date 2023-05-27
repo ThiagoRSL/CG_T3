@@ -27,7 +27,7 @@ void Weapon::EquipOn(WeaponSlot* slot)
 {
     this->Wielder = slot->SlotOf()->PartOf();
     this->SlottedOn = slot;
-    this->SetAnchor(Wielder->GetAnchor());
+    Renderable::SetAnchor(Wielder->GetAnchor());
     Pnt2* wielderAimPoint = Wielder->GetAimPoint();
     this->OrientationVector = new Vec2(wielderAimPoint->x, wielderAimPoint->y);
 }

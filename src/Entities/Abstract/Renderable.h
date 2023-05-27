@@ -13,10 +13,29 @@ class Renderable
         virtual void Render()=0;
 
     protected:
+        Pnt2* Anchor;
         Pnt2* CameraOffsetRef;
         bool isStatic;
 
     public:
+
+        void SetAnchor(float x, float y) {this->Anchor = new Pnt2(x, y);}
+        void SetAnchor(Pnt2* Anchor) {this->Anchor = Anchor;}
+        Pnt2* GetAnchor() {return this->Anchor;}
+
+        Pnt2 Offset;
+        Pnt2 StaticOffset;
+        virtual void SetOffset(float x, float y)
+        {
+            Offset.x = x;
+            Offset.y = y;
+        }
+        void SetStaticOffset(float x, float y)
+        {
+            StaticOffset.x = x;
+            StaticOffset.y = y;
+        }
+
         void Static(bool isStatic){this->isStatic = isStatic;}
         bool Static(){return this->isStatic;}
 

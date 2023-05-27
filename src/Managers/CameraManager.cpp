@@ -3,6 +3,7 @@
 CameraManager::CameraManager()
 {
     WindowOffset = Pnt2(0,0);
+    Anchor = new Pnt2(0,0);
 }
 
 void CameraManager::SetCameraAnchor(Pnt2* anchor)
