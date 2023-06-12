@@ -89,9 +89,9 @@ void CollisionManager::CheckCollisions()
             //Garante a atualização do ponto mais próximo.
             while(true)
             {
-                nearestPoint = Walls[0]->GetCurvePoint(nearestPointIndex);
-                nearestPointNext = Walls[0]->GetCurvePoint(nearestPointNextIndex);
-                nearestPointPrevious = Walls[0]->GetCurvePoint(nearestPointPreviousIndex);
+                nearestPoint = Walls[j]->GetCurvePoint(nearestPointIndex);
+                nearestPointNext = Walls[j]->GetCurvePoint(nearestPointNextIndex);
+                nearestPointPrevious = Walls[j]->GetCurvePoint(nearestPointPreviousIndex);
 
                 distanceActual = GeometryAux::DistanceBetween(actualCharacterPoint, nearestPoint);
 
@@ -104,14 +104,14 @@ void CollisionManager::CheckCollisions()
                 while(distanceActual == distanceNext)
                 {
                     nearestPointNextIndex+=1;
-                    nearestPointNext = Walls[0]->GetCurvePoint(nearestPointNextIndex);
+                    nearestPointNext = Walls[j]->GetCurvePoint(nearestPointNextIndex);
                     if(nearestPointNext != nullptr) distanceNext = GeometryAux::DistanceBetween(actualCharacterPoint, nearestPointNext);
                     else distanceNext = 2000000.0;
                 }
                 while(distanceActual == distancePrevious)
                 {
                     nearestPointPreviousIndex-=1;
-                    nearestPointPrevious = Walls[0]->GetCurvePoint(nearestPointPreviousIndex);
+                    nearestPointPrevious = Walls[j]->GetCurvePoint(nearestPointPreviousIndex);
                     if(nearestPointPrevious != nullptr) distancePrevious = GeometryAux::DistanceBetween(actualCharacterPoint, nearestPointPrevious);
                     else distancePrevious = 2000000.0;
                 }
