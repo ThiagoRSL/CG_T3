@@ -2,6 +2,7 @@
 #define COLLISIONMANAGER_H
 
 #include <vector>
+#include <map>
 #include "Curves.h"
 class Character;
 
@@ -18,13 +19,15 @@ class CollisionManager
         void addWall(Curve2d* wall);
         Character* VerifyCollisionNPCs(float x, float y);
         Character* VerifyCollisionPlayer(float x, float y);
-        bool VerifyCollisionWalls(Character* character, int distance);
+        void CheckCollisions();
+        bool VerifyCollisionWalls(Character* character);
 
     protected:
 
     private:
+        std::vector<std::map<Character*, int>*> CharactersWallNearestPoint;
         Character* player_character;
-        std::vector<Character*> npcs;
+        std::vector<Character*> Characters;
         std::vector<Curve2d*> Walls;
 };
 

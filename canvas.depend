@@ -539,7 +539,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1685216836 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1686551787 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -660,7 +660,7 @@
 	"Vec2.h"
 	"GeometryAux.h"
 
-1685212495 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
+1686556238 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 	"PlayerManager.h"
 
@@ -692,8 +692,9 @@
 	"Managers/MouseManager.h"
 	"Entities/Abstract/Renderable.h"
 
-1685215165 c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.h
+1686557385 c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.h
 	<vector>
+	<map>
 	"Curves.h"
 
 1684791772 c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.h
@@ -710,10 +711,10 @@
 1684550669 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\playercharacter.h
 	<Entities/Character/Character.h>
 
-1685148486 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
+1686555644 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\poly.cpp
 	"Poly.h"
 
-1685215170 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.cpp
+1686557854 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\collisionmanager.cpp
 	"Managers/CollisionManager.h"
 	"Entities/Character/Character.h"
 
@@ -1260,10 +1261,10 @@
 	"Utils/Vec2.h"
 	"Abstract/Renderable.h"
 
-1685216495 source:c:\users\nektus\desktop\cg\cg_t3\src\utils\curves.cpp
+1686538396 source:c:\users\nektus\desktop\cg\cg_t3\src\utils\curves.cpp
 	"Curves.h"
 
-1685216697 c:\users\nektus\desktop\cg\cg_t3\src\utils\curves.h
+1686538371 c:\users\nektus\desktop\cg\cg_t3\src\utils\curves.h
 	"gl_canvas2d.h"
 	<vector>
 	"Entities/Abstract/Renderable.h"

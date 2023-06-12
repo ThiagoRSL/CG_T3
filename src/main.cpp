@@ -58,6 +58,7 @@ void render()
     CV::clear(0,0,0);
     FPSManager::shared_instance().UpdateFrames();
     CameraManager::shared_instance().UpdateCameraOffset();
+    CollisionManager::shared_instance().CheckCollisions();
     PlayerManager::shared_instance().CheckInteraction();
     RenderManager::shared_instance().RenderAll();
     UIManager::shared_instance().RenderAll();
@@ -217,7 +218,7 @@ int main(void)
     Pnt2* p = new Pnt2(100,100);
     Pnt2* pn;
     Pnt2* pnx;
-    int controlPoints = 150;
+    int controlPoints = 300;
     int i;
     for (i = 0; i < controlPoints; i++)
     {
@@ -242,8 +243,8 @@ int main(void)
     RenderManager::shared_instance().AddRenderableToList(left);
     CollisionManager::shared_instance().addWall(right);
     RenderManager::shared_instance().AddRenderableToList(right);
-    CollisionManager::shared_instance().addWall(closeBottom);
-    RenderManager::shared_instance().AddRenderableToList(closeBottom);
+    //CollisionManager::shared_instance().addWall(closeBottom);
+    //RenderManager::shared_instance().AddRenderableToList(closeBottom);
 
     Poly* base = new Poly(0,0,RGB4);
     base->AddVertex(300,0);

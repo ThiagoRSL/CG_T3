@@ -120,6 +120,12 @@ void Curve2d::RenderWithPoints()
     glEnd();
 }
 
+Pnt2* Curve2d::GetCurvePoint(int i)
+{
+    if(i < 0 || i >= CurvePoints.size()) return nullptr;
+    return CurvePoints.at(i);
+}
+
 Pnt2* Curve2d::NearPoint(Pnt2 point, float distanceMin)
 {
     float virtualX, virtualY;

@@ -164,7 +164,7 @@ void Character::Render()
     if(autonomous)  AutonomousThinking();
     if(moving)      Move(moving*movement_speed/FPSManager::shared_instance().GetFrames());
     if(rotating)    Rotate(rotating*rotation_speed/FPSManager::shared_instance().GetFrames());
-    if(CollisionManager::shared_instance().VerifyCollisionWalls(this, 35)) ReceiveDamage(1000);
+    if(CollisionManager::shared_instance().VerifyCollisionWalls(this)) ReceiveDamage(1000);
 
     Entity::Render();
     ////RenderShipParts();
@@ -295,12 +295,14 @@ void Character::MoveDirection(Vec2* directionVector, float speed)
 
 bool Character::HasCollisionOnParts(float x, float y)
 {
-    int i;
+    if(Entity::CollideAt(x, y) != nullptr)
+        return true;
+    /*int i;
     for (i = 0; i < Parts.size(); i++)
     {
         if(Parts.at(i)->HasCollision(x, y))
             return true;
-    }
+    }*/
     return false;
 }
 

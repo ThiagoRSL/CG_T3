@@ -211,7 +211,7 @@ bool Poly::HasCollision(float x, float y)
             a = 0;
 
         int counter = 0;
-        float virtualX, virtualY;
+        float virtualX = x, virtualY = y;
         if(!isStatic)
         {
             virtualX = this->Anchor->x + Offset.x - CameraOffsetRef->x;
