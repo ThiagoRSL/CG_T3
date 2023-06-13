@@ -21,6 +21,8 @@ class Weapon : public Poly
         float CalcShotMaxDistance();
 
         void RefreshShotCooldown();
+
+        void SetShotColor(float *RGB);
     protected:
 
     private:
@@ -29,13 +31,13 @@ class Weapon : public Poly
 
         float energy_cost_base;
         float accuracy_base;
+        float damage_base;
 
         float shot_cooldown_base;
         float shot_cooldown_val;
-
-        float damage_base;
         float shot_speed;
         float shot_max_distance;
+        float shot_RGB[3];
 
         float ammo_max;
         float ammo_val;

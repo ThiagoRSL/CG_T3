@@ -10,6 +10,7 @@
 #include "Slot.h"
 #include "Entities/Weapon/Weapon.h"
 #include "Entities/Weapon/Projectile.h"
+#include "Particle.h"
 
 class PlayerManager;
 class UIManager;
@@ -28,6 +29,7 @@ class Character : public Entity
 
         void AnimateDeath();
         void BurstAnimation();
+        void LeftTrail();
         void Die();
 
         bool HasCollisionOnParts(float x, float y);
@@ -40,6 +42,7 @@ class Character : public Entity
         void RenderBody();
         void RenderWeapons();
         void RenderShipParts();
+        void RenderTrail();
 
         void AppendPart(ShipPart* part);
         void RemovePart(ShipPart* part);
@@ -59,6 +62,7 @@ class Character : public Entity
     protected:
         std::map<int, std::pair<Pnt2*, ShipPart*>> ShipParts;
         std::vector<WeaponSlot*> WeaponSlots;
+        Particle* Trail;
         //SpecialPower* Special;
         Pnt2* AimPoint;
         Vec2* AimVector;

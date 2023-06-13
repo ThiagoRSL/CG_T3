@@ -192,6 +192,7 @@ int main(void)
     float RGB2[3] = {0.75,0.0,0.75};
     float RGB3[3] = {0.75, 0.75, 0.0};
     float RGB4[3] = {0.75, 0.35, 0.35};
+    float RGB5[3] = {0.85, 0.85, 0.85};
    //Sleep(1000);
 
 
@@ -222,9 +223,9 @@ int main(void)
     int i;
     for (i = 0; i < controlPoints; i++)
     {
-        pn = new Pnt2((std::rand() % 50), p->y - (std::rand() % 125) - 175);
+        pn = new Pnt2((std::rand() % 150), p->y - (std::rand() % 125) - 175);
         left->AddControlPoint(pn);
-        pnx = new Pnt2(pn->x + 1200 + (std::rand() % 200), pn->y - (std::rand() % 50));
+        pnx = new Pnt2(1200 + (std::rand() % 250), pn->y - (std::rand() % 50));
         right->AddControlPoint(pnx);
         p = pn;
     }
@@ -258,6 +259,9 @@ int main(void)
     w2->SetBackgroundColor(RGB2);
     Weapon* w3 = new Weapon();
     w3->SetBackgroundColor(RGB2);
+    w1->SetShotColor(RGB4);
+    w2->SetShotColor(RGB5);
+    w3->SetShotColor(RGB5);
     player_character->EquipWeapon(w1);
     player_character->EquipWeapon(w2);
     player_character->EquipWeapon(w3);
@@ -274,6 +278,8 @@ int main(void)
     w1->SetBackgroundColor(RGB4);
     w2 = new Weapon();
     w2->SetBackgroundColor(RGB4);
+    w1->SetShotColor(RGB5);
+    w2->SetShotColor(RGB5);
     enemy_character->EquipWeapon(w1);
     enemy_character->EquipWeapon(w2);
     enemy_character->SetAutonomous(true);

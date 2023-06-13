@@ -3,13 +3,14 @@
 
 #include "Managers/FPSManager.h"
 #include "Entities/Poly.h"
+#include "Particle.h"
 
 class Character;
 
 class Projectile : public Poly
 {
     public:
-        Projectile(float x, float y, float damage, float speed,  float maxDistance, Character* Owner);
+        Projectile(float x, float y, float damage, float speed, float maxDistance, float *RGB, Character* Owner);
         void DestroyProjectile();
 
         void Render();
@@ -20,8 +21,10 @@ class Projectile : public Poly
         Pnt2 CreatedAt;
 
         Character* Owner;
+        Particle* Trail;
 
     private:
+        float RGB[3];
 };
 
 #endif // PROJECTILE_H

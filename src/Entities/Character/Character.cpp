@@ -33,6 +33,7 @@ Character::Character(float x, float y, float RGB[3])
     //Controls
     this->rotating = 0;
     this->moving = 0;
+    this->Trail = new Particle(20, RGB);
 
     //Ir pro laranja quando morre
     this->death_rgb_save[0] = 1 - this->background_color[0];
@@ -101,6 +102,8 @@ void Character::Rotate(float degrees)
 
 void Character::ReceiveDamage(float damage)
 {
+    if(dying || dead)
+        return;
     this->hit_points = hit_points - damage;
     if(this->hit_points <= 0)
     {
@@ -159,22 +162,45 @@ void Character::Render()
     if(dead)
         return;
 
-    RefreshWeaponsCooldown();
+
+    Trail->Render();
+
     if(dying)
     {
         this->AnimateDeath();
-        if(death_frame == death_frames) this->Die();
+        if(death_frame == death_frames)
+        {
+            this->BurstAnimation();
+            this->Die();
+        }
         Entity::Render();
         return;
     }
+
+
+
+    RefreshWeaponsCooldown();
     if(autonomous)  AutonomousThinking();
-    if(moving)      Move(moving*movement_speed/FPSManager::shared_instance().GetFrames());
+    if(moving)
+    {
+        Trail->AddPoint(this->Anchor->x, this->Anchor->y);
+        float displacement = moving*movement_speed/FPSManager::shared_instance().GetFrames();
+        Move(displacement);
+    }
     if(rotating)    Rotate(rotating*rotation_speed/FPSManager::shared_instance().GetFrames());
     if(CollisionManager::shared_instance().VerifyCollisionWalls(this)) ReceiveDamage(1000);
 
     Entity::Render();
-    ////RenderShipParts();
     RenderWeapons();
+}
+
+void Character::RenderWeapons()
+{
+    int i;
+    for(i = 0; i < WeaponSlots.size(); i++)
+    {
+        WeaponSlots.at(i)->Render();
+    }
 }
 
 void Character::CreatePartSlot(int type_part_id, Pnt2 offset)
@@ -202,30 +228,6 @@ void Character::AppendPart(ShipPart* shipPart)
     shipPart->AppendToCharacter(this);
     //UpdatePartsModifiers();
     UpdateParts();
-}
-
-bool Character::EquipWeapon(Weapon* weapon)
-{
-    int i;
-    for(i = 0; i < WeaponSlots.size(); i++)
-    {
-        WeaponSlot* slot = WeaponSlots.at(i);
-        if(slot->EquippedWeapon == nullptr)
-        {
-            slot->SetWeapon(weapon);
-            return true;
-        }
-    }
-    return false;
-}
-
-void Character::RenderWeapons()
-{
-    int i;
-    for(i = 0; i < WeaponSlots.size(); i++)
-    {
-        WeaponSlots.at(i)->Render();
-    }
 }
 
 void Character::UpdateWeaponAim()
@@ -256,6 +258,22 @@ void Character::UpdateWeaponAim()
         }
     }
 }
+
+bool Character::EquipWeapon(Weapon* weapon)
+{
+    int i;
+    for(i = 0; i < WeaponSlots.size(); i++)
+    {
+        WeaponSlot* slot = WeaponSlots.at(i);
+        if(slot->EquippedWeapon == nullptr)
+        {
+            slot->SetWeapon(weapon);
+            return true;
+        }
+    }
+    return false;
+}
+
 
 void Character::RefreshWeaponsCooldown()
 {

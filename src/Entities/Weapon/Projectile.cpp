@@ -1,7 +1,7 @@
 #include "Entities/Weapon/Projectile.h"
 #include "Entities/Character/Character.h"
 
-Projectile::Projectile(float x, float y, float damage, float speed, float maxDistance, Character* Owner)
+Projectile::Projectile(float x, float y, float damage, float speed, float maxDistance, float *RGB, Character* Owner)
     :Poly(x, y)
 {
     this->Owner = Owner;
@@ -9,6 +9,11 @@ Projectile::Projectile(float x, float y, float damage, float speed, float maxDis
     this->speed = speed;
     this->max_distance = maxDistance;
     this->CreatedAt = Pnt2(x, y);
+    this->Trail = new Particle(5, RGB);
+
+    this->RGB[0] = RGB[0];
+    this->RGB[1] = RGB[1];
+    this->RGB[2] = RGB[2];
 }
 
 void Projectile::Render()
@@ -19,11 +24,12 @@ void Projectile::Render()
         return;
     }
 
-    Pnt2 position = Pnt2(this->Anchor->x - CameraOffsetRef->x, this->Anchor->y - CameraOffsetRef->y);
-
+    Trail->Render();
+    Trail->AddPoint(this->Anchor->x, this->Anchor->y);
     this->Move(speed/FPSManager::shared_instance().GetFrames());
 
-    CV::color(1,1,1);
+    Pnt2 position = Pnt2(this->Anchor->x - CameraOffsetRef->x, this->Anchor->y - CameraOffsetRef->y);
+    CV::color(RGB[0], RGB[1], RGB[2]);
     CV::circleFill(position.x, position.y, 5, 30);
 
     Character* target = CollisionManager::shared_instance().VerifyCollisionNPCs(position.x, position.y);
