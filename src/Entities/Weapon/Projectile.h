@@ -6,6 +6,7 @@
 #include "Particle.h"
 
 class Character;
+class PlayerManager;
 
 class Projectile : public Poly
 {

@@ -29,12 +29,21 @@ class UIManager : public RenderManager
         void AddScore(int score_val);
         void UpdateScore();
         void RenderScore();
+        //Stage
+        void SetLevel(int stage_level);
+        void UpdateStage();
+        void RenderStageLabel();
 
         void RenderAll();
     private:
-        //
+        //Show Score
         int score;
         std::string score_text;
+        //Show Stage
+        int stage_level;
+        std::string stage_text;
+
+
         std::vector<CharacterStatsFrameUI*> CharacterStatsFrames;
 
 

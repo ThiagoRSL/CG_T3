@@ -12,6 +12,8 @@ UIManager::UIManager()
     InventoryBackground->AppendPoly(background);
     score = 0;
     score_text = "0";
+    stage_level = 0;
+    score_text = "0";
 }
 
 void UIManager::OpenInventory()
@@ -110,10 +112,30 @@ void UIManager::RenderScore()
     CV::text(position - (25 - (score_text.size()*5)), 50, "SCORE");
     CV::text(position, 70, score_text.c_str());
 }
+
+void UIManager::SetLevel(int stage_level)
+{
+    this->stage_level = stage_level;
+    UpdateStage();
+}
+void UIManager::UpdateStage()
+{
+    stage_text = "LEVEL " + std::to_string(stage_level);
+}
+void UIManager::RenderStageLabel()
+{
+    float position = glutGet(GLUT_SCREEN_WIDTH)/2;
+
+    CV::color(1,1,1);
+    CV::text(position - 30, 50, stage_text.c_str());
+}
+
+
 void UIManager::RenderAll()
 {
     RenderManager::RenderAll();
     RenderScore();
+    RenderStageLabel();
 
     int i;
     for(i = 0; i < CharacterStatsFrames.size();i++)

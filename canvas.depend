@@ -539,7 +539,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1686635427 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
+1686669538 source:c:\users\nektus\desktop\cg\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -660,12 +660,12 @@
 	"Vec2.h"
 	"GeometryAux.h"
 
-1686635462 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
+1686669208 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 	"PlayerManager.h"
 	"UIManager.h"
 
-1686632596 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
+1686667217 c:\users\nektus\desktop\cg\cg_t3\src\entities\character\character.h
 	<math.h>
 	<vector>
 	<map>
@@ -703,7 +703,7 @@
 	<Entities/Poly.h>
 	<Entities/Weapon/Projectile.h>
 
-1686635368 c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.h
+1686669458 c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.h
 	"Managers/FPSManager.h"
 	"Entities/Poly.h"
 	"Particle.h"
@@ -724,11 +724,12 @@
 1684550669 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\rendermanager.cpp
 	"RenderManager.h"
 
-1686635713 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.cpp
+1686669462 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\projectile.cpp
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
+	"PlayerManager.h"
 
-1686635198 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
+1686669183 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\weapon\weapon.cpp
 	"Entities/Weapon/Weapon.h"
 	"Entities/Character/Character.h"
 	"Slot.h"
@@ -966,7 +967,7 @@
 	"Slot.h"
 	"ShipPart.h"
 
-1686622631 c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.h
+1686666130 c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.h
 	<stdio.h>
 	<vector>
 	"Poly.h"
@@ -976,7 +977,7 @@
 	"RenderManager.h"
 	"CharacterStatsFrameUI.h"
 
-1686623942 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.cpp
+1686666984 source:c:\users\nektus\desktop\cg\cg_t3\src\managers\uimanager.cpp
 	"UIManager.h"
 
 1684957771 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.cpp

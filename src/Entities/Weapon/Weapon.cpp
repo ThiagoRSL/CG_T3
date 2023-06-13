@@ -16,7 +16,7 @@ Weapon::Weapon()
     accuracy_base = 2;
     ammo_max = 5;
     shot_speed = 1500;
-    shot_max_distance = 1000;
+    shot_max_distance = 1500;
 
     shot_cooldown_val = 0;
     ammo_val = ammo_max;

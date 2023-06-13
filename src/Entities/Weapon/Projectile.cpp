@@ -1,5 +1,6 @@
 #include "Entities/Weapon/Projectile.h"
 #include "Entities/Character/Character.h"
+#include "PlayerManager.h"
 
 Projectile::Projectile(float x, float y, float damage, float speed, float maxDistance, float *RGB, Character* Owner)
     :Poly(x, y)
@@ -36,10 +37,21 @@ void Projectile::Render()
 
     if(target != this->Owner)
     {
-        if(target != nullptr)
+        if(this->Owner != PlayerManager::shared_instance().GetPlayerCharacter())
         {
-            target->ReceiveDamage(this->damage);
-            DestroyProjectile();
+            if(target == PlayerManager::shared_instance().GetPlayerCharacter())
+            {
+                target->ReceiveDamage(this->damage);
+                DestroyProjectile();
+            }
+        }
+        else
+        {
+            if(target != nullptr)
+            {
+                target->ReceiveDamage(this->damage);
+                DestroyProjectile();
+            }
         }
     }
 }

@@ -106,6 +106,8 @@ class Character : public Entity
         float* GetHitPointsRef() {return &this->hit_points;}
         float* GetEnergyMaxRef() {return &this->energy_max;}
         float* GetEnergyRef() {return &this->energy;}
+        void SetMaxHitPoints(float hitPoints);
+        void SetMaxEnergy(float energy);
 
         void SetAutonomous(bool autonomous){this->autonomous = autonomous;}
         bool SetTarget(Character* target) {this->Target = target;}

@@ -20,13 +20,13 @@ Character::Character(float x, float y, float RGB[3])
     this->autonomous = false;
     this->view_range = 600;
     this->Target = nullptr;
-    this->target_last_known_location = new Pnt2();
+    this->target_last_known_location = new Pnt2(x, y);
     aim_accuracy = 2;
 
-    this->hit_points_max = 100;
-    this->hit_points = hit_points_max;
-    this->energy_max = 100;
-    this->energy = energy_max;
+    this->hit_points_max = 1;
+    this->hit_points = 1;
+    this->energy_max = 1;
+    this->energy = 1;
 
     this->dying = false;
     this->dead = false;
@@ -41,13 +41,23 @@ Character::Character(float x, float y, float RGB[3])
     this->death_rgb_save[2] = - this->background_color[2];
 }
 
+void Character::SetMaxHitPoints(float hitPoints)
+{
+    this->hit_points_max = hitPoints;
+    this->hit_points = hit_points_max;
+}
+void Character::SetMaxEnergy(float energy)
+{
+    this->energy_max = energy;
+    this->energy = energy;
+}
 void Character::AutonomyAdjustAim()
 {
     if(Target == nullptr)
         return;
 
-    float targetX = Target->Anchor->x - this->Anchor->x;
-    float targetY = Target->Anchor->y - this->Anchor->y;
+    float targetX = target_last_known_location->x - this->Anchor->x;
+    float targetY = target_last_known_location->y - this->Anchor->y;
 
     AimTo(targetX, targetY);
 }
@@ -155,6 +165,7 @@ void Character::Die()
 
 void Character::Render()
 {
+    Trail->Render();
     //Checa a distÂncia do personagem pra ver se ele deve ser renderizado.
     if(GeometryAux::DistanceBetween(this->Anchor, CameraManager::shared_instance().Anchor) > RenderManager::RENDER_DISTANCE)
         return;
@@ -163,7 +174,6 @@ void Character::Render()
         return;
 
 
-    Trail->Render();
 
     if(dying)
     {
@@ -352,26 +362,19 @@ void Character::AutonomousThinking()
             return;
         }
     }
-    AutonomyAdjustAim(); // Revisar se deveria estar nesta linha
-    if(GeometryAux::DistanceBetween(this->Anchor, Target->GetAnchor()) > view_range)
-    {
-        rotating = 0;
-        if(GeometryAux::DistanceBetween(this->Anchor, this->target_last_known_location) > 100)
-        {
-            moving = 0.5;
-        }
-        else
-            moving = 0;
-        return;
-    }
     moving = 0;
-    this->target_last_known_location->x = Target->GetAnchor()->x;
-    this->target_last_known_location->y = Target->GetAnchor()->y;
+
+    if(GeometryAux::DistanceBetween(this->Anchor, Target->GetAnchor()) < view_range)
+    {
+        this->target_last_known_location->x = Target->GetAnchor()->x;
+        this->target_last_known_location->y = Target->GetAnchor()->y;
+        AutonomyAdjustAim();
+    }
 
     float x1 = this->Anchor->x;
     float y1 = this->Anchor->y;
-    float x2 = Target->GetAnchor()->x - x1; // Considerando o ponto âncora como a origem
-    float y2 = Target->GetAnchor()->y - y1; // Considerando o ponto âncora como a origem
+    float x2 = target_last_known_location->x - x1; // Considerando o ponto âncora como a origem
+    float y2 = target_last_known_location->y - y1; // Considerando o ponto âncora como a origem
     float x3 = this->OrientationVector->x;
     float y3 = this->OrientationVector->y;
 
@@ -381,7 +384,6 @@ void Character::AutonomousThinking()
     float angleDifference = angleTarget - angleOrientation;
     float angleDifferenceInverse = (360.0 - abs(angleDifference));
 
-    Shoot();
     if(abs(angleDifference) > 0 && abs(angleDifference) < this->aim_accuracy)
     {
         rotating = 0;
@@ -392,17 +394,35 @@ void Character::AutonomousThinking()
         if(abs(angleDifferenceInverse) < abs(angleDifference))
         {
             if(angleDifference > 0)
-                rotating = -0.25;
+                rotating = -0.5;
             else
-                rotating = 0.25;
+                rotating = 0.5;
         }
         else
         {
             if(angleDifference > 0)
-                rotating = 0.25;
+                rotating = 0.5;
             else
-                rotating = -0.25;
+                rotating = -0.5;
         }
+
+        if(GeometryAux::DistanceBetween(this->Anchor, Target->GetAnchor()) > view_range) return;
         //Atualizar o valor de rotação para o minimo necessário no último frame.
+    }
+
+    if(GeometryAux::DistanceBetween(this->Anchor, Target->GetAnchor()) > view_range)
+    {
+        rotating = 0;
+        if(GeometryAux::DistanceBetween(this->Anchor, this->target_last_known_location) > 50)
+        {
+            moving = 0.5;
+        }
+        else
+            moving = 0;
+        return;
+    }
+    else
+    {
+        Shoot();
     }
 }
