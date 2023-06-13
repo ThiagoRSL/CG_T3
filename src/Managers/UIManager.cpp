@@ -10,6 +10,8 @@ UIManager::UIManager()
     background->AddVertex(500,500);
     background->AddVertex(0,500);
     InventoryBackground->AppendPoly(background);
+    score = 0;
+    score_text = "0";
 }
 
 void UIManager::OpenInventory()
@@ -81,8 +83,6 @@ void UIManager::Select(Poly* selectedPoly)
     }
 }
 
-
-
 void UIManager::AddCharacterStatsToRenderer(Character* character)
 {
     CharacterStatsFrameUI* charStatsFrame = new CharacterStatsFrameUI(character);
@@ -93,9 +93,28 @@ void UIManager::RemoveCharacterStatsToRenderer(Character* character)
     return;
 }
 
+void UIManager::AddScore(int score_val)
+{
+    score += score_val;
+    UpdateScore();
+}
+void UIManager::UpdateScore()
+{
+    score_text = std::to_string(score);
+}
+void UIManager::RenderScore()
+{
+    float position = glutGet(GLUT_SCREEN_WIDTH) - (75 + (score_text.size()*5));
+
+    CV::color(1,1,1);
+    CV::text(position - (25 - (score_text.size()*5)), 50, "SCORE");
+    CV::text(position, 70, score_text.c_str());
+}
 void UIManager::RenderAll()
 {
     RenderManager::RenderAll();
+    RenderScore();
+
     int i;
     for(i = 0; i < CharacterStatsFrames.size();i++)
     {

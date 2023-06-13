@@ -12,6 +12,7 @@
 #include "Entities/Weapon/Projectile.h"
 
 class PlayerManager;
+class UIManager;
 
 class Character : public Entity
 {

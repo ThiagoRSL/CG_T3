@@ -25,9 +25,18 @@ class UIManager : public RenderManager
         void AddCharacterStatsToRenderer(Character* character);
         void RemoveCharacterStatsToRenderer(Character* character);
 
+        //Score
+        void AddScore(int score_val);
+        void UpdateScore();
+        void RenderScore();
+
         void RenderAll();
     private:
+        //
+        int score;
+        std::string score_text;
         std::vector<CharacterStatsFrameUI*> CharacterStatsFrames;
+
 
         bool show_inventory;
         bool show_character_stats;
@@ -36,6 +45,8 @@ class UIManager : public RenderManager
         //Open Inventory
         Entity* InventoryBackground;
         Entity* CharacterProjection;
+
+
 
 };
 

@@ -218,13 +218,13 @@ int main(void)
     Pnt2* p = new Pnt2(100,100);
     Pnt2* pn;
     Pnt2* pnx;
-    int controlPoints = 300;
+    int controlPoints = 1300;
     int i;
     for (i = 0; i < controlPoints; i++)
     {
-        pn = new Pnt2((std::rand() % 100), p->y - (std::rand() % 125) - 175);
+        pn = new Pnt2((std::rand() % 50), p->y - (std::rand() % 125) - 175);
         left->AddControlPoint(pn);
-        pnx = new Pnt2(pn->x + 1000 + (std::rand() % 200), pn->y - (std::rand() % 50));
+        pnx = new Pnt2(pn->x + 1200 + (std::rand() % 200), pn->y - (std::rand() % 50));
         right->AddControlPoint(pnx);
         p = pn;
     }
@@ -243,8 +243,8 @@ int main(void)
     RenderManager::shared_instance().AddRenderableToList(left);
     CollisionManager::shared_instance().addWall(right);
     RenderManager::shared_instance().AddRenderableToList(right);
-    //CollisionManager::shared_instance().addWall(closeBottom);
-    //RenderManager::shared_instance().AddRenderableToList(closeBottom);
+    CollisionManager::shared_instance().addWall(closeBottom);
+    RenderManager::shared_instance().AddRenderableToList(closeBottom);
 
     Poly* base = new Poly(0,0,RGB4);
     base->AddVertex(300,0);
@@ -280,7 +280,6 @@ int main(void)
     RenderManager::shared_instance().AddRenderableToList(enemy_character);
     CollisionManager::shared_instance().AddNPC(enemy_character);
     enemy_character->TeleportTo((firstRightPoint->x + firstLeftPoint->x)/2, firstLeftPoint->y-1000);
-
 
     CV::init("Space Extinction");
 

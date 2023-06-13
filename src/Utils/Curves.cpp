@@ -6,6 +6,7 @@ Curve2d::Curve2d()
     curve_resolution = 1;
     show_with_lines = false;
     this->Anchor = new Pnt2(0,0);
+    firstToRenderIndex = 0;
 }
 
 BSpline::BSpline()
@@ -53,6 +54,7 @@ void Curve2d::Render()
             CV::line(c0->x + virtualX, c0->y + virtualY, c1->x + virtualX, c1->y + virtualY);
         }
     }
+    UpdateClosestPoint();
     if(show_with_lines)
     {
         RenderWithLines();
@@ -79,18 +81,86 @@ void Curve2d::RenderWithLines()
         virtualY = StaticOffset.y + Offset.y;
     }
 
-    int i, j;
+    int i, j, save_i;
     float t, div = ControlPoints.size()*curve_resolution;
     glColor3f(Color[0], Color[1], Color[2]);
+
+    //Encontra primeiro ponto
     glBegin(GL_LINES);
-    for(i = 0; i < CurvePoints.size()-1; i++)
+    for(i = firstToRenderIndex; i < CurvePoints.size()-1; i++)
     {
-        Pnt2* point = CurvePoints.at(i);
-        Pnt2* pointPlus = CurvePoints.at(i+1);
+        Pnt2* point = GetCurvePoint(i);
+        if(GeometryAux::DistanceBetween(point, CameraManager::shared_instance().Anchor) > RenderManager::RENDER_DISTANCE)
+           break;
+        Pnt2* pointPlus = GetCurvePoint(i+1);
+        glVertex2d(point->x + virtualX, point->y + virtualY);
+        glVertex2d(pointPlus->x + virtualX, pointPlus->y + virtualY);
+    }
+    for(i = firstToRenderIndex; i > 0; i--)
+    {
+        Pnt2* point = GetCurvePoint(i);
+        if(GeometryAux::DistanceBetween(point, CameraManager::shared_instance().Anchor) > RenderManager::RENDER_DISTANCE)
+           break;
+        Pnt2* pointPlus = GetCurvePoint(i-1);
         glVertex2d(point->x + virtualX, point->y + virtualY);
         glVertex2d(pointPlus->x + virtualX, pointPlus->y + virtualY);
     }
     glEnd();
+}
+
+void Curve2d::UpdateClosestPoint()
+{
+    float distanceNext, distanceActual, distancePrevious;
+    int nearestPointIndex, nearestPointNextIndex, nearestPointPreviousIndex;
+    Pnt2 *nearestPoint, *nearestPointNext, *nearestPointPrevious;
+
+    Pnt2* CameraFocus = CameraManager::shared_instance().Anchor;
+
+    nearestPointIndex = firstToRenderIndex;
+    nearestPointNextIndex = firstToRenderIndex+1;
+    nearestPointPreviousIndex = firstToRenderIndex-1;
+    while(true)
+    {
+        nearestPoint = GetCurvePoint(nearestPointIndex);
+        nearestPointNext = GetCurvePoint(nearestPointNextIndex);
+        nearestPointPrevious = GetCurvePoint(nearestPointPreviousIndex);
+
+        distanceActual = GeometryAux::DistanceBetween(CameraFocus, nearestPoint);
+
+        if(nearestPointNext != nullptr) distanceNext = GeometryAux::DistanceBetween(CameraFocus, nearestPointNext);
+        else distanceNext = 2000000.0;
+
+        if(nearestPointPrevious != nullptr) distancePrevious = GeometryAux::DistanceBetween(CameraFocus, nearestPointPrevious);
+        else distancePrevious = 2000000.0;
+
+        while(distanceActual == distanceNext)
+        {
+            nearestPointNextIndex+=1;
+            nearestPointNext = GetCurvePoint(nearestPointNextIndex);
+            if(nearestPointNext != nullptr) distanceNext = GeometryAux::DistanceBetween(CameraFocus, nearestPointNext);
+            else distanceNext = 2000000.0;
+        }
+        while(distanceActual == distancePrevious)
+        {
+            nearestPointPreviousIndex-=1;
+            nearestPointPrevious = GetCurvePoint(nearestPointPreviousIndex);
+            if(nearestPointPrevious != nullptr) distancePrevious = GeometryAux::DistanceBetween(CameraFocus, nearestPointPrevious);
+            else distancePrevious = 2000000.0;
+        }
+        if(distanceActual < distanceNext && distanceActual < distancePrevious)
+        {
+            break;
+        }
+        else if(distanceActual > distanceNext)
+        {
+            nearestPointIndex = nearestPointNextIndex;
+        }
+        else if(distanceActual > distancePrevious)
+        {
+            nearestPointIndex = nearestPointPreviousIndex;
+        }
+    }
+    firstToRenderIndex = nearestPointIndex;
 }
 
 void Curve2d::RenderWithPoints()
@@ -110,11 +180,14 @@ void Curve2d::RenderWithPoints()
     int i, j;
     float t, div = ControlPoints.size()*curve_resolution;
     glColor3f(Color[0], Color[1], Color[2]);
+
+
     glBegin(GL_POINTS);
-    for(i = 0; i < CurvePoints.size(); i++)
+    for(i = firstToRenderIndex; i < CurvePoints.size(); i++)
     {
         Pnt2* point = CurvePoints.at(i);
-
+        if(GeometryAux::DistanceBetween(point, CameraManager::shared_instance().Anchor) > RenderManager::RENDER_DISTANCE)
+           break;
         glVertex2d(point->x + virtualX, point->y + virtualY);
     }
     glEnd();
@@ -144,8 +217,6 @@ Pnt2* Curve2d::NearPoint(Pnt2 point, float distanceMin)
     {
         CV::color(3);
         Pnt2 p = Pnt2(CurvePoints.at(i)->x + virtualX, CurvePoints.at(i)->y + virtualY);
-        //CV::point(p.x, p.y);
-        //CV::point(point.x, point.y);
         if(GeometryAux::DistanceBetween(&p, &point) < distanceMin)
         {
             return new Pnt2(CurvePoints.at(i)->x + virtualX, CurvePoints.at(i)->y + virtualY);

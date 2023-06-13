@@ -13,6 +13,7 @@ typedef void (*callback_function)(void);
 class RenderManager
 {
     public:
+        static const int RENDER_DISTANCE = 2500;
         static RenderManager &shared_instance() {static RenderManager renderManager; return renderManager;}
         RenderManager();
         void AddRenderableToList(Renderable* element);

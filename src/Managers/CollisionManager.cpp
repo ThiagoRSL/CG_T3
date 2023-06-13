@@ -80,11 +80,12 @@ void CollisionManager::CheckCollisions()
             nearestPointNextIndex = nearestPointIndex+1;
             nearestPointPreviousIndex = nearestPointIndex-1;
 
-            CV::color(6);
-            CV::line(actualCharacter->GetAnchor()->x - CameraManager::shared_instance().GetCameraOffsetRef()->x,
-                     actualCharacter->GetAnchor()->y - CameraManager::shared_instance().GetCameraOffsetRef()->y,
-                     Walls.at(j)->GetCurvePoint(CharactersWallNearestPoint.at(j)->operator[](actualCharacter))->x - CameraManager::shared_instance().GetCameraOffsetRef()->x,
-                     Walls.at(j)->GetCurvePoint(CharactersWallNearestPoint.at(j)->operator[](actualCharacter))->y - CameraManager::shared_instance().GetCameraOffsetRef()->y);
+            //Debug para verificar a colisão com as paredes.
+            //CV::color(6);
+            //CV::line(actualCharacter->GetAnchor()->x - CameraManager::shared_instance().GetCameraOffsetRef()->x,
+            //         actualCharacter->GetAnchor()->y - CameraManager::shared_instance().GetCameraOffsetRef()->y,
+            //         Walls.at(j)->GetCurvePoint(CharactersWallNearestPoint.at(j)->operator[](actualCharacter))->x - CameraManager::shared_instance().GetCameraOffsetRef()->x,
+            //         Walls.at(j)->GetCurvePoint(CharactersWallNearestPoint.at(j)->operator[](actualCharacter))->y - CameraManager::shared_instance().GetCameraOffsetRef()->y);
 
             //Garante a atualização do ponto mais próximo.
             while(true)
@@ -96,24 +97,24 @@ void CollisionManager::CheckCollisions()
                 distanceActual = GeometryAux::DistanceBetween(actualCharacterPoint, nearestPoint);
 
                 if(nearestPointNext != nullptr) distanceNext = GeometryAux::DistanceBetween(actualCharacterPoint, nearestPointNext);
-                else distanceNext = 2000000.0;
+                else distanceNext = std::numeric_limits<float>::infinity();;
 
                 if(nearestPointPrevious != nullptr) distancePrevious = GeometryAux::DistanceBetween(actualCharacterPoint, nearestPointPrevious);
-                else distancePrevious = 2000000.0;
+                else distancePrevious = std::numeric_limits<float>::infinity();;
 
                 while(distanceActual == distanceNext)
                 {
                     nearestPointNextIndex+=1;
                     nearestPointNext = Walls[j]->GetCurvePoint(nearestPointNextIndex);
                     if(nearestPointNext != nullptr) distanceNext = GeometryAux::DistanceBetween(actualCharacterPoint, nearestPointNext);
-                    else distanceNext = 2000000.0;
+                    else distanceNext = std::numeric_limits<float>::infinity();;
                 }
                 while(distanceActual == distancePrevious)
                 {
                     nearestPointPreviousIndex-=1;
                     nearestPointPrevious = Walls[j]->GetCurvePoint(nearestPointPreviousIndex);
                     if(nearestPointPrevious != nullptr) distancePrevious = GeometryAux::DistanceBetween(actualCharacterPoint, nearestPointPrevious);
-                    else distancePrevious = 2000000.0;
+                    else distancePrevious = std::numeric_limits<float>::infinity();;
                 }
                 if(distanceActual < distanceNext && distanceActual < distancePrevious)
                 {

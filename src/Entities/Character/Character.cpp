@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "PlayerManager.h"
+#include "UIManager.h"
 
 static int death_frames = 20;
 
@@ -137,6 +138,7 @@ void Character::Die()
     dying = false;
     dead = true;
 
+    UIManager::shared_instance().AddScore(1000);
     //BurstAnimation();
 
     RenderManager::shared_instance().RemoveRenderableFromList(this);
@@ -150,6 +152,10 @@ void Character::Die()
 
 void Character::Render()
 {
+    //Checa a distÂncia do personagem pra ver se ele deve ser renderizado.
+    if(GeometryAux::DistanceBetween(this->Anchor, CameraManager::shared_instance().Anchor) > RenderManager::RENDER_DISTANCE)
+        return;
+
     if(dead)
         return;
 

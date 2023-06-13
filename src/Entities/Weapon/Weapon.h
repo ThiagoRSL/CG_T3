@@ -15,8 +15,10 @@ class Weapon : public Poly
 
         void EquipOn(WeaponSlot* slot);
         void Shoot();
+
         float CalcShotDamage();
         float CalcShotSpeed();
+        float CalcShotMaxDistance();
 
         void RefreshShotCooldown();
     protected:
@@ -33,6 +35,7 @@ class Weapon : public Poly
 
         float damage_base;
         float shot_speed;
+        float shot_max_distance;
 
         float ammo_max;
         float ammo_val;

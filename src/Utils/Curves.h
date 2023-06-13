@@ -6,6 +6,8 @@
 #include "Entities/Abstract/Renderable.h"
 #include "Pnt2.h"
 #include "GeometryAux.h"
+#include "RenderManager.h"
+
 
 class Curve2d : public Renderable
 {
@@ -22,6 +24,7 @@ class Curve2d : public Renderable
         Pnt2* NearPoint(Pnt2 point, float distanceMin);
         Pnt2* GetFirstCurvePoint() { return CurvePoints.at(0);}
         Pnt2* GetCurvePoint(int i);
+        void UpdateClosestPoint();
 
         void Render();
 
@@ -32,6 +35,8 @@ class Curve2d : public Renderable
         float Color[3];
         std::vector<Pnt2*> ControlPoints;
         std::vector<Pnt2*> CurvePoints;
+        std::vector<Pnt2*> ToRenderPoints;
+        int firstToRenderIndex, lastToRenderIndex;
         void RenderWithLines();
         void RenderWithPoints();
 };
