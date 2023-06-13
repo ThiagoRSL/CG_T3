@@ -75,6 +75,8 @@
 		<Unit filename="src/Entities/Character/Slot.h" />
 		<Unit filename="src/Entities/Entity.cpp" />
 		<Unit filename="src/Entities/Entity.h" />
+		<Unit filename="src/Entities/Particle.cpp" />
+		<Unit filename="src/Entities/Particle.h" />
 		<Unit filename="src/Entities/Poly.cpp" />
 		<Unit filename="src/Entities/Poly.h" />
 		<Unit filename="src/Entities/Weapon/Projectile.cpp" />
