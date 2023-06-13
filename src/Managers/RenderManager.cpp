@@ -42,3 +42,8 @@ void RenderManager::RemoveRenderableFromList(Renderable* element)
         }
     }
 }
+
+void RenderManager::ClearManager()
+{
+    renderList.clear();
+}

@@ -264,3 +264,15 @@ void Bezier::GenerateCurvePoints()
         CurvePoints.push_back(newPoint);
     }
 }
+
+
+Curve2d::~Curve2d()
+{
+    printf("\nBom e Velho ");
+    for ( auto point : ControlPoints ) delete point;
+    printf("\nVasco ");
+    for ( auto point : CurvePoints ) delete point;
+    printf("\nDa Gaa ");
+    ControlPoints.clear();
+    CurvePoints.clear();
+}

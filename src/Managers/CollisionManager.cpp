@@ -61,6 +61,20 @@ Character* CollisionManager::VerifyCollisionPlayer(float x, float y)
     }
 }
 
+void CollisionManager::ClearManager()
+{
+    printf("LIM");
+    for ( auto element : CharactersWallNearestPoint ) delete element;
+    printf("PE");
+    for ( auto element : Walls ) delete element;
+    printf("ZA");
+
+    CharactersWallNearestPoint.clear();
+    //player_character = nullptr;
+    Characters.clear();
+    Walls.clear();
+}
+
 void CollisionManager::CheckCollisions()
 {
     int i, j, nearestPointIndex, nearestPointNextIndex, nearestPointPreviousIndex;

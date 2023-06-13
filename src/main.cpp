@@ -41,9 +41,13 @@
 #include "Entities/Character/PlayerCharacter.h"
 #include "Utils/Curves.h"
 
+const int CONTROL_POINTS = 50;
+const int CONTROL_POINTS_INCREMENT = 0;
+
 void GenerateWalls();
 void GeneratePlayer();
 void CreateEnemy(float x, float y);
+void SetupStage();
 
 Character* player_character;
 Character* enemy_character;
@@ -53,6 +57,7 @@ Bezier* BottomWall;
 BSpline* LeftWall;
 BSpline* RightWall;
 
+std::vector<Pnt2> EnemySpawnPoints;
 
 std::set<int> PressedKeys;
 
@@ -70,7 +75,7 @@ void render()
 
 void keyboard(int key)
 {
-    //printf("\nTecla: %d" , key);
+    printf("\nTecla: %d" , key);
 
     if(PressedKeys.find(key) != PressedKeys.end())
     {
@@ -82,22 +87,31 @@ void keyboard(int key)
     {
       //seta para a esquerda
       case 99:
-        //tecla C
-        CreateEnemy((RightWall->GetFirstCurvePoint()->x + LeftWall->GetFirstCurvePoint()->x)/2, LeftWall->GetFirstCurvePoint()->y - 1000);
       break;
       case 120:
         //tecla X
         enemy_character->Shoot();
       break;
-      case 122:
-        //tecla Z
-        player_character->ActivateSpecial();
+      case 49:
+        player_character->ActivateSpecial(1);
+      break;
+      case 50:
+        player_character->ActivateSpecial(2);
+      break;
+      case 51:
+        player_character->ActivateSpecial(3);
+      break;
+      case 52:
+        player_character->ActivateSpecial(4);
       break;
       case 97:
         player_character->SetRotating(-1);
       break;
       case 100:
         player_character->SetRotating(1);
+      break;
+      case 114:
+        SetupStage();
       break;
       case 115:
         player_character->SetMoving(-0.5);
@@ -188,8 +202,6 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 void GenerateWalls()
 {
     float RGB3[3] = {0.75, 0.75, 0.0};
-
-
     //Wall Close
     BottomWall = new Bezier();
     BottomWall->SetColor(RGB3);
@@ -214,7 +226,7 @@ void GenerateWalls()
     Pnt2* p = new Pnt2(100,100);
     Pnt2* pn;
     Pnt2* pnx;
-    int controlPoints = 100;
+    int controlPoints = CONTROL_POINTS + (stage_level*CONTROL_POINTS_INCREMENT);
     int i;
     for (i = 0; i < controlPoints; i++)
     {
@@ -223,6 +235,8 @@ void GenerateWalls()
         pnx = new Pnt2(1200 + (std::rand() % 250), pn->y - (std::rand() % 50));
         RightWall->AddControlPoint(pnx);
         p = pn;
+
+        EnemySpawnPoints.push_back(Pnt2((pn->x + pnx->x)/2, (pn->y + pnx->y)/2));
     }
 
     LeftWall->GenerateCurvePoints();
@@ -230,17 +244,19 @@ void GenerateWalls()
     Pnt2* firstRightPoint = RightWall->GetFirstCurvePoint();
     Pnt2* firstLeftPoint = LeftWall->GetFirstCurvePoint();
 
-    BottomWall->AddControlPoint(firstRightPoint);
+    BottomWall->AddControlPoint(new Pnt2(firstRightPoint->x, firstRightPoint->y));
     BottomWall->AddControlPoint(new Pnt2((firstRightPoint->x + firstLeftPoint->x)/2, firstLeftPoint->y + 500));
-
-
-    BottomWall->AddControlPoint(firstLeftPoint);
+    BottomWall->AddControlPoint(new Pnt2(firstLeftPoint->x, firstLeftPoint->y));
     BottomWall->GenerateCurvePoints();
+
+
+    CollisionManager::shared_instance().ClearManager();
+    RenderManager::shared_instance().ClearManager();
     CollisionManager::shared_instance().addWall(LeftWall);
-    RenderManager::shared_instance().AddRenderableToList(LeftWall);
     CollisionManager::shared_instance().addWall(RightWall);
-    RenderManager::shared_instance().AddRenderableToList(RightWall);
     CollisionManager::shared_instance().addWall(BottomWall);
+    RenderManager::shared_instance().AddRenderableToList(LeftWall);
+    RenderManager::shared_instance().AddRenderableToList(RightWall);
     RenderManager::shared_instance().AddRenderableToList(BottomWall);
 }
 
@@ -255,6 +271,7 @@ void GeneratePlayer()
     player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(200, 700, RGB, 1);
     player_character->SetMaxHitPoints(100);
     player_character->SetMaxEnergy(100);
+
 
     Weapon* w1 = new Weapon();
     w1->SetBackgroundColor(RGB3);
@@ -278,7 +295,7 @@ void GeneratePlayer()
     CameraManager::shared_instance().SetCameraAnchor(player_character->GetAnchor());
 }
 
-void CreateEnemy(float x, float y)
+void CreateEnemy(float x, float y, bool mustBeBig=false)
 {
     float RGB[3] = {0.0,0.75,0.75};
     float RGB2[3] = {0.75,0.0,0.75};
@@ -298,7 +315,7 @@ void CreateEnemy(float x, float y)
     w3->SetBackgroundColor(RGB4);
     w3->SetShotColor(RGB5);
 
-    if(randomNum > 100)
+    if(randomNum >= 100 || mustBeBig)
     {
         enemy_character = CharacterBuilder::BuildShip(x, y+1, RGB2, 2);
         enemy_character->SetMaxHitPoints(20 + stage_level * 10);
@@ -309,32 +326,81 @@ void CreateEnemy(float x, float y)
     else
     {
         enemy_character = CharacterBuilder::BuildShip(x, y+1, RGB2, 1);
-        enemy_character->SetMaxHitPoints(10 + stage_level * 5);
+        enemy_character->SetMaxHitPoints(stage_level * 5);
         enemy_character->EquipWeapon(w1);
         delete w2;
         delete w3;
     }
     enemy_character->Rotate(180);
+    if((25 * stage_level) > 500)
+    {
+        enemy_character->SetViewRange(1000);
+    }
+    else
+    {
+        enemy_character->SetViewRange(500 + (25 * stage_level));
+    }
     enemy_character->SetAutonomous(true);
     RenderManager::shared_instance().AddRenderableToList(enemy_character);
     CollisionManager::shared_instance().AddNPC(enemy_character);
     enemy_character->TeleportTo(x, y);
 }
 
+void GenerateEnemies()
+{
+    int i;
+    for(i = 5; i < EnemySpawnPoints.size(); i++)
+    {
+        Pnt2* spawnPoint = &EnemySpawnPoints.at(i);
+        int random = (std::rand() % 30) + stage_level;
+        if(random < 30)
+        {
+            if(random >= 0 && random < 15)
+            {
+                CreateEnemy(spawnPoint->x + 200, spawnPoint->y, false);
+                CreateEnemy(spawnPoint->x, spawnPoint->y, false);
+                CreateEnemy(spawnPoint->x - 200, spawnPoint->y, false);
+                i += 4;
+            }
+            else if(random >= 15 && random < 25)
+            {
+                CreateEnemy(spawnPoint->x + 200, spawnPoint->y, false);
+                CreateEnemy(spawnPoint->x, spawnPoint->y, true);
+                CreateEnemy(spawnPoint->x - 200, spawnPoint->y, false);
+                i += 6;
+            }
+            else if(random >= 25 && random < 29)
+            {
+                CreateEnemy(spawnPoint->x + 200, spawnPoint->y, false);
+                CreateEnemy(spawnPoint->x + 200, spawnPoint->y + 100, false);
+                CreateEnemy(spawnPoint->x, spawnPoint->y, true);
+                CreateEnemy(spawnPoint->x - 200, spawnPoint->y + 100, false);
+                CreateEnemy(spawnPoint->x - 200, spawnPoint->y, false);
+
+                i += 6;
+            }
+            else if(random >= 29)
+            {
+                CreateEnemy(spawnPoint->x + 250, spawnPoint->y, true);
+                CreateEnemy(spawnPoint->x, spawnPoint->y, true);
+                CreateEnemy(spawnPoint->x - 250, spawnPoint->y, true);
+                i += 6;
+            }
+        }
+    }
+}
+
 void SetupStage()
 {
-    float RGB[3] = {0.0,0.75,0.75};
-    float RGB2[3] = {0.75,0.0,0.75};
-    float RGB3[3] = {0.75, 0.75, 0.0};
-    float RGB4[3] = {0.75, 0.35, 0.35};
-    float RGB5[3] = {0.85, 0.85, 0.85};
+    UIManager::shared_instance().ClearManager();
 
     stage_level += 1;
     UIManager::shared_instance().SetLevel(stage_level);
 
+    EnemySpawnPoints.clear();
     GenerateWalls();
     GeneratePlayer();
-    CreateEnemy((RightWall->GetFirstCurvePoint()->x + LeftWall->GetFirstCurvePoint()->x)/2, LeftWall->GetFirstCurvePoint()->y - 1000);
+    GenerateEnemies();
 }
 
 int main(void)

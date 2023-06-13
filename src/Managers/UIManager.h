@@ -21,6 +21,7 @@ class UIManager : public RenderManager
         void OpenCharacterStats();
         bool CheckInteraction(float x, float y);
         void Select(Poly* selectedPoly);
+        void ClearManager();
 
         void AddCharacterStatsToRenderer(Character* character);
         void RemoveCharacterStatsToRenderer(Character* character);

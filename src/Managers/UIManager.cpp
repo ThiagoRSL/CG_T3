@@ -90,6 +90,11 @@ void UIManager::AddCharacterStatsToRenderer(Character* character)
     CharacterStatsFrameUI* charStatsFrame = new CharacterStatsFrameUI(character);
     CharacterStatsFrames.push_back(charStatsFrame);
 }
+void UIManager::ClearManager()
+{
+    for(auto elem: CharacterStatsFrames) delete elem;
+    CharacterStatsFrames.clear();
+}
 void UIManager::RemoveCharacterStatsToRenderer(Character* character)
 {
     return;

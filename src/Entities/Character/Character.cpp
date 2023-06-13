@@ -18,7 +18,7 @@ Character::Character(float x, float y, float RGB[3])
 
     //Autonomous Module
     this->autonomous = false;
-    this->view_range = 600;
+    this->view_range = 200;
     this->Target = nullptr;
     this->target_last_known_location = new Pnt2(x, y);
     aim_accuracy = 2;
@@ -93,10 +93,20 @@ void Character::Shoot()
     }
 }
 
-void Character::ActivateSpecial()
+void Character::ActivateSpecial(int special_id)
 {
-    printf("\nCharacter used special.");
-    //this->Special->Activate();
+    printf("\nCharacter used special: %i.", special_id);
+    switch(special_id)
+    {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+    }
 }
 
 void Character::Rotate(float degrees)
@@ -369,6 +379,13 @@ void Character::AutonomousThinking()
         this->target_last_known_location->x = Target->GetAnchor()->x;
         this->target_last_known_location->y = Target->GetAnchor()->y;
         AutonomyAdjustAim();
+        if(GeometryAux::DistanceBetween(this->Anchor, Target->GetAnchor()) > view_range/2)
+        {
+            if(GeometryAux::DistanceBetween(this->Anchor, this->target_last_known_location) > 50)
+            {
+                moving = 0.75;
+            }
+        }
     }
 
     float x1 = this->Anchor->x;
@@ -394,16 +411,16 @@ void Character::AutonomousThinking()
         if(abs(angleDifferenceInverse) < abs(angleDifference))
         {
             if(angleDifference > 0)
-                rotating = -0.5;
+                rotating = -0.75;
             else
-                rotating = 0.5;
+                rotating = 0.75;
         }
         else
         {
             if(angleDifference > 0)
-                rotating = 0.5;
+                rotating = 0.75;
             else
-                rotating = -0.5;
+                rotating = -0.75;
         }
 
         if(GeometryAux::DistanceBetween(this->Anchor, Target->GetAnchor()) > view_range) return;
@@ -415,7 +432,7 @@ void Character::AutonomousThinking()
         rotating = 0;
         if(GeometryAux::DistanceBetween(this->Anchor, this->target_last_known_location) > 50)
         {
-            moving = 0.5;
+            moving = 0.8;
         }
         else
             moving = 0;

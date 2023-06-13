@@ -19,6 +19,7 @@ class RenderManager
         void AddRenderableToList(Renderable* element);
         void RemoveRenderableFromList(Renderable* element);
         void SetFirstPosition(Renderable* element);
+        virtual void ClearManager();
         //AddToRenderQueue(Renderizable element, int priority_level);
         virtual void RenderAll();
 

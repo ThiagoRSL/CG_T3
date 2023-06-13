@@ -12,6 +12,11 @@ Pnt2::Pnt2(float x, float y)
     this->y = y;
 }
 
+Pnt2::~Pnt2()
+{
+    //ctor
+}
+
 void Pnt2::ApplyVec2(Vec2 vec)
 {
     this->x = this->x + vec.x;

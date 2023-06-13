@@ -986,7 +986,7 @@
 1684778534 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\builder\characterbuilder.h
 	"../Entities/Character/Character.h"
 
-1685448140 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.h
+1686684616 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.h
 	<math.h>
 	<vector>
 	<map>
@@ -996,8 +996,9 @@
 	"Slot.h"
 	"Entities/Weapon/Weapon.h"
 	"Entities/Weapon/Projectile.h"
+	"Particle.h"
 
-1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\pnt2.h
+1686676591 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\pnt2.h
 
 1685448140 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\entity.h
 	<stdio.h>
@@ -1056,7 +1057,7 @@
 	"Managers/CameraManager.h"
 	"Utils/GeometryAux.h"
 
-1684959223 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\rendermanager.h
+1686675606 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\rendermanager.h
 	<stdlib.h>
 	<algorithm>
 	<iostream>
@@ -1066,7 +1067,7 @@
 
 1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\mousemanager.h
 
-1686574613 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\collisionmanager.h
+1686674578 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\collisionmanager.h
 	<vector>
 	<map>
 	"Curves.h"
@@ -1083,13 +1084,14 @@
 1684943665 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\slot.h
 	"Weapon/Weapon.h"
 
-1684854862 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.h
+1686673549 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.h
 	<Entities/Poly.h>
 	<Entities/Weapon/Projectile.h>
 
-1684854862 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\projectile.h
+1686673549 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\projectile.h
 	"Managers/FPSManager.h"
 	"Entities/Poly.h"
+	"Particle.h"
 
 1685117417 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\fpsmanager.h
 	<stdio.h>
@@ -1104,9 +1106,10 @@
 	"Renderable.h"
 	"Utils/Vec2.h"
 
-1686574613 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.cpp
+1686683813 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\character.cpp
 	"Character.h"
 	"PlayerManager.h"
+	"UIManager.h"
 
 1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\character\modifier.cpp
 	"Modifier.h"
@@ -1133,11 +1136,12 @@
 1686574613 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\poly.cpp
 	"Poly.h"
 
-1684854862 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\projectile.cpp
+1686673549 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\projectile.cpp
 	"Entities/Weapon/Projectile.h"
 	"Entities/Character/Character.h"
+	"PlayerManager.h"
 
-1685448140 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.cpp
+1686673549 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\weapon\weapon.cpp
 	"Entities/Weapon/Weapon.h"
 	"Entities/Character/Character.h"
 	"Slot.h"
@@ -1146,7 +1150,7 @@
 	"gl_canvas2d.h"
 	<GL/glut.h>
 
-1686574613 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\main.cpp
+1686684688 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -1183,7 +1187,7 @@
 1684764394 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\playermanager.h
 	"Character/Character.h"
 
-1684961146 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\uimanager.h
+1686684356 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\uimanager.h
 	<stdio.h>
 	<vector>
 	"Poly.h"
@@ -1196,7 +1200,7 @@
 1685448140 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\cameramanager.cpp
 	"CameraManager.h"
 
-1686575104 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\collisionmanager.cpp
+1686679174 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\collisionmanager.cpp
 	"Managers/CollisionManager.h"
 	"Entities/Character/Character.h"
 
@@ -1212,13 +1216,13 @@
 1685448140 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\playermanager.cpp
 	"PlayerManager.h"
 
-1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\rendermanager.cpp
+1686684145 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\rendermanager.cpp
 	"RenderManager.h"
 
 1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\geometryaux.cpp
 	"GeometryAux.h"
 
-1684764394 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\pnt2.cpp
+1686676614 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\pnt2.cpp
 	"Pnt2.h"
 	"Vec2.h"
 
@@ -1226,7 +1230,7 @@
 	"Vec2.h"
 	"GeometryAux.h"
 
-1684961632 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\uimanager.cpp
+1686684416 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\managers\uimanager.cpp
 	"UIManager.h"
 
 1684770550 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\uientity.cpp
@@ -1285,14 +1289,15 @@
 	"GeometryAux.h"
 	"RenderManager.h"
 
-1686574613 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\curves.h
+1686676194 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\curves.h
 	"gl_canvas2d.h"
 	<vector>
 	"Entities/Abstract/Renderable.h"
 	"Pnt2.h"
 	"GeometryAux.h"
+	"RenderManager.h"
 
-1686574613 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\curves.cpp
+1686679623 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\utils\curves.cpp
 	"Curves.h"
 
 1686632323 c:\users\nektus\desktop\cg\cg_t3\src\entities\particle.h
@@ -1303,5 +1308,15 @@
 	"tuple"
 
 1686634745 source:c:\users\nektus\desktop\cg\cg_t3\src\entities\particle.cpp
+	"Particle.h"
+
+1686673549 c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\particle.h
+	"Abstract/Renderable.h"
+	"RenderManager.h"
+	"FPSManager.h"
+	"map"
+	"tuple"
+
+1686673549 source:c:\users\thiago\desktop\grad\cg\trabalhos\cg_t3\src\entities\particle.cpp
 	"Particle.h"
 

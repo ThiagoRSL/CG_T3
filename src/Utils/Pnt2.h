@@ -7,6 +7,7 @@ class Pnt2
 {
     public:
         Pnt2();
+        ~Pnt2();
         Pnt2(float x, float y);
 
         float x;

@@ -14,6 +14,7 @@ class Curve2d : public Renderable
 
     public:
         Curve2d();
+        ~Curve2d();
 
         void SetColor(float* color) {Color[0] = color[0];Color[1] = color[1];Color[2] = color[2];}
         void AddControlPoint(Pnt2* point);
@@ -35,7 +36,6 @@ class Curve2d : public Renderable
         float Color[3];
         std::vector<Pnt2*> ControlPoints;
         std::vector<Pnt2*> CurvePoints;
-        std::vector<Pnt2*> ToRenderPoints;
         int firstToRenderIndex, lastToRenderIndex;
         void RenderWithLines();
         void RenderWithPoints();

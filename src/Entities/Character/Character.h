@@ -23,7 +23,7 @@ class Character : public Entity
         void AimTo(float x, float y);
         void SetRotating(float degree);
         void SetMoving(float movement);
-        void ActivateSpecial();
+        void ActivateSpecial(int special_id);
         void Shoot();
         void ReceiveDamage(float damage);
 
@@ -108,6 +108,7 @@ class Character : public Entity
         float* GetEnergyRef() {return &this->energy;}
         void SetMaxHitPoints(float hitPoints);
         void SetMaxEnergy(float energy);
+        void SetViewRange(float view_range) {this->view_range = view_range;}
 
         void SetAutonomous(bool autonomous){this->autonomous = autonomous;}
         bool SetTarget(Character* target) {this->Target = target;}

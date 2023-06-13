@@ -17,6 +17,7 @@ class CollisionManager
         void AddNPC(Character* character);
         void RemoveNPC(Character* character);
         void addWall(Curve2d* wall);
+        void ClearManager();
         Character* VerifyCollisionNPCs(float x, float y);
         Character* VerifyCollisionPlayer(float x, float y);
         void CheckCollisions();
