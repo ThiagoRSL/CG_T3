@@ -1,9 +1,10 @@
 #include "Managers/CollisionManager.h"
 #include "Entities/Character/Character.h"
+#include "Poly.h"
 
 CollisionManager::CollisionManager()
 {
-
+    this->Station = nullptr;
 }
 Character* CollisionManager::GetPlayerCharacter()
 {
@@ -151,7 +152,66 @@ void CollisionManager::CheckCollisions()
             }
         }
     }
+    Pnt2* CameraOffset = CameraManager::shared_instance().GetCameraOffsetRef();
+    for(i = 0; i < Characters.size(); i++)
+    {
+        if(player_character == nullptr)
+            return;
+
+        actualCharacter = Characters.at(i);
+        if(actualCharacter == player_character)
+            continue;
+
+        if(GeometryAux::DistanceBetween(actualCharacter->GetAnchor(), player_character->GetAnchor()) < 200)
+        {
+            if(player_character->HasCollisionOnParts(actualCharacter->GetAnchor()->x - CameraOffset->x, actualCharacter->GetAnchor()->y - CameraOffset->y))
+            {
+                if(!player_character->IsDashing())player_character->ReceiveDamage(1000);
+                actualCharacter->ReceiveDamage(1000);
+                return;
+            }
+        }
+    }
 }
+
+Character* CollisionManager::GetClosestEnemy(Pnt2* fromPoint)
+{
+    Character* actualCharacter;
+    Character* closest = nullptr;
+    float lastClosestDistance, actualDistance;
+    int i;
+    for(i = 0; i < Characters.size(); i++)
+    {
+        actualCharacter = Characters.at(i);
+        if(player_character == nullptr || player_character == actualCharacter)
+            continue;
+
+        actualDistance = GeometryAux::DistanceBetween(actualCharacter->GetAnchor(), fromPoint);
+
+        if(actualDistance < RenderManager::RENDER_DISTANCE)
+        {
+            closest = actualCharacter;
+            return closest;
+        }
+    }
+    return closest;
+}
+
+
+bool CollisionManager::ArrivedAtStation()
+{
+    Pnt2* CameraOffset = CameraManager::shared_instance().GetCameraOffsetRef();
+    if(this->player_character != nullptr && this->Station != nullptr)
+    {
+        Pnt2* anchor = player_character->GetAnchor();
+        if(Station->HasCollision(anchor->x - CameraOffset->x, anchor->y - CameraOffset->y))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 bool CollisionManager::VerifyCollisionWalls(Character* character)
 {

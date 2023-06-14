@@ -15,6 +15,7 @@ class Particle : public Renderable
         void AddPoint(float x, float y);
         void Render();
 
+        float* GetRGBRef() {return RGB;}
     protected:
 
     private:

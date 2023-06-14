@@ -14,7 +14,7 @@ class Projectile : public Poly
         Projectile(float x, float y, float damage, float speed, float maxDistance, float *RGB, Character* Owner);
         void DestroyProjectile();
 
-        void Render();
+        virtual void Render();
     protected:
         float damage;
         float speed;
@@ -23,9 +23,9 @@ class Projectile : public Poly
 
         Character* Owner;
         Particle* Trail;
+        float RGB[3];
 
     private:
-        float RGB[3];
 };
 
 #endif // PROJECTILE_H

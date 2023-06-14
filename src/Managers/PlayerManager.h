@@ -10,6 +10,7 @@ class PlayerManager
         static PlayerManager &shared_instance() {static PlayerManager playerManager; return playerManager;}
 
         void CheckInteraction();
+        bool IsGameOver();
 
     private:
         Character* PlayerCharacter;

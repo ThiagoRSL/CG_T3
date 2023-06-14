@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "PlayerManager.h"
 #include "UIManager.h"
+#include "Entities/Weapon/HoomingProjectile.h"
 
 static int death_frames = 20;
 
@@ -23,6 +24,8 @@ Character::Character(float x, float y, float RGB[3])
     this->target_last_known_location = new Pnt2(x, y);
     aim_accuracy = 2;
 
+    this->score_val = 0;
+
     this->hit_points_max = 1;
     this->hit_points = 1;
     this->energy_max = 1;
@@ -35,12 +38,16 @@ Character::Character(float x, float y, float RGB[3])
     this->moving = 0;
     this->Trail = new Particle(20, RGB);
 
+    this->dashing = false;
     //Ir pro laranja quando morre
     this->death_rgb_save[0] = 1 - this->background_color[0];
     this->death_rgb_save[1] = (1 - this->background_color[1])/4;
     this->death_rgb_save[2] = - this->background_color[2];
 }
-
+void Character::SetMovementSpeed(float movementSpeed)
+{
+    this->movement_speed = movementSpeed;
+}
 void Character::SetMaxHitPoints(float hitPoints)
 {
     this->hit_points_max = hitPoints;
@@ -92,6 +99,24 @@ void Character::Shoot()
             WeaponSlots.at(i)->EquippedWeapon->Shoot();
     }
 }
+void Character::SpawnHommies()
+{
+    HoomingProjectile* shotPoly = new HoomingProjectile(this->Anchor->x + 50, this->Anchor->y + 50, 25, 0, 10000, this->background_color, this);
+    shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
+    RenderManager::shared_instance().AddRenderableToList(shotPoly);
+
+    shotPoly = new HoomingProjectile(this->Anchor->x - 50, this->Anchor->y - 50, 25, 0, 10000, this->background_color, this);
+    shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
+    RenderManager::shared_instance().AddRenderableToList(shotPoly);
+
+    shotPoly = new HoomingProjectile(this->Anchor->x + 50, this->Anchor->y - 50, 25, 0, 10000, this->background_color, this);
+    shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
+    RenderManager::shared_instance().AddRenderableToList(shotPoly);
+
+    shotPoly = new HoomingProjectile(this->Anchor->x - 50, this->Anchor->y + 50, 25, 0, 10000, this->background_color, this);
+    shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
+    RenderManager::shared_instance().AddRenderableToList(shotPoly);
+}
 
 void Character::ActivateSpecial(int special_id)
 {
@@ -99,8 +124,17 @@ void Character::ActivateSpecial(int special_id)
     switch(special_id)
     {
         case 1:
+            if(energy > 0)
+            {
+                this->dashing = !this->dashing;
+            }
             break;
         case 2:
+            if(energy >= 25)
+            {
+                DrawEnergy(25);
+                SpawnHommies();
+            }
             break;
         case 3:
             break;
@@ -124,6 +158,7 @@ void Character::ReceiveDamage(float damage)
 {
     if(dying || dead)
         return;
+
     this->hit_points = hit_points - damage;
     if(this->hit_points <= 0)
     {
@@ -161,20 +196,22 @@ void Character::Die()
     dying = false;
     dead = true;
 
-    UIManager::shared_instance().AddScore(1000);
+    UIManager::shared_instance().AddScore(this->score_val);
     //BurstAnimation();
 
-    RenderManager::shared_instance().RemoveRenderableFromList(this);
     if(PlayerManager::shared_instance().GetPlayerCharacter() == this)
     {
         PlayerManager::shared_instance().SetPlayerCharacter(nullptr);
         CollisionManager::shared_instance().SetPlayerCharacter(nullptr);
     }
-    //CollisionManager::shared_instance().RemoveNPC(this);
+    RenderManager::shared_instance().RemoveRenderableFromList(this);
+    CollisionManager::shared_instance().RemoveNPC(this);
 }
 
 void Character::Render()
 {
+    float frames = FPSManager::shared_instance().GetFrames();
+
     Trail->Render();
     //Checa a distÂncia do personagem pra ver se ele deve ser renderizado.
     if(GeometryAux::DistanceBetween(this->Anchor, CameraManager::shared_instance().Anchor) > RenderManager::RENDER_DISTANCE)
@@ -194,24 +231,57 @@ void Character::Render()
             this->Die();
         }
         Entity::Render();
+        if(CollisionManager::shared_instance().GetPlayerCharacter() == this) CollisionManager::shared_instance().SetPlayerCharacter(nullptr);
         return;
     }
 
 
-
     RefreshWeaponsCooldown();
-    if(autonomous)  AutonomousThinking();
-    if(moving)
+
+    if(!PlayerManager::shared_instance().IsGameOver())
     {
-        Trail->AddPoint(this->Anchor->x, this->Anchor->y);
-        float displacement = moving*movement_speed/FPSManager::shared_instance().GetFrames();
-        Move(displacement);
+        if(autonomous)  AutonomousThinking();
+        if(moving)
+        {
+            Trail->AddPoint(this->Anchor->x, this->Anchor->y);
+            float displacement;
+            if(dashing)
+            {
+                if(last_frame != frames)
+                    DrawEnergy(1);
+                if(energy == 0)
+                {
+                    dashing = false;
+                }
+
+                Trail->AddPoint(this->Anchor->x-20, this->Anchor->y);
+                Trail->AddPoint(this->Anchor->x-10, this->Anchor->y);
+                Trail->AddPoint(this->Anchor->x+10, this->Anchor->y);
+                Trail->AddPoint(this->Anchor->x+20, this->Anchor->y);
+                displacement = 3*moving*movement_speed/FPSManager::shared_instance().GetFrames();
+            }
+            else
+            {
+                displacement = moving*movement_speed/FPSManager::shared_instance().GetFrames();
+            }
+            Move(displacement);
+        }
+        if(rotating)    Rotate(rotating*rotation_speed/FPSManager::shared_instance().GetFrames());
+        if(CollisionManager::shared_instance().VerifyCollisionWalls(this)) ReceiveDamage(1000);
     }
-    if(rotating)    Rotate(rotating*rotation_speed/FPSManager::shared_instance().GetFrames());
-    if(CollisionManager::shared_instance().VerifyCollisionWalls(this)) ReceiveDamage(1000);
 
     Entity::Render();
     RenderWeapons();
+    if(last_frame != frames)
+        last_frame = frames;
+}
+
+void Character::DrawEnergy(float energyPoints)
+{
+    if(this->energy - energyPoints < 0)
+        this->energy = 0;
+    else
+        this->energy -= energyPoints;
 }
 
 void Character::RenderWeapons()
@@ -361,6 +431,8 @@ void Character::AutonomousThinking()
     if(Target == nullptr || Target->IsDying() || Target->IsDead())
     {
         Character* player = CollisionManager::shared_instance().GetPlayerCharacter();
+        if(player == nullptr)
+            return;
         //FindNewTarget
         if(!player->IsDead() && !player->IsDying())
             this->Target = player;
@@ -383,7 +455,7 @@ void Character::AutonomousThinking()
         {
             if(GeometryAux::DistanceBetween(this->Anchor, this->target_last_known_location) > 50)
             {
-                moving = 0.75;
+                moving = 1;
             }
         }
     }
@@ -432,7 +504,7 @@ void Character::AutonomousThinking()
         rotating = 0;
         if(GeometryAux::DistanceBetween(this->Anchor, this->target_last_known_location) > 50)
         {
-            moving = 0.8;
+            moving = 1.2;
         }
         else
             moving = 0;

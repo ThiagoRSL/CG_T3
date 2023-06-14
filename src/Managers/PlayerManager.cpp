@@ -19,3 +19,12 @@ void PlayerManager::CheckInteraction()
     float mouseY = (MouseManager::shared_instance().PosY - PlayerCharacter->GetAnchor()->y) + CameraManager::shared_instance().GetCameraOffsetRef()->y;
     PlayerCharacter->AimTo(mouseX, mouseY);
 }
+
+bool PlayerManager::IsGameOver()
+{
+    if(PlayerCharacter == nullptr)
+        return true;
+    if(PlayerCharacter->IsDead() || PlayerCharacter->IsDying())
+        return true;
+    return false;
+}

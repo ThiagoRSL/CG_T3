@@ -24,6 +24,7 @@ class Curve2d : public Renderable
         virtual void GenerateCurvePoints() = 0;
         Pnt2* NearPoint(Pnt2 point, float distanceMin);
         Pnt2* GetFirstCurvePoint() { return CurvePoints.at(0);}
+        Pnt2* GetLastCurvePoint() { return CurvePoints.at(CurvePoints.size()-1);}
         Pnt2* GetCurvePoint(int i);
         void UpdateClosestPoint();
 

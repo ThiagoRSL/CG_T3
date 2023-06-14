@@ -130,7 +130,10 @@ void Poly::Transform(float matrix[2][2])
 
 void Poly::Render()
 {
-    //this->RenderVertex();
+    Pnt2* CameraOffset = CameraManager::shared_instance().GetCameraFocusPoint();
+    //if(GeometryAux::DistanceBetween(this->Anchor, CameraOffset) > wRenderManager::RENDER_DISTANCE)
+    //    return;
+
     this->RenderBody();
     if(show_border) this->RenderBorder();
 }

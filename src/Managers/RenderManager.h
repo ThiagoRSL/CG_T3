@@ -7,6 +7,7 @@
 #include <vector>
 #include "Managers/MouseManager.h"
 #include "Entities/Abstract/Renderable.h"
+#include "Utils/GeometryAux.h"
 
 typedef void (*callback_function)(void);
 

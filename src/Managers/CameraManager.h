@@ -13,6 +13,7 @@ class CameraManager
         void SetCameraOffset(Pnt2 offset);
         void UpdateCameraOffset();
         Pnt2* GetCameraOffsetRef() {return &CameraOffset;}
+        Pnt2* GetCameraFocusPoint() {return Anchor;}
 
         Pnt2* Anchor;
         Pnt2 WindowOffset;

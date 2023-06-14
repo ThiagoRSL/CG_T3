@@ -48,6 +48,7 @@ void GenerateWalls();
 void GeneratePlayer();
 void CreateEnemy(float x, float y);
 void SetupStage();
+void ResetGame();
 
 Character* player_character;
 Character* enemy_character;
@@ -64,13 +65,17 @@ std::set<int> PressedKeys;
 void render()
 {
     CV::clear(0,0,0);
+
+    //glBegin(GL_LINES);
     FPSManager::shared_instance().UpdateFrames();
     CameraManager::shared_instance().UpdateCameraOffset();
     CollisionManager::shared_instance().CheckCollisions();
     PlayerManager::shared_instance().CheckInteraction();
     RenderManager::shared_instance().RenderAll();
     UIManager::shared_instance().RenderAll();
+    if(CollisionManager::shared_instance().ArrivedAtStation())  SetupStage();
 }
+
 
 
 void keyboard(int key)
@@ -86,38 +91,43 @@ void keyboard(int key)
     switch(key)
     {
       //seta para a esquerda
-      case 99:
+      case 8:
+          //SetupStage(); // < ------ PARA DEBUGAR DESCOMENTE ESTA LINHA
       break;
       case 120:
-        //tecla X
-        enemy_character->Shoot();
-      break;
-      case 49:
-        player_character->ActivateSpecial(1);
-      break;
-      case 50:
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
         player_character->ActivateSpecial(2);
       break;
-      case 51:
-        player_character->ActivateSpecial(3);
-      break;
-      case 52:
-        player_character->ActivateSpecial(4);
+      case 32:
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
+        player_character->ActivateSpecial(1);
       break;
       case 97:
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
         player_character->SetRotating(-1);
       break;
       case 100:
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
         player_character->SetRotating(1);
       break;
       case 114:
-        SetupStage();
+        if(PlayerManager::shared_instance().IsGameOver())
+            ResetGame();
       break;
       case 115:
-        player_character->SetMoving(-0.5);
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
+        player_character->SetMoving(-1);
       break;
       case 119:
-        player_character->SetMoving(1);
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
+        player_character->SetMoving(1.5);
+        //player_character->SetMoving(4); <- Usar isso aqui pra debuggar
       break;
     }
 }
@@ -154,24 +164,36 @@ void keyboardUp(int key)
         UIManager::shared_instance().OpenInventory();
         break;
       case 97:
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
+
         if(PressedKeys.find(100) != PressedKeys.end())
             player_character->SetRotating(1);
         else
             player_character->SetRotating(0);
       break;
       case 100:
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
+
         if(PressedKeys.find(97) != PressedKeys.end())
             player_character->SetRotating(-1);
         else
             player_character->SetRotating(0);
       break;
       case 115:
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
+
         if(PressedKeys.find(119) != PressedKeys.end())
             player_character->SetMoving(-0.5);
         else
             player_character->SetMoving(0);
       break;
       case 119:
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
+
         if(PressedKeys.find(115) != PressedKeys.end())
             player_character->SetMoving(1);
         else
@@ -194,6 +216,8 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
     }
     if(button == 0 && state == 0)
     {
+        if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())
+            return;
         player_character->Shoot();
     }
 
@@ -236,7 +260,12 @@ void GenerateWalls()
         RightWall->AddControlPoint(pnx);
         p = pn;
 
-        EnemySpawnPoints.push_back(Pnt2((pn->x + pnx->x)/2, (pn->y + pnx->y)/2));
+
+        if(i+5 < controlPoints)
+        {
+            EnemySpawnPoints.push_back(Pnt2((pn->x + pnx->x)/2, (pn->y + pnx->y)/2));
+        }
+
     }
 
     LeftWall->GenerateCurvePoints();
@@ -249,15 +278,26 @@ void GenerateWalls()
     BottomWall->AddControlPoint(new Pnt2(firstLeftPoint->x, firstLeftPoint->y));
     BottomWall->GenerateCurvePoints();
 
+    Pnt2* lastRightPoint = RightWall->GetLastCurvePoint();
+    Pnt2* lastLeftPoint = LeftWall->GetLastCurvePoint();
+    Poly* Station = new Poly(lastLeftPoint->x, lastLeftPoint->y);
+    Station->AddVertex(0,0);
+    Station->AddVertex(lastRightPoint->x-lastLeftPoint->x, 0);
+    Station->AddVertex(lastRightPoint->x-lastLeftPoint->x, -1000);
+    Station->AddVertex(0, -1000);
+    Station->SetBackgroundColor(RGB3);
+
 
     CollisionManager::shared_instance().ClearManager();
     RenderManager::shared_instance().ClearManager();
     CollisionManager::shared_instance().addWall(LeftWall);
     CollisionManager::shared_instance().addWall(RightWall);
     CollisionManager::shared_instance().addWall(BottomWall);
+    CollisionManager::shared_instance().SetStation(Station);
     RenderManager::shared_instance().AddRenderableToList(LeftWall);
     RenderManager::shared_instance().AddRenderableToList(RightWall);
     RenderManager::shared_instance().AddRenderableToList(BottomWall);
+    RenderManager::shared_instance().AddRenderableToList(Station);
 }
 
 void GeneratePlayer()
@@ -268,9 +308,18 @@ void GeneratePlayer()
     float RGB4[3] = {0.75, 0.35, 0.35};
     float RGB5[3] = {0.85, 0.85, 0.85};
 
-    player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(200, 700, RGB, 1);
-    player_character->SetMaxHitPoints(100);
-    player_character->SetMaxEnergy(100);
+    if(stage_level >= 10)
+    {
+        player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(200, 700, RGB, 2);
+        player_character->SetMaxHitPoints(200);
+        player_character->SetMaxEnergy(150);
+    }
+    else
+    {
+        player_character = (PlayerCharacter*) CharacterBuilder::BuildShip(200, 700, RGB, 1);
+        player_character->SetMaxHitPoints(100);
+        player_character->SetMaxEnergy(100);
+    }
 
 
     Weapon* w1 = new Weapon();
@@ -280,11 +329,11 @@ void GeneratePlayer()
     Weapon* w3 = new Weapon();
     w3->SetBackgroundColor(RGB2);
     w1->SetShotColor(RGB4);
-    //w2->SetShotColor(RGB5);
-    //w3->SetShotColor(RGB5);
+    w2->SetShotColor(RGB5);
+    w3->SetShotColor(RGB5);
     player_character->EquipWeapon(w1);
-    //player_character->EquipWeapon(w2);
-    //player_character->EquipWeapon(w3);
+    player_character->EquipWeapon(w2);
+    player_character->EquipWeapon(w3);
     PlayerManager::shared_instance().SetPlayerCharacter(player_character);
     RenderManager::shared_instance().AddRenderableToList(player_character);
     CollisionManager::shared_instance().SetPlayerCharacter(player_character);
@@ -322,22 +371,26 @@ void CreateEnemy(float x, float y, bool mustBeBig=false)
         enemy_character->EquipWeapon(w1);
         enemy_character->EquipWeapon(w2);
         enemy_character->EquipWeapon(w3);
+        enemy_character->SetScoreValue(2000 + stage_level * 500);
     }
     else
     {
         enemy_character = CharacterBuilder::BuildShip(x, y+1, RGB2, 1);
         enemy_character->SetMaxHitPoints(stage_level * 5);
         enemy_character->EquipWeapon(w1);
+        enemy_character->SetScoreValue(500 + stage_level * 100);
         delete w2;
         delete w3;
     }
     enemy_character->Rotate(180);
-    if((25 * stage_level) > 500)
+    if(stage_level > 20)
     {
+        enemy_character->SetMovementSpeed(1000);
         enemy_character->SetViewRange(1000);
     }
     else
     {
+        enemy_character->SetMovementSpeed(500 + (25 * stage_level));
         enemy_character->SetViewRange(500 + (25 * stage_level));
     }
     enemy_character->SetAutonomous(true);
@@ -352,42 +405,45 @@ void GenerateEnemies()
     for(i = 5; i < EnemySpawnPoints.size(); i++)
     {
         Pnt2* spawnPoint = &EnemySpawnPoints.at(i);
-        int random = (std::rand() % 30) + stage_level;
-        if(random < 30)
+        int random = (std::rand() % 20) + stage_level;
+        if(random >= 0 && random < 15)
         {
-            if(random >= 0 && random < 15)
-            {
-                CreateEnemy(spawnPoint->x + 200, spawnPoint->y, false);
-                CreateEnemy(spawnPoint->x, spawnPoint->y, false);
-                CreateEnemy(spawnPoint->x - 200, spawnPoint->y, false);
-                i += 4;
-            }
-            else if(random >= 15 && random < 25)
-            {
-                CreateEnemy(spawnPoint->x + 200, spawnPoint->y, false);
-                CreateEnemy(spawnPoint->x, spawnPoint->y, true);
-                CreateEnemy(spawnPoint->x - 200, spawnPoint->y, false);
-                i += 6;
-            }
-            else if(random >= 25 && random < 29)
-            {
-                CreateEnemy(spawnPoint->x + 200, spawnPoint->y, false);
-                CreateEnemy(spawnPoint->x + 200, spawnPoint->y + 100, false);
-                CreateEnemy(spawnPoint->x, spawnPoint->y, true);
-                CreateEnemy(spawnPoint->x - 200, spawnPoint->y + 100, false);
-                CreateEnemy(spawnPoint->x - 200, spawnPoint->y, false);
-
-                i += 6;
-            }
-            else if(random >= 29)
-            {
-                CreateEnemy(spawnPoint->x + 250, spawnPoint->y, true);
-                CreateEnemy(spawnPoint->x, spawnPoint->y, true);
-                CreateEnemy(spawnPoint->x - 250, spawnPoint->y, true);
-                i += 6;
-            }
+            CreateEnemy(spawnPoint->x + 200, spawnPoint->y, false);
+            CreateEnemy(spawnPoint->x, spawnPoint->y, false);
+            CreateEnemy(spawnPoint->x - 200, spawnPoint->y, false);
+            i += 4;
+        }
+        else if(random >= 15 && random < 25)
+        {
+            CreateEnemy(spawnPoint->x + 200, spawnPoint->y, false);
+            CreateEnemy(spawnPoint->x, spawnPoint->y, true);
+            CreateEnemy(spawnPoint->x - 200, spawnPoint->y, false);
+            i += 6;
+        }
+        else if(random >= 25 && random < 50)
+        {
+            CreateEnemy(spawnPoint->x + 250, spawnPoint->y, true);
+            CreateEnemy(spawnPoint->x, spawnPoint->y, true);
+            CreateEnemy(spawnPoint->x - 250, spawnPoint->y, true);
+            i += 6;
+        }
+        else if(random >= 50)
+        {
+            CreateEnemy(spawnPoint->x + 200, spawnPoint->y, false);
+            CreateEnemy(spawnPoint->x + 200, spawnPoint->y + 100, false);
+            CreateEnemy(spawnPoint->x, spawnPoint->y, true);
+            CreateEnemy(spawnPoint->x - 200, spawnPoint->y + 100, false);
+            CreateEnemy(spawnPoint->x - 200, spawnPoint->y, false);
+            i += 6;
         }
     }
+}
+
+void ResetGame()
+{
+    stage_level = 0;
+    UIManager::shared_instance().SetLevel(stage_level);
+    SetupStage();
 }
 
 void SetupStage()
@@ -411,6 +467,7 @@ int main(void)
     float RGB4[3] = {0.75, 0.35, 0.35};
     float RGB5[3] = {0.85, 0.85, 0.85};
 
+
     stage_level = 0;
     SetupStage();
 
@@ -420,6 +477,9 @@ int main(void)
     int screenHeight = glutGet(GLUT_SCREEN_HEIGHT);
     CameraManager::shared_instance().SetCameraOffset(Pnt2((float) -screenWidth/2, (float) -screenHeight/2));
 
+    glutInitWindowSize (screenWidth, screenHeight);
+    glutInitWindowPosition (0, 0);
+    glutFullScreen();
 
     glutSetCursor(GLUT_CURSOR_CROSSHAIR);
     CV::run();

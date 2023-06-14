@@ -134,6 +134,15 @@ void UIManager::RenderStageLabel()
     CV::color(1,1,1);
     CV::text(position - 30, 50, stage_text.c_str());
 }
+void UIManager::RenderResetNotification()
+{
+    float posX = glutGet(GLUT_SCREEN_WIDTH)/2;
+    float posY = glutGet(GLUT_SCREEN_HEIGHT)/2;
+
+    CV::color(1,1,1);
+    CV::text(posX - 160, posY, "Game is Over, press R to Restart.");
+}
+
 
 
 void UIManager::RenderAll()
@@ -141,6 +150,8 @@ void UIManager::RenderAll()
     RenderManager::RenderAll();
     RenderScore();
     RenderStageLabel();
+    if(PlayerManager::shared_instance().IsGameOver())
+        RenderResetNotification();
 
     int i;
     for(i = 0; i < CharacterStatsFrames.size();i++)

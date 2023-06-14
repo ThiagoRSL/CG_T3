@@ -14,6 +14,7 @@
 
 class PlayerManager;
 class UIManager;
+class HoomingProjectile;
 
 class Character : public Entity
 {
@@ -69,6 +70,8 @@ class Character : public Entity
         //Control Variables
         float rotating;
         float moving;
+        int score_val;
+
 
         //Base stats
         float movement_speed;
@@ -91,16 +94,22 @@ class Character : public Entity
         bool autonomous;
         float view_range;
 
+        //specials
+        bool dashing;
+        void SpawnHommies();
+
         // Death Animation
         int death_frame;
         float death_rgb_save[3];
         float last_death_frame;
 
+        float last_frame;
         void AutonomousThinking();
     //Getters e Setters
     public:
         bool IsDying() {return this->dying;}
         bool IsDead() {return this->dead;}
+        bool IsDashing() {return this->dashing;}
         Pnt2* GetAimPoint() {return this->AimPoint;}
         float* GetHitPointsMaxRef() {return &this->hit_points_max;}
         float* GetHitPointsRef() {return &this->hit_points;}
@@ -109,6 +118,9 @@ class Character : public Entity
         void SetMaxHitPoints(float hitPoints);
         void SetMaxEnergy(float energy);
         void SetViewRange(float view_range) {this->view_range = view_range;}
+        void SetScoreValue(int scoreVal) {this->score_val = scoreVal;}
+        void SetMovementSpeed(float movementSpeed);
+        void DrawEnergy(float energyPoints);
 
         void SetAutonomous(bool autonomous){this->autonomous = autonomous;}
         bool SetTarget(Character* target) {this->Target = target;}

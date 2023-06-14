@@ -79,6 +79,8 @@
 		<Unit filename="src/Entities/Particle.h" />
 		<Unit filename="src/Entities/Poly.cpp" />
 		<Unit filename="src/Entities/Poly.h" />
+		<Unit filename="src/Entities/Weapon/HoomingProjectile.cpp" />
+		<Unit filename="src/Entities/Weapon/HoomingProjectile.h" />
 		<Unit filename="src/Entities/Weapon/Projectile.cpp" />
 		<Unit filename="src/Entities/Weapon/Projectile.h" />
 		<Unit filename="src/Entities/Weapon/Weapon.cpp" />

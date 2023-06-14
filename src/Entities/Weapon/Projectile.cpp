@@ -39,7 +39,7 @@ void Projectile::Render()
     {
         if(this->Owner != PlayerManager::shared_instance().GetPlayerCharacter())
         {
-            if(target == PlayerManager::shared_instance().GetPlayerCharacter())
+            if(PlayerManager::shared_instance().GetPlayerCharacter() != nullptr && target == PlayerManager::shared_instance().GetPlayerCharacter())
             {
                 target->ReceiveDamage(this->damage);
                 DestroyProjectile();

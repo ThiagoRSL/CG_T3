@@ -34,6 +34,8 @@ class UIManager : public RenderManager
         void SetLevel(int stage_level);
         void UpdateStage();
         void RenderStageLabel();
+        //Reset
+        void RenderResetNotification();
 
         void RenderAll();
     private:
