@@ -111,11 +111,12 @@ void UIManager::UpdateScore()
 }
 void UIManager::RenderScore()
 {
-    float position = glutGet(GLUT_SCREEN_WIDTH) - (75 + (score_text.size()*5));
+    float position = glutGet(GLUT_SCREEN_WIDTH) - (75);
+    float position_val = glutGet(GLUT_SCREEN_WIDTH) - (70 + (score_text.size()*5));
 
     CV::color(1,1,1);
-    CV::text(position - (25 - (score_text.size()*5)), 50, "SCORE");
-    CV::text(position, 70, score_text.c_str());
+    CV::text(position - 20, 50, "SCORE");
+    CV::text(position_val, 70, score_text.c_str());
 }
 
 void UIManager::SetLevel(int stage_level)

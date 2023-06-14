@@ -92,7 +92,7 @@ void keyboard(int key)
     {
       //seta para a esquerda
       case 8:
-          //SetupStage(); // < ------ PARA DEBUGAR DESCOMENTE ESTA LINHA
+          SetupStage(); // < ------ PARA DEBUGAR DESCOMENTE ESTA LINHA
       break;
       case 120:
         if(player_character == nullptr || player_character->IsDead() || player_character->IsDying())

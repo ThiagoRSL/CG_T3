@@ -101,19 +101,35 @@ void Character::Shoot()
 }
 void Character::SpawnHommies()
 {
-    HoomingProjectile* shotPoly = new HoomingProjectile(this->Anchor->x + 50, this->Anchor->y + 50, 25, 0, 10000, this->background_color, this);
+    HoomingProjectile* shotPoly = new HoomingProjectile(this->Anchor->x + 30, this->Anchor->y + 30, 25, 0, 10000, this->background_color, this);
     shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
     RenderManager::shared_instance().AddRenderableToList(shotPoly);
 
-    shotPoly = new HoomingProjectile(this->Anchor->x - 50, this->Anchor->y - 50, 25, 0, 10000, this->background_color, this);
+    shotPoly = new HoomingProjectile(this->Anchor->x - 30, this->Anchor->y - 30, 25, 0, 10000, this->background_color, this);
     shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
     RenderManager::shared_instance().AddRenderableToList(shotPoly);
 
-    shotPoly = new HoomingProjectile(this->Anchor->x + 50, this->Anchor->y - 50, 25, 0, 10000, this->background_color, this);
+    shotPoly = new HoomingProjectile(this->Anchor->x + 30, this->Anchor->y - 30, 25, 0, 10000, this->background_color, this);
     shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
     RenderManager::shared_instance().AddRenderableToList(shotPoly);
 
-    shotPoly = new HoomingProjectile(this->Anchor->x - 50, this->Anchor->y + 50, 25, 0, 10000, this->background_color, this);
+    shotPoly = new HoomingProjectile(this->Anchor->x - 30, this->Anchor->y + 30, 25, 0, 10000, this->background_color, this);
+    shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
+    RenderManager::shared_instance().AddRenderableToList(shotPoly);
+
+    shotPoly = new HoomingProjectile(this->Anchor->x - 50, this->Anchor->y, 25, 0, 10000, this->background_color, this);
+    shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
+    RenderManager::shared_instance().AddRenderableToList(shotPoly);
+
+    shotPoly = new HoomingProjectile(this->Anchor->x + 50, this->Anchor->y, 25, 0, 10000, this->background_color, this);
+    shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
+    RenderManager::shared_instance().AddRenderableToList(shotPoly);
+
+    shotPoly = new HoomingProjectile(this->Anchor->x, this->Anchor->y - 50, 25, 0, 10000, this->background_color, this);
+    shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
+    RenderManager::shared_instance().AddRenderableToList(shotPoly);
+
+    shotPoly = new HoomingProjectile(this->Anchor->x, this->Anchor->y + 50, 25, 0, 10000, this->background_color, this);
     shotPoly->SetOrientation(this->OrientationVector->x, this->OrientationVector->y);
     RenderManager::shared_instance().AddRenderableToList(shotPoly);
 }
